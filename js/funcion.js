@@ -57,14 +57,16 @@ $(function(){
     fetchtask();
 
     $('#task-form').submit(function(e){
-        
+        var producto = $('#detalle_producto').val();    
+           + 'producto' +  console.log(producto) ; 
+ 
         const postData = {
-            codigo_recibo_detalle: $('#codigo_recibo_detalle').val(),
-            detalle_mesa: $('#detalle_mesa').val(),
-            detalle_producto: $('#detalle_producto').val(),            
-            detalle_cantidad: $('#detalle_cantidad').val(),
-            detalle_precio: $('#detalle_precio').val(),
-            detalle_estado: $('#detalle_estado').val(),            
+            codigo_recibo_detalle: $('.codigo_recibo_detalle').val(),
+            detalle_mesa: $('.detalle_mesa').val(),
+            detalle_producto: $('.detalle_producto').val(),            
+            detalle_cantidad: $('.detalle_cantidad').val(),
+            detalle_precio: $('.detalle_precio').val(),
+            detalle_estado: $('.detalle_estado').val(),            
         };
             console.log(postData);
             
@@ -80,7 +82,7 @@ $(function(){
 
     function fetchtask(){
         var mesa = $('#actEstado').val();    
-            
+            console.log(mesa);
         $.ajax({
             url:'task-list.php',
             type:'POST',

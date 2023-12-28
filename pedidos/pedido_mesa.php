@@ -26,7 +26,7 @@
 
     //consultas   
         // consulta ingreso de datos a base datos   
-            error_reporting(0);
+            //error_reporting(0);
             $host='localhost'; #tu servidor o localhost
             $usuario='root'; #usuario de la base de datos
             $password=''; #contraseña de la base de datos
@@ -45,7 +45,7 @@
             #Se hace una consulta a la tabla registros de base de datos, se usa COUNT para saber cuántos registros tiene.
             $queryRegistro = $conexion->query(" SELECT COUNT(codigo_recibo) AS cantidad 
                                                 FROM pedidos 
-                                                WHERE pedido_mesa = $registro_id and pedido_estado='abierta'");
+                                                WHERE pedido_mesa = $mesa and pedido_estado = 'abierta' ");
             $row = $queryRegistro->fetch_assoc();
 
             
@@ -53,7 +53,7 @@
             if($row['cantidad'] > 0) {
                     $query = "  SELECT *
                                 FROM pedidos
-                                where  pedido_mesa = $registro_id and pedido_estado='abierta' 
+                                where  pedido_mesa = $mesa and pedido_estado='abierta' 
                             ";
                     $pedidos = $mysqli->query($query);
             }else{
@@ -62,7 +62,7 @@
 
                 if (mysqli_query($conexion, $queryOrder)) {
 
-                    $queryAct = "UPDATE mesa SET mesas_estado = 'abierta' where mesas_id = $registro_id";
+                    $queryAct = "UPDATE mesa SET mesas_estado = 'abierta' where mesas_id = $mesa";
                     $pedidos2 = $mysqli->query($queryAct);
 
                     $query3 = " SELECT *
@@ -81,7 +81,7 @@
                     FROM pedidos
                     where  pedido_mesa = $registro_id and pedido_estado='abierta' 
                 ";
-        $pedidos3 = $mysqli->query($query4);
+        $pedidos3 = $mysqli->query($query);
 
         // Para categorias
             $categorias = $mysqli-> query(" SELECT * 
@@ -92,7 +92,7 @@
             $productos = $mysqli-> query("  SELECT * 
                                             FROM productos as pro
                                             INNER JOIN categorias as cat on pro.producto_categoria = cat.categoria_id
-                                            ORDER BY producto_categoria
+                                            ORDER BY producto_id
                                             ") or die($conexion->error);    
         
         // Para mesa abierta
@@ -151,7 +151,8 @@
                                 <div class="col col-md-6 col-lg-6 m-0 p-0">
                                     <div class="card">
                                         <div class="card-header">
-                                            PRODUCTOS
+                                        mesa&nbsp;<?php echo $mesa; ?> <br>
+                                            PRODUCTOS <br>
                                                 <?php
                                                     while ($fila = $pedidos->fetch_array()) {
                                                         $idcod = $fila['codigo_recibo'];
@@ -161,6 +162,7 @@
                                                         $estado = $fila['pedido_estado'];
                                                 ?> 
                                                 PEDIDO:&nbsp;<b><?php echo $idcod; ?></b><br>
+                                                       
                                                 FECHA:&nbsp;<b><?php echo $fecha; ?></b></br>
                                                 MESERO:&nbsp;<b><?php echo $mesero; ?></b></br>
                                                 MESA:&nbsp;<b><?php echo $mesa; ?></b></br>
@@ -200,39 +202,41 @@
                                         <!-- fin listado categorias -->
                                         <!-- inicio listado productos -->
                                             <div class="container-fluid p-0 m-0">
-                                                <div class="row">
-                                                    <form id="task-form">
-                                                        <?php while ($fila = $productos->fetch_array()) {
-                                                            $id_pro = $fila['producto_id'];
-                                                            $nom_pro = $fila['producto_nombre'];
-                                                            $pre_pro = $fila['producto_precio'];
-                                                            $cat_pro = $fila['producto_categoria'];
-                                                            $cat_nom = $fila['categoria_nombre'];
-                                                            $img_pro = $fila['producto_img'];
-                                                            ?>
-                                                            <div id="padre">
-                                                                <button class="product_item btn btn-outline-dark mt-2 mb-0 mx-1"
-                                                                    id="product_item"                                                                
-                                                                    type="submit">                                                                
+                                                <div class="trans">
+                                                    <form id="task-form">                        
+                                                    <div id="padre">
+                                                        <?php
+                                                            $query = "SELECT * FROM productos";
+                                                            $result = mysqli_query($conexion,$query);
+                                                             while ($row = mysqli_fetch_array($result)) { ?>
+                                                             
                                                             
-                                                                    <input type="hidden" id="codigo_recibo_detalle" class="codigo_recibo_detalle" value="4" readonly></input>
-                                                                    <input type="hidden" id="detalle_mesa" class="detalle_mesa" value="1" readonly></input>
-                                                                    <input type="text" id="detalle_producto" class="detalle_producto" value="<?php echo $id_pro?>" readonly></input>
+                                                                <button class="product_item btn btn-outline-dark mt-2 mb-0 mx-1" id="product_item" type="submit"
+                                                                value = "<?= $row['producto_id'];?>">                                                                
+                                                                        <?php
+                                                                            while ($fila =  $ultimo ->fetch_array()) {
+                                                                                $codRec = $fila['codigo_recibo'];
+                                                                                $mesa1 = $fila['pedido_mesa'];
+                                                                        ?> 
+                                                                    <input type="hidden" id="codigo_recibo_detalle" class="codigo_recibo_detalle" value="<?php echo $codRec?>" readonly></input>
+                                                                    <input type="hidden" id="detalle_mesa" class="detalle_mesa" value="<?php echo $mesa1?>" readonly></input>
+                                                                        <?php } ?>
+                                                                    <input type="hidden" id="detalle_producto" class="detalle_producto" value="<?= $row['producto_id'] ;?>" readonly></input>
                                                                     <input type="hidden" id="detalle_cantidad" class="detalle_cantidad" value="1" readonly></input>
-                                                                    <input type="hidden" id="detalle_precio" class="detalle_precio" value="<?php echo number_format($pre_pro, 0, ",", "."); ?>" readonly></input> 
+                                                                    <input type="hidden" id="detalle_precio" class="detalle_precio" value="<?= $row['producto_precio'] ;?>" readonly></input> 
                                                                     <input type="hidden" id="detalle_estado" class="detalle_estado" value="abierta" readonly></input> 
-                                                                
-                                                                    <div class="img1" >
-                                                                        <span><img class="avatar3" src="<?php echo $img_pro?>" style=" font-size:30px"></img></span>
-                                                                    </div>
-                                                                    <p style="font-size: 12px ; align-items: stretch; text-align: center">
-                                                                    <?php echo $nom_pro?>
-                                                                    <br>
-                                                                    $&nbsp;<?php echo number_format($pre_pro, 0, ",", "."); ?></p>
-                                                            </button>
+                                                                        <div class="img1" >
+                                                                            <span><img class="avatar3" src="<?= $row['producto_img'] ;?>" style=" font-size:30px"></img></span>
+                                                                        </div>
+                                                                        <p style="font-size: 12px ; align-items: stretch; text-align: center" >
+                                                                        <?= $row['producto_nombre'] ;?>
+                                                                        <br>
+                                                                        $&nbsp;<?= $row['producto_precio'] ;?></p>
+                                                                </button>
+                                                            
+                                                            <?php } ?>
                                                         </div>
-                                                        <?php } ?>
-                                                    </form>                                                                                                            
+                                                    </form>
                                                 </div>
                                             </div>
                                         <!-- fin listado productos -->

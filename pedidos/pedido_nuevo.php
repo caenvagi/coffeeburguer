@@ -25,29 +25,19 @@
         echo "<link rel='stylesheet' type='text/css' href='../css/styles.css'>";
         echo "<link rel='stylesheet' type='text/css' href='../css/estilos.css'>"; 
 
+        error_reporting(0);
+
     // consultas
     include '../conexion/conexion.php';   
+
+      
     
-    $mesa = trim($_POST['mesa']);
-    $codRec = trim($_POST['codRecibo']);
-    $estado = trim($_POST['BtnEst']);
     
-    $queryAct = "UPDATE mesa 
-                SET mesas_estado = 'cerrada' 
-                where mesas_id = $mesa";
-    $pedidos = $mysqli->query($queryAct);
+    
 
-    $queryAct1 = "UPDATE pedidos 
-                SET pedido_estado = 'cerrada' 
-                where codigo_recibo = $codRec";
-    $pedidos1 = $mysqli->query($queryAct1);
+     
 
-    $queryAct2 = "UPDATE pedido_detalle
-        SET detalle_estado = 'cerrada' 
-        where codigo_recibo_detalle = $codRec";
-    $pedidos2 = $mysqli->query($queryAct2);
-
-        // consulta estadoS de la mesa
+        // consulta estado de la mesa
             $queryEstados = "   SELECT pedido_estado
                                 FROM pedidos
                     
@@ -64,7 +54,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="Es">
+<html lang="es">
     <head>
         <?php require '../logs/head.php'; ?>
         <script src="../js/mensajes.js"></script>
@@ -72,14 +62,11 @@
     <body>
         <?php require '../logs/nav-bar.php'; ?>
         <div id="layoutSidenav_content" class="layoutSidenav" >
-            <main>
-                <div class="container-fluid px-3"> 
-                    <div class="card-header BG-WARNING mt-1"><font color="white">PEDIDOS</font></div>
-                    <div class="container mt-1">
-                        <div class="row justify-content-center">
-                            <div class="container-fluid">
-                                <div class="row">
-                                <?php
+                <main>
+                        <div class="card-header BG-WARNING mt-1"><font color="white">PEDIDOS</font></div>
+                            <div class="container">
+                                <div class="trans">
+                                        <?php
                                                 while ($fila = $mesas->fetch_array()) {
                                                         $idmesas = $fila['mesas_id'];
                                                         $nombre = $fila['mesas_nombre'];                                               
@@ -92,28 +79,26 @@
                                                             $label_class = 'badge bg-primary badge';
                                                         } 
                                             ?> 
-                                    <form method="POST" action="pedido_mesa.php">
-
+                               
+                                    <form method="POST" action="pedido_mesa.php" class="m-0">
                                         <input type="hidden" id="pedido_mesero" name="pedido_mesero" value="<?php echo $id; ?>">
                                         <input type="hidden" id="pedido_mesa" name="pedido_mesa" value="<?php echo $idmesas; ?>">
                                         <input type="hidden" id="pedido_estado" name="pedido_estado" value="abierta">
-
+                                                                
                                         <button value="<?php echo $idmesas; ?>" id="btn_mesa" name="btn_mesa" type="submit"     class="btn btn-outline-dark btn-lg p-2 m-2">
-                                            <span class="material-icons">restaurant</span>
-                                            &#160;&#160;&nbsp;
-                                            Mesa&nbsp;<?php echo $idmesas; ?>
-                                            &#160;&#160;&nbsp;                                             
+                                            <span class="material-icons" id="tenedor">restaurant</span>
+                                            <br>
+                                            <p>Mesa&nbsp;<?php echo $nombre;?></p>
+                                                                                       
                                             <span class="label <?php echo $label_class; ?>"><?php echo $estado; ?></span>
                                         </button>
                                     </form>
                                     <?php } ?>
-
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </main>            
+                        
+                    
+                </main>            
             <?php require '../logs/nav-footer.php'; ?>
         </div>
         
