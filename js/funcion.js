@@ -14,9 +14,7 @@ $(document).ready(function () {
         $('.category_item[category="all"]').click(function () {
             $(".product_item").show();
         });
-    });   
 });
-
 
 
 
@@ -115,3 +113,4 @@ $(function(){
         });
     }
 });
+});   

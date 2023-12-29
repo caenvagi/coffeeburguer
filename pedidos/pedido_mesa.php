@@ -37,7 +37,10 @@
         
 
 
-            $sentencia = $pdo->prepare("SELECT * FROM `PRODUCTOS`");
+            $sentencia = $pdo->prepare("SELECT * 
+                                        FROM productos as pro
+                                        INNER JOIN categorias as cat on pro.producto_categoria = cat.categoria_id
+                                        ORDER BY categoria_id");     
             $sentencia ->execute();
             $listaproductos = $sentencia -> fetchAll(PDO::FETCH_ASSOC);
             //print_r($listaproductos);
@@ -162,6 +165,12 @@ $ultimo1 = $mysqli->query($queryUlt1);
                             WHERE       pedido_mesa = $registro_id and detalle_estado = 'abierta'
                             ";
     $productos1 = $mysqli->query($query_productos1);
+
+            // Para categorias
+            $categorias = $mysqli-> query(" SELECT * 
+                                            FROM categorias
+                                            ") or die($conexion->error);
+
            
             
 ?>
@@ -195,6 +204,14 @@ $ultimo1 = $mysqli->query($queryUlt1);
                                                             <div class="category_list">
                                                                 <ul class="ul">
                                                                     <a class="category_item" id="all" href="#"  category="all">Todos</a>
+                                                                    <?php
+                                                                    while ($fila = $categorias->fetch_array()) {
+                                                                        $id_cat = $fila['categoria_id'];
+                                                                        $cat_nombre = $fila['categoria_nombre'];
+                                                                        $cat_img = $fila['categoria_img'];
+                                                                        ?>
+                                                                    <a class="category_item"  id="<?php echo $cat_nombre?>" href="#" category="<?php echo $cat_nombre?>" ><?php echo $cat_nombre?></a></a>
+                                                                    <?php } ?>
                                                                 <ul>     
                                                             </div>
                                                         </div>    
@@ -207,8 +224,8 @@ $ultimo1 = $mysqli->query($queryUlt1);
                                                 <div class="trans">
                                                     <?php foreach ($listaproductos as $producto) { ?>
                                                         <form   method="POST" action="task-add.php?pedido_mesa=<?php echo $mesas ?>"  id="task-form1">
-                                                        
-                                                        <button class="product_item btn btn-outline-dark mt-2 mb-0 mx-1" id="product_item" type="submit" value="agregar">
+                                                            
+                                                        <button class="product_item btn btn-outline-dark mt-2 mb-0 mx-1" id="product_item" type="submit" value="product_item" category="<?php echo $producto['categoria_nombre']; ?>">
                                                             <?php foreach ($ultimo as $recibo) { ?>
                                                             <input type="hidden" value="<?php echo $recibo['codigo_recibo']; ?>" id="codigo_recibo_detalle" class="codigo_recibo_detalle" name="codigo_recibo_detalle"  readonly></input>
                                                             <?php } ?>
