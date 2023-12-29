@@ -58,15 +58,15 @@ $(function(){
 
     $('#task-form').submit(function(e){
         var producto = $('#detalle_producto').val();    
-           + 'producto' +  console.log(producto) ; 
+            console.log(producto) ; 
  
         const postData = {
-            codigo_recibo_detalle: $('.codigo_recibo_detalle').val(),
-            detalle_mesa: $('.detalle_mesa').val(),
-            detalle_producto: $('.detalle_producto').val(),            
-            detalle_cantidad: $('.detalle_cantidad').val(),
-            detalle_precio: $('.detalle_precio').val(),
-            detalle_estado: $('.detalle_estado').val(),            
+            codigo_recibo_detalle: $('#codigo_recibo_detalle').val(),
+            detalle_mesa: $('#detalle_mesa').val(),
+            detalle_producto: $('#detalle_producto').val(),            
+            detalle_cantidad: $('#detalle_cantidad').val(),
+            detalle_precio: $('#detalle_precio').val(),
+            detalle_estado: $('#detalle_estado').val(),            
         };
             console.log(postData);
             
@@ -81,7 +81,7 @@ $(function(){
     });    
 
     function fetchtask(){
-        var mesa = $('#actEstado').val();    
+        var mesa = $('#detalle_mesa').val() ;
             console.log(mesa);
         $.ajax({
             url:'task-list.php',
@@ -89,17 +89,17 @@ $(function(){
             async:true,
             data: {mesa:mesa},
             success: function(response){
-                
+                console.log(response);
                 let tasks = JSON.parse(response);
                 let template = '';
                 tasks.forEach(task => {
                     template += `
                     <tr>
-                        <td>${task.codigo_recibo_detalle}</td>
+                        
                         <td>${task.producto_nombre}</td>
                         <td>${task.totalcant}</td>
-                        <td>${task.totalprecio}</td>
-                        <td>${task.pedido_mesa}</td>                        
+                        <td> $ ${task.totalprecio}</td>
+                                              
                     </tr>
                     `
                 });
@@ -107,7 +107,7 @@ $(function(){
             },
             error:function(error){
                 console.log(error);
-            },
+            }, 
 
                 
             

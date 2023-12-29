@@ -401,6 +401,7 @@
     display: flex;
     -webkit-box-align: center;
     align-items: center;
+    color: #f8f5f5;
 }
 .total7{
     font-family: "Nunito Sans";

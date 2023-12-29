@@ -36,14 +36,14 @@ if(!empty($_POST)){
                     'detalle_producto' => $row['detalle_producto'],
                     'producto_nombre' => $row['producto_nombre'],
                     'producto_precio' => $row['producto_precio'],
-                    'totalprecio' => $row['totalprecio'],
+                    'totalprecio' =>  number_format($row['totalprecio'], 0, ",", "."),
                     'detalle_cantidad' => $row['detalle_cantidad'],
                     'totalcant' => $row['totalcant'],
                     'pedido_mesa' => $row['pedido_mesa'],
                     'detalle_precio' => $row['detalle_precio'],
                     'detalle_estado' => $row['detalle_estado']
                 );
-            }
+            } 
             $jsonstring = json_encode($json);
             echo $jsonstring;      
     }

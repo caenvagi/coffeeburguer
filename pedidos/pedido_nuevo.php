@@ -25,7 +25,7 @@
         echo "<link rel='stylesheet' type='text/css' href='../css/styles.css'>";
         echo "<link rel='stylesheet' type='text/css' href='../css/estilos.css'>"; 
 
-        error_reporting(0);
+       // error_reporting(0);
 
     // consultas
     include '../conexion/conexion.php';   
@@ -38,11 +38,13 @@
      
 
         // consulta estado de la mesa
-            $queryEstados = "   SELECT pedido_estado
+            $queryEstados = "   SELECT pedido_estado , pedido_mesa
                                 FROM pedidos
                     
             ";
-            $estadosBtn = $mysqli->query($queryEstados);        
+            $estadosBtn = $mysqli->query($queryEstados);
+            
+           
 
         // consulta listado de mesas
             $query_mesa = " SELECT *
@@ -50,6 +52,8 @@
                         ";
             $mesas = $mysqli->query($query_mesa);
     // fin consultas
+
+    
         
 ?>
 
@@ -77,18 +81,22 @@
                                                             $label_class = "badge bg-success" ;
                                                         } elseif ($estado == 'por entregar') {
                                                             $label_class = 'badge bg-primary badge';
-                                                        } 
+                                                        }
+                                                        
+                                                        
                                             ?> 
                                
-                                    <form method="POST" action="pedido_mesa.php" class="m-0">
+                                    <form method="POST" action="pedido_mesa.php?pedido_mesa=<?php echo $idmesas; ?>" class="m-0">
                                         <input type="hidden" id="pedido_mesero" name="pedido_mesero" value="<?php echo $id; ?>">
                                         <input type="hidden" id="pedido_mesa" name="pedido_mesa" value="<?php echo $idmesas; ?>">
                                         <input type="hidden" id="pedido_estado" name="pedido_estado" value="abierta">
+
+                                        
                                                                 
-                                        <button value="<?php echo $idmesas; ?>" id="btn_mesa" name="btn_mesa" type="submit"     class="btn btn-outline-dark btn-lg p-2 m-2">
+                                        <button value="agregar" id="btn_mesa" name="btn_mesa" type="submit"     class="btn btn-outline-dark btn-lg p-2 m-2">
                                             <span class="material-icons" id="tenedor">restaurant</span>
                                             <br>
-                                            <p>Mesa&nbsp;<?php echo $nombre;?></p>
+                                            <p>Mesa&nbsp;<?php echo $idmesas;?></p>
                                                                                        
                                             <span class="label <?php echo $label_class; ?>"><?php echo $estado; ?></span>
                                         </button>
@@ -104,4 +112,7 @@
         
        
     </body>
+    <script>
+      
+    </script>
 </html>

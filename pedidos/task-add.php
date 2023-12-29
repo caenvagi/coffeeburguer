@@ -1,6 +1,8 @@
 <?php
 include('database.php');
 
+$mesas = $_GET['pedido_mesa'];
+
 if(isset($_POST['codigo_recibo_detalle'])){
     $detRec = $_POST['codigo_recibo_detalle'];
     $detMes = $_POST['detalle_mesa'];
@@ -17,7 +19,7 @@ if(isset($_POST['codigo_recibo_detalle'])){
     if(!$result){
         die(' la consulta a fallado');
     } 
-    echo 'producto agregado';           
+    header("location:pedido_mesa.php?pedido_mesa=$mesas");           
 };
 
 ?>
