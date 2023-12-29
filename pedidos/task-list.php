@@ -9,6 +9,7 @@ if(!empty($_POST)){
         $mesa = $_POST['mesa'];
 
         $query = "SELECT    codigo_recibo_detalle,
+                    producto_id,
                     detalle_producto,
                     producto_nombre,
                     producto_precio,
@@ -36,6 +37,7 @@ if(!empty($_POST)){
                     'detalle_producto' => $row['detalle_producto'],
                     'producto_nombre' => $row['producto_nombre'],
                     'producto_precio' => $row['producto_precio'],
+                    'producto_id' => $row['producto_id'],
                     'totalprecio' =>  number_format($row['totalprecio'], 0, ",", "."),
                     'detalle_cantidad' => $row['detalle_cantidad'],
                     'totalcant' => $row['totalcant'],

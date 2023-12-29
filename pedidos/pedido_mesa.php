@@ -367,6 +367,8 @@ $ultimo1 = $mysqli->query($queryUlt1);
                                                 <td><b>PRODUCTO</b></td>
                                                 <td><b>CANT</b></td>
                                                 <td><b>PRECIO</b></td>
+                                                <td><b>ACCION</b></td>
+                                                
                                             </thead>
                                             <tbody id="tasks" class="text-center">
                                             </tbody>
@@ -384,7 +386,7 @@ $ultimo1 = $mysqli->query($queryUlt1);
                                                         <div class="total3">
                                                             <p class="total4"><?php echo $prod['totalcant']; ?></p>
                                                         </div>
-                                                            <p class="total5">Total pedido:</p>
+                                                            <p class="total5">&nbsp;&nbsp;&nbsp;&nbsp;Confirmar pedido:</p>
                                                     </div>
                                                     <div class="total6">
                                                         <p class="total7">$&nbsp;<?php echo number_format($prod['total'], 0, ",", "."); ?></p>
