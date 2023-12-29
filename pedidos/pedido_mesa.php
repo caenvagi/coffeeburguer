@@ -11,6 +11,7 @@
         $mesas = $_GET['pedido_mesa'];
         $_SESSION['ides'] = $mesas;
 
+
         require '../conexion/conexion.php';
 
         if (!isset($_SESSION['id'])) {
@@ -140,6 +141,14 @@ FROM    pedidos
 WHERE   pedido_mesa = $registro_id and pedido_estado='abierta'
 ";
 $ultimo = $mysqli->query($queryUlt);
+
+// Para mesa abierta
+$queryUlt1 = "   SELECT  codigo_recibo
+
+FROM    pedidos 
+WHERE   pedido_mesa = $registro_id and pedido_estado='abierta'
+";
+$ultimo1 = $mysqli->query($queryUlt1);
 
     // Para mesa abierta
     $query_productos1 = "   SELECT      				
@@ -346,15 +355,19 @@ $ultimo = $mysqli->query($queryUlt);
                                             </tbody>
                                         </table>
                                     
-                                        <?php foreach ($productos1 as $prod) { ?>            
+                                                   
                                         <div class="total1" id="total1">
                                             <div style="width: calc(100% - 24px)">
+                                            <?php foreach ($ultimo1 as $rec) { ?>
+                                            <form method="POST" action="task-update.php?pedido_mesa=<?php echo $registro_id?>&codigo_recibo=<?php echo $rec['codigo_recibo']; ?>">
+                                            <?php } ?>
+                                            <?php foreach ($productos1 as $prod) { ?> 
                                                 <button class="total-boton">
                                                     <div class="total2">
                                                         <div class="total3">
                                                             <p class="total4"><?php echo $prod['totalcant']; ?></p>
                                                         </div>
-                                                            <p class="total5">Agregar</p>
+                                                            <p class="total5">Total pedido:</p>
                                                     </div>
                                                     <div class="total6">
                                                         <p class="total7">$&nbsp;<?php echo number_format($prod['total'], 0, ",", "."); ?></p>
@@ -362,10 +375,12 @@ $ultimo = $mysqli->query($queryUlt);
                                                         </svg>
                                                     </div>
                                                 </button>
+                                                <?php } ?>
                                                 <label type="text" id="nombre"></label><br>
+                                                </form>
                                             </div>
                                         </div> 
-                                        <?php } ?>                                  
+                                                                         
                                     </div>
                                 </div>
                             <!-- fin listado pedido -->                                   
