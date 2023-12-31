@@ -1,5 +1,4 @@
 <?php
-
 include '../conexion/conexion.php';
 // consulta ingreso pedido detalles a base datos    
 if(isset($_POST['codigo_recibo_detalle'])){
@@ -11,7 +10,6 @@ if(isset($_POST['codigo_recibo_detalle'])){
         $cantidad = trim($_POST['detalle_cantidad']);
         $precio = trim($_POST['detalle_precio']);
         $estado = trim($_POST['detalle_estado']);
-        
         
         $consulta = "   INSERT INTO pedido_detalle(codigo_recibo_detalle, detalle_producto, detalle_cantidad, detalle_precio, detalle_estado) 
                         VALUES ('$recibo','$producto','$cantidad','$precio','$estado')";
@@ -40,6 +38,4 @@ if(isset($_POST['codigo_recibo_detalle'])){
     }
         
 }
-
-
 ?>

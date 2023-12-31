@@ -17,7 +17,6 @@ $result1 = mysqli_query($connection,$query1);
 $query2 = "UPDATE pedido_detalle SET detalle_estado = 'cerrada' where codigo_recibo_detalle = $recibo";
 $result2 = mysqli_query($connection,$query2);
 
-
     if(!$result1){
         die(' la consulta a fallado');
     } 

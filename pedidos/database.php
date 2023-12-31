@@ -1,9 +1,7 @@
 <?php
-$connection = mysqli_connect(
-    'localhost',
-    'root',
-    '',
-    'burguermirador'
-);
-
+    $connection = mysqli_connect(
+        'localhost',
+        'root',
+        '',
+        'burguermirador');
 ?>

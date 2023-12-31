@@ -111,13 +111,18 @@
                                                 <div><span class="material-icons">restaurant</span></div>
                                                 &nbsp;&nbsp;&nbsp;Pedidos
                                             </a>
+
+                                            <a class="nav-link" href="../pedidos/pedido_abierto.php">
+                                                <div><span class="material-symbols-outlined">table_restaurant</span></div>
+                                                &nbsp;&nbsp;&nbsp;Mesas Abiertas
+                                            </a>
                                             
                                             <a class="nav-link" href="#">
                                                 <div><span class="material-icons">two_wheeler</span></div>
                                                 &nbsp;&nbsp;&nbsp;Domicilios
                                             </a>
                                             <a class="nav-link" href="../mesas/mesas.php">
-                                                <div><span class="material-icons">dining</span></div>
+                                                <div><span class="material-symbols-outlined">food_bank</span></div>
                                                 &nbsp;&nbsp;&nbsp;Mesas
                                             </a>
                                             
@@ -131,7 +136,7 @@
                                     </div>
                                 <!-- MENU ENVIA FIN-->
 
-                                <!-- MENU APOSTILLAS INICIO-->
+                                <!-- MENU INVENTARIO INICIO-->
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapse-apostilla" aria-expanded="false" aria-controls="collapseLayouts">
                                         <div><span class="material-icons">kitchen</span></div>
                                         &nbsp;&nbsp;&nbsp;Inventario
@@ -158,7 +163,7 @@
                                     </div>
                                 <!-- MENU APOSTILLAS FIN-->
 
-                                <!-- MENU CONFIGURACION Caja-->
+                                <!-- MENU CAJA Caja-->
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapse-caja" aria-expanded="false" aria-controls="collapseLayouts">
                                         <div><i style="font-size:24px" class="fas fa-cash-register"></i></div>
                                         &nbsp;&nbsp;&nbsp;Caja
@@ -172,7 +177,7 @@
                                             </a>
                                             <a class="nav-link" href="../caja/caja_lista.php">
                                                 <div><i class="fas fa-chart-line" ></i></div>
-                                                &nbsp;&nbsp;&nbsp;Lista
+                                                &nbsp;&nbsp;&nbsp;Lista pedidos
                                             </a>
                                             
                                         </nav>

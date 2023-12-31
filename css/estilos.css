@@ -244,7 +244,7 @@
    
     
     }
-    .trans{
+    .rows{
     margin: 0;
     background-color: white;
     display: flex;
@@ -253,12 +253,12 @@
     }
     #tenedor {
         font-size:30px;
-        margin: 5px;
+        margin: 0px;
     }
-    .trans p{
+    .rows p{
         margin:5px; 
     }
-    .trans span{
+    .rows span{
         margin:5px; 
     }
     #btn_mesa{

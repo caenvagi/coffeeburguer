@@ -6,12 +6,10 @@
 
     // inicio de sesion
         session_start();
-
         
         $mesas = $_GET['pedido_mesa'];
         $_SESSION['ides'] = $mesas;
-
-
+        
         require '../conexion/conexion.php';
 
         if (!isset($_SESSION['id'])) {
@@ -31,86 +29,46 @@
     date_default_timezone_set('America/Bogota');
     echo "<link rel='stylesheet' type='text/css' href='../css/styles.css'>";
     echo "<link rel='stylesheet' type='text/css' href='../css/estilos.css'>";
-
     
-   
-        
+    $sentencia = $pdo->prepare("SELECT      *
+                                FROM        productos as pro
+                                INNER JOIN  categorias as cat on pro.producto_categoria = cat.categoria_id
+                                ORDER BY    categoria_id");     
+    $sentencia ->execute();
+    $listaproductos = $sentencia -> fetchAll(PDO::FETCH_ASSOC);
+    //print_r($listaproductos);
 
+    $sentencia1 = $pdo->prepare("SELECT * FROM `pedido_detalle`");
+    $sentencia1 ->execute();
+    $listapedidos = $sentencia1 -> fetchAll(PDO::FETCH_ASSOC);
+    //print_r($listapedidos);
 
-            $sentencia = $pdo->prepare("SELECT * 
-                                        FROM productos as pro
-                                        INNER JOIN categorias as cat on pro.producto_categoria = cat.categoria_id
-                                        ORDER BY categoria_id");     
-            $sentencia ->execute();
-            $listaproductos = $sentencia -> fetchAll(PDO::FETCH_ASSOC);
-            //print_r($listaproductos);
-
-            $sentencia1 = $pdo->prepare("SELECT * FROM `pedido_detalle`");
-            $sentencia1 ->execute();
-            $listapedidos = $sentencia1 -> fetchAll(PDO::FETCH_ASSOC);
-            //print_r($listapedidos);
-
-
-           
-            //consultas   
-        // consulta ingreso de datos a base datos   
-        //error_reporting(0);
-       // $host='localhost'; #tu servidor o localhost
-        //$usuario='root'; #usuario de la base de datos
-       // $password=''; #contraseña de la base de datos
-       // $bd='burguermirador'; #base de datos
-
-        #Petición de conexión
-        //$conexion = new mysqli($host,$usuario,$password,$bd) or die('could not connect to database');
-
-        #variable con el registro que se va a insertar
-        // if(isset($_POST['btn_mesa'])){
-        // $registro_id = $_POST['pedido_mesa'];
-        // $fecha = date("y/m/d H:i:s");
-        // $mesero = trim($_POST['pedido_mesero']);
-        // $mesa = trim($_POST['pedido_mesa']);
-        // $estado = trim($_POST['pedido_estado']);        
-
-        // $queryAct = "UPDATE mesa SET mesas_estado = 'abierta' where mesas_id = $registro_id";
-        // $pedidos2 = $mysqli->query($queryAct);
-
-        // $queryOrder = "INSERT INTO `pedidos`(`pedido_fecha`, `pedido_mesero`, `pedido_mesa`, `pedido_estado`)
-        //                 VALUES ('$fecha','$mesero','$mesa','$estado')";
-
-        // $resultado = mysqli_query($mysqli,$queryOrder);
-             
-        //             echo $nombre. ', registro creado con éxito';
-        //     } else {
-                
-        //         echo 'Error inesperado.';
-        //     }
-        
-     //consultas   
-        // consulta ingreso de datos a base datos   
+    // consulta ingreso de datos a base datos   
         error_reporting(0);
         $host='localhost'; #tu servidor o localhost
         $usuario='root'; #usuario de la base de datos
         $password=''; #contraseña de la base de datos
         $bd='burguermirador'; #base de datos
 
-        #Petición de conexión
+    #Petición de conexión
         $conexion = new mysqli($host,$usuario,$password,$bd) or die('could not connect to database');
 
-        #variable con el registro que se va a insertar
+    #variable con el registro que se va a insertar
         $registro_id = $_GET['pedido_mesa']; 
         $fecha = date("y/m/d/H/i/s");
         $mesero = trim($_POST['pedido_mesero']);
+        $mesero1 = trim($_POST['pedido_mesero_nombre']);
         $mesa = trim($_POST['pedido_mesa']);
         $estado = trim($_POST['pedido_estado']);
 
-        #Se hace una consulta a la tabla registros de base de datos, se usa COUNT para saber cuántos registros tiene.
+    #Se hace una consulta a la tabla registros de base de datos, se usa COUNT para saber cuántos registros tiene.
         $queryRegistro = $conexion->query(" SELECT COUNT(codigo_recibo) AS cantidad 
                                             FROM pedidos 
                                             WHERE pedido_mesa = $registro_id and pedido_estado='abierta'");
         $row = $queryRegistro->fetch_assoc();
 
         
-        #Si la cantidad es mayor a 0 significa que ya hay un registro, por lo contrario, se inserta a la base de datos.
+    #Si la cantidad es mayor a 0 significa que ya hay un registro, por lo contrario, se inserta a la base de datos.
         if($row['cantidad'] > 0) {
                 $query = "  SELECT *
                             FROM pedidos
@@ -118,8 +76,8 @@
                         ";
                 $pedidos = $mysqli->query($query);
         }else{
-            $queryOrder = "INSERT INTO `pedidos`(`pedido_fecha`, `pedido_mesero`, `pedido_mesa`, `pedido_estado`)
-                            VALUES ('$fecha','$mesero','$mesa','$estado')";                            
+            $queryOrder = "INSERT INTO `pedidos`(`pedido_fecha`, `pedido_mesero`, `pedido_mesero_nombre`, `pedido_mesa`, `pedido_estado`)
+                            VALUES ('$fecha','$mesero','$mesero1','$mesa','$estado')";                            
 
             if (mysqli_query($conexion, $queryOrder)) {
 
@@ -137,50 +95,45 @@
             }
         }
         
-// Para mesa abierta
-$queryUlt = "   SELECT  codigo_recibo
-
-FROM    pedidos 
-WHERE   pedido_mesa = $registro_id and pedido_estado='abierta'
-";
-$ultimo = $mysqli->query($queryUlt);
-
-// Para mesa abierta
-$queryUlt1 = "   SELECT  codigo_recibo
-
-FROM    pedidos 
-WHERE   pedido_mesa = $registro_id and pedido_estado='abierta'
-";
-$ultimo1 = $mysqli->query($queryUlt1);
+    // Para mesa abierta
+        $queryUlt = "   SELECT  codigo_recibo
+                        FROM    pedidos 
+                        WHERE   pedido_mesa = $registro_id and pedido_estado='abierta'
+        ";
+        $ultimo = $mysqli->query($queryUlt);
 
     // Para mesa abierta
-    $query_productos1 = "   SELECT      				
-                                        codigo_recibo_detalle as recibo,
-                                        COUNT(detalle_cantidad) AS totalcant,
-                                        sum(detalle_cantidad * detalle_precio) as total
-                            FROM        pedido_detalle AS PD
-                            INNER JOIN  productos AS PR ON PD.detalle_producto=PR.producto_id
-                            INNER JOIN  categorias AS CA ON PR.producto_categoria=CA.categoria_id
-                            INNER JOIN  pedidos AS PE ON PD.codigo_recibo_detalle=PE.codigo_recibo
-                            WHERE       pedido_mesa = $registro_id and detalle_estado = 'abierta'
+        $queryUlt1 = "  SELECT  codigo_recibo
+                        FROM    pedidos 
+                        WHERE   pedido_mesa = $registro_id and pedido_estado='abierta'
+        ";
+        $ultimo1 = $mysqli->query($queryUlt1);
+
+    // Para mesa abierta
+        $query_productos1 = "   SELECT      codigo_recibo_detalle as recibo,
+                                            COUNT(detalle_cantidad) AS totalcant,
+                                            sum(detalle_cantidad * detalle_precio) as total
+                                FROM        pedido_detalle AS PD
+                                INNER JOIN  productos AS PR ON PD.detalle_producto=PR.producto_id
+                                INNER JOIN  categorias AS CA ON PR.producto_categoria=CA.categoria_id
+                                INNER JOIN  pedidos AS PE ON PD.codigo_recibo_detalle=PE.codigo_recibo
+                                WHERE       pedido_mesa = $registro_id and detalle_estado = 'abierta'
                             ";
-    $productos1 = $mysqli->query($query_productos1);
+        $productos1 = $mysqli->query($query_productos1);
 
-            // Para categorias
-            $categorias = $mysqli-> query(" SELECT * 
-                                            FROM categorias
-                                            ") or die($conexion->error);
-
-           
-            
+    // Para categorias
+        $categorias = $mysqli-> query(" SELECT  * 
+                                        FROM    categorias
+                                    ") or die($conexion->error);
+                                    
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
         <?php require '../logs/head.php'; ?>
         <?php require 'task-add.php'; ?>
         <script src="../js/funcion.js"></script>
-        
     </head>
     <body>
         <?php require '../logs/nav-bar.php'; ?>
@@ -221,31 +174,24 @@ $ultimo1 = $mysqli->query($queryUlt1);
                                         <!-- fin listado categorias -->
                                         <!-- inicio listado productos -->
                                             <div class="container-fluid p-0 m-0">
-                                                <div class="trans">
+                                                <div class="rows">
                                                     <?php foreach ($listaproductos as $producto) { ?>
                                                         <form   method="POST" action="task-add.php?pedido_mesa=<?php echo $mesas ?>"  id="task-form1">
-                                                            
-                                                        <button class="product_item btn btn-outline-dark mt-2 mb-0 mx-1" id="product_item" type="submit" value="product_item" category="<?php echo $producto['categoria_nombre']; ?>">
-                                                            <?php foreach ($ultimo as $recibo) { ?>
-                                                            <input type="hidden" value="<?php echo $recibo['codigo_recibo']; ?>" id="codigo_recibo_detalle" class="codigo_recibo_detalle" name="codigo_recibo_detalle"  readonly></input>
-                                                            <?php } ?>
-                                                            <input type="hidden" value="<?php echo $mesas ?>" id="detalle_mesa" class="detalle_mesa" name="detalle_mesa" readonly></input>
-                                                            <input type="hidden" value="<?php echo $producto['producto_id']; ?>" id="detalle_producto" class="detalle_producto" name="detalle_producto" readonly></input>
-                                                            <input type="hidden" value="1" id="detalle_cantidad" class="detalle_cantidad" name="detalle_cantidad" readonly></input>
-                                                            <input type="hidden" value="<?php echo $producto['producto_precio']; ?>" id="detalle_precio" class="detalle_precio" name="detalle_precio" readonly></input>
-                                                            <input type="hidden" value="abierta"id="detalle_estado" class="detalle_estado" name="detalle_estado" readonly></input>
-                                                            
-                                                            
+                                                            <button class="product_item btn btn-outline-dark mt-2 mb-0 mx-1" id="product_item" type="submit" value="product_item" category="<?php echo $producto['categoria_nombre']; ?>">
+                                                                <?php foreach ($ultimo as $recibo) { ?>
+                                                                <input type="hidden" value="<?php echo $recibo['codigo_recibo']; ?>" id="codigo_recibo_detalle" class="codigo_recibo_detalle" name="codigo_recibo_detalle"  readonly></input>
+                                                                <?php } ?>
+                                                                <input type="hidden" value="<?php echo $mesas ?>" id="detalle_mesa" class="detalle_mesa" name="detalle_mesa" readonly></input>
+                                                                <input type="hidden" value="<?php echo $producto['producto_id']; ?>" id="detalle_producto" class="detalle_producto" name="detalle_producto" readonly></input>
+                                                                <input type="hidden" value="1" id="detalle_cantidad" class="detalle_cantidad" name="detalle_cantidad" readonly></input>
+                                                                <input type="hidden" value="<?php echo $producto['producto_precio']; ?>" id="detalle_precio" class="detalle_precio" name="detalle_precio" readonly></input>
+                                                                <input type="hidden" value="abierta"id="detalle_estado" class="detalle_estado" name="detalle_estado" readonly></input>
                                                                 <div class="img1">
-                                                                    <span><img class="avatar3" src="<?php echo $producto['producto_img']; ?>"
-                                                                            style="font-size:30px"></img></span>
+                                                                    <span><img class="avatar3" src="<?php echo $producto['producto_img']; ?>" style="font-size:30px"></img></span>
                                                                 </div>
                                                                 <p style="font-size: 12px ; align-items: stretch; text-align: center">
                                                                     <?php echo $producto['producto_nombre']; ?>
-                                                                    <br>
-                                                                    $&nbsp;
-                                                                    <?php echo $producto['producto_precio']; ?>
-                                                                </p>
+                                                                    <br>$&nbsp;<?php echo $producto['producto_precio']; ?></p>
                                                             </button>
                                                         </form>
                                                     <?php } ?>
@@ -304,8 +250,8 @@ $ultimo1 = $mysqli->query($queryUlt1);
                                                 <?php
                                                 }
                                                 ?>
-                                                 <!-- Mensaje falta -->
-                                                 <?php
+                                                <!-- Mensaje falta -->
+                                                <?php
                                                 if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'falta1') {
                                                 ?>
                                                     <div class="alerta alert alert-warning alert-dismissible fade show" role="alert">
@@ -367,39 +313,36 @@ $ultimo1 = $mysqli->query($queryUlt1);
                                                 <td><b>PRODUCTO</b></td>
                                                 <td><b>CANT</b></td>
                                                 <td><b>PRECIO</b></td>
-                                                <td><b>ACCION</b></td>
+                                                <td><b>BORRAR</b></td>
                                                 
                                             </thead>
                                             <tbody id="tasks" class="text-center">
                                             </tbody>
                                         </table>
-                                    
-                                                   
                                         <div class="total1" id="total1">
                                             <div style="width: calc(100% - 24px)">
-                                            <?php foreach ($ultimo1 as $rec) { ?>
-                                            <form method="POST" action="task-update.php?pedido_mesa=<?php echo $registro_id?>&codigo_recibo=<?php echo $rec['codigo_recibo']; ?>">
-                                            <?php } ?>
-                                            <?php foreach ($productos1 as $prod) { ?> 
-                                                <button class="total-boton">
-                                                    <div class="total2">
-                                                        <div class="total3">
-                                                            <p class="total4"><?php echo $prod['totalcant']; ?></p>
+                                                    <?php foreach ($ultimo1 as $rec) { ?>
+                                                <form method="POST" action="task-update.php?pedido_mesa=<?php echo $registro_id?>&codigo_recibo=<?php echo $rec['codigo_recibo']; ?>">
+                                                    <?php } ?>
+                                                    <?php foreach ($productos1 as $prod) { ?> 
+                                                    <button class="total-boton">
+                                                        <div class="total2">
+                                                            <div class="total3">
+                                                                <p class="total4"><?php echo $prod['totalcant']; ?></p>
+                                                            </div>
+                                                                <p class="total5">&nbsp;&nbsp;&nbsp;&nbsp;Confirmar pedido:</p>
                                                         </div>
-                                                            <p class="total5">&nbsp;&nbsp;&nbsp;&nbsp;Confirmar pedido:</p>
-                                                    </div>
-                                                    <div class="total6">
-                                                        <p class="total7">$&nbsp;<?php echo number_format($prod['total'], 0, ",", "."); ?></p>
-                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"><path d="M9.993 18c.263.002.516-.099.705-.281l5.009-5.01a1.002 1.002 0 0 0 0-1.418l-5.01-5.01a1.001 1.001 0 0 0-1.416 1.417l4.3 4.302-1 1.002-3.3 3.3A1.002 1.002 0 0 0 9.993 18Z"></path>
-                                                        </svg>
-                                                    </div>
-                                                </button>
-                                                <?php } ?>
-                                                <label type="text" id="nombre"></label><br>
+                                                        <div class="total6">
+                                                            <p class="total7">$&nbsp;<?php echo number_format($prod['total'], 0, ",", "."); ?></p>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"><path d="M9.993 18c.263.002.516-.099.705-.281l5.009-5.01a1.002 1.002 0 0 0 0-1.418l-5.01-5.01a1.001 1.001 0 0 0-1.416 1.417l4.3 4.302-1 1.002-3.3 3.3A1.002 1.002 0 0 0 9.993 18Z"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </button>
+                                                    <?php } ?>
+                                                    <label type="text" id="nombre"></label><br>
                                                 </form>
                                             </div>
                                         </div> 
-                                                                         
                                     </div>
                                 </div>
                             <!-- fin listado pedido -->                                   

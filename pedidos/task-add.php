@@ -21,5 +21,4 @@ if(isset($_POST['codigo_recibo_detalle'])){
     } 
     header("location:pedido_mesa.php?pedido_mesa=$mesas");           
 };
-
 ?>
