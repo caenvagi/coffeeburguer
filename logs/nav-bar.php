@@ -117,14 +117,12 @@
                                                 &nbsp;&nbsp;&nbsp;Mesas Abiertas
                                             </a>
                                             
-                                            <a class="nav-link" href="#">
+
+                                            <a class="nav-link" href="../pedidos/pedido_domicilio.php">
                                                 <div><span class="material-icons">two_wheeler</span></div>
                                                 &nbsp;&nbsp;&nbsp;Domicilios
                                             </a>
-                                            <a class="nav-link" href="../mesas/mesas.php">
-                                                <div><span class="material-symbols-outlined">food_bank</span></div>
-                                                &nbsp;&nbsp;&nbsp;Mesas
-                                            </a>
+                                            
                                             
 
                                             <!--<a class="nav-link" href="../env_guias/envia_devoluciones.php">
@@ -151,6 +149,14 @@
                                             <a class="nav-link" href="../productos/producto_categoria.php">
                                                 <div><span class="material-icons">category</span></div>
                                                 &nbsp;&nbsp;&nbsp;Categorias
+                                            </a>
+                                            <a class="nav-link" href="../mesas/mesas.php">
+                                                <div><span class="material-symbols-outlined">food_bank</span></div>
+                                                &nbsp;&nbsp;&nbsp;Mesas
+                                            </a>
+                                            <a class="nav-link" href="../mesas/domicilios.php">
+                                                <div><span class="material-icons">two_wheeler</span></div>
+                                                &nbsp;&nbsp;&nbsp;Domicilios
                                             </a>
                                             
                                             <!-- <a class="nav-link" href="../apostillas/apost_tablas.php">
@@ -197,7 +203,6 @@
                                                 <div><i class="fa fa-user-circle" style='font-size:24px'></i></div>
                                                 &nbsp;&nbsp;&nbsp;Empleados
                                             </a>
-                                            <a class="nav-link" href="layout-sidenav-light.html">#</a>
                                         </nav>
                                     </div>
                                 <?php  } ?>    

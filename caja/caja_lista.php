@@ -34,10 +34,12 @@
                                     detalle_estado,
                                     pedido_mesero,
                                     pedido_mesero_nombre,
+                                    mesas_tipo_pedido,
                                     COUNT(PD.detalle_cantidad) AS totalcant,
                                     sum(detalle_cantidad * detalle_precio) as total
                         FROM        pedidos AS PE 
-                        INNER JOIN  pedido_detalle as PD ON PE.codigo_recibo = PD.codigo_recibo_detalle                        
+                        INNER JOIN  pedido_detalle as PD ON PE.codigo_recibo = PD.codigo_recibo_detalle 
+                        INNER JOIN  mesa AS ME ON PE.pedido_mesa = ME.mesas_id                       
                         group by    codigo_recibo_detalle
                         order by    codigo_recibo  DESC
                                                 ";
@@ -51,11 +53,6 @@
         <?php require '../logs/head.php'; ?>
         <script src="../js/mensajes.js"></script>
        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-        
-        
-
-       
-
     </head>
     <body>
         <?php require '../logs/nav-bar.php'; ?>
@@ -73,6 +70,7 @@
                                         <th>CANT</th>
                                         <th>TOTAL</th>
                                         <th>ESTADO</th>
+                                        <th>TIPO</th>
                                     </tr>
                                 </thead>
                                 <tbody style="width:100% ; text-align: center;">
@@ -81,9 +79,20 @@
                                                 $codRec = $fila['codigo_recibo'];
                                                 $mesero = $fila['pedido_mesero'];
                                                 $mesero1 = $fila['pedido_mesero_nombre'];
+
+                                                $tipo_pedido = $fila['mesas_tipo_pedido'];
+                                                    if ($tipo_pedido == 'LOCAL') {
+                                                    $label_class1 = 'fas fa-utensils';
+                                                    } elseif ($tipo_pedido == 'DOMICILIO') {
+                                                    $label_class1 = "fas fa-motorcycle" ;
+                                                    } elseif ($tipo_pedido == 'por entregar') {
+                                                    $label_class1 = 'badge bg-primary badge';
+                                                    }
+                                                    
                                                 $idmesas = $fila['detalle_mesa'];
                                                 $totalcant = $fila['totalcant'];
-                                                $total = $fila['total'];                                            
+                                                $total = $fila['total']; 
+                                                    
                                                 $estado = $fila['detalle_estado'];
                                                 if ($estado == 'cerrada') {
                                                 $label_class = 'badge bg-danger';
@@ -101,16 +110,18 @@
                                         <td><?php echo $totalcant; ?></td>
                                         <td><?php echo $total; ?></td>
                                         <td><span class="label <?php echo $label_class; ?>" style="font-size:18px"><?php echo $estado; ?></span></td>
+                                        <td><span class="label <?php echo $label_class1; ?>" style="font-size:20px"></span>&nbsp;&nbsp;<?php echo $tipo_pedido; ?></td>
                                     </tr>
                                     <?php } ?>
                                 </tbody>
-                                <tfoot>
+                                <tfoot class="table-success">
                                         <th></th>
                                         <th></th>
                                         <th></th>
                                         <th></th>
                                         <th></th>
                                         <th>TOTAL</th>
+                                        <th></th>
                                         <th></th>
                                 </tfoot>                               
                             </table> 

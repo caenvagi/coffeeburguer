@@ -55,19 +55,22 @@
 
     #variable con el registro que se va a insertar
         $registro_id = $_GET['pedido_mesa']; 
-        $fecha = date("y/m/d/H/i/s");
+        $fecha = date("y-m-d H:i:s");
         $mesero = trim($_POST['pedido_mesero']);
         $mesero1 = trim($_POST['pedido_mesero_nombre']);
-        $mesa = trim($_POST['pedido_mesa']);
+        $mesa = trim($_POST['pedido_mesa']);       
         $estado = trim($_POST['pedido_estado']);
+        $cliente = trim($_POST['pedido_cliente']);
+        $direccion = trim($_POST['pedido_direccion']);
+        $telefono = trim($_POST['pedido_telefono']);
+        $tipo = trim($_POST['pedido_tipo']);
 
     #Se hace una consulta a la tabla registros de base de datos, se usa COUNT para saber cuántos registros tiene.
         $queryRegistro = $conexion->query(" SELECT COUNT(codigo_recibo) AS cantidad 
                                             FROM pedidos 
                                             WHERE pedido_mesa = $registro_id and pedido_estado='abierta'");
-        $row = $queryRegistro->fetch_assoc();
+        $row = $queryRegistro->fetch_assoc();        
 
-        
     #Si la cantidad es mayor a 0 significa que ya hay un registro, por lo contrario, se inserta a la base de datos.
         if($row['cantidad'] > 0) {
                 $query = "  SELECT *
@@ -76,8 +79,11 @@
                         ";
                 $pedidos = $mysqli->query($query);
         }else{
-            $queryOrder = "INSERT INTO `pedidos`(`pedido_fecha`, `pedido_mesero`, `pedido_mesero_nombre`, `pedido_mesa`, `pedido_estado`)
-                            VALUES ('$fecha','$mesero','$mesero1','$mesa','$estado')";                            
+            $queryOrder = "INSERT INTO `pedidos`(`pedido_fecha`, `pedido_mesero`, `pedido_mesero_nombre`, `pedido_mesa`, `pedido_estado`, `pedido_cliente`, `pedido_direccion`, `pedido_telefono`, `pedido_tipo`)
+                            VALUES ('$fecha','$mesero','$mesero1','$mesa','$estado','$cliente','$direccion','$telefono','$tipo')";                            
+
+
+            printf("Errormessage: %s\n", mysqli_error($conexion));
 
             if (mysqli_query($conexion, $queryOrder)) {
 

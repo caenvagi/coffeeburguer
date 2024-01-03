@@ -30,9 +30,10 @@
             if(strlen($_POST['mesas_nombre']) >= 1 && strlen($_POST['mesas_estado']) >= 1){
                 $mesa = trim($_POST['mesas_nombre']);
                 $estados = trim($_POST['mesas_estado']);
+                $tipo_pedido = trim($_POST['mesas_tipo_pedido']);
 
-                $consulta = "   INSERT INTO mesa(mesas_nombre,mesas_estado) 
-                                VALUES ('$mesa','$estados')";
+                $consulta = "   INSERT INTO mesa(mesas_nombre,mesas_estado,mesas_tipo_pedido) 
+                                VALUES ('$mesa','$estados','$tipo_pedido')";
                 
                 $resultado = mysqli_query($mysqli,$consulta);
                 
@@ -58,7 +59,16 @@
                             FROM mesa
                         ";
         $mesas = $mysqli->query($query_mesa);
-    //    
+    //  
+    // lista de mesas  
+        $query_mesa1 =   "   SELECT mesas_id FROM mesa ORDER BY mesas_id DESC LIMIT 1;
+                        ";
+        $mesas1 = $mysqli->query($query_mesa1);
+        
+    // 
+    
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +81,7 @@
         <div id="layoutSidenav_content" class="layoutSidenav" >
             <main>
                 <div class="container-fluid px-3"> 
-                    <div class="card-header BG-WARNING mt-1"><font color="white">PEDIDOS</font></div>
+                    <div class="card-header BG-WARNING mt-1"><font color="white">CREAR MESAS</font></div>
                     <div class="container mt-1">
                         <div class="row justify-content-center">
                             <!-- inicio formulario -->
@@ -80,13 +90,27 @@
                                         <div class="card-header">
                                             Ingresar Mesa nueva:
                                         </div> 
+                                        <?php
+                                            while ($fila = $mesas1->fetch_array()) {
+                                                 $id_mesa = $fila['mesas_id']+1;
+                                                
+                                            ?>
+                                            
                                         <form id="mesas" name="mesas" class="sm p-4" action="mesas.php" method="POST">
                                                 <input type="hidden" class="form-control" name="mesas_id" id="mesas_id" placeholder="mesas_id" aria-label="id" aria-describedby="basic-addon1" readonly></input>
                                                 <input type="hidden" class="form-control" name="mesas_estado" id="mesas_estado"  value="cerrada" placeholder="mesas_estado" aria-label="mesas_estado" aria-describedby="basic-addon1"></input>  
-                                                <input type="hidden" class="form-control" name="mesas_nombre" id="mesas_nombre"  value="mesa" placeholder="mesas_nombre" aria-label="mesas_nombre" aria-describedby="basic-addon1"></input>
-                                            <div class="d-grid gap-2">
+                                                <input type="hidden" class="form-control" name="mesas_tipo_pedido" id="mesas_tipo_pedido"  value="LOCAL" placeholder="mesas_tipo_pedido" aria-label="mesas_tipo_pedido" aria-describedby="basic-addon1"></input>
+                                                <select name="mesas_nombre" id="mesas_nombre">
+                                                    <option value="Mesa-<?php echo $id_mesa?>">MESA-<?php echo $id_mesa?></option>                                                    
+                                                </select>
+                                                
+                                                <br>
+                                            
+
+                                            <div class="d-grid gap-2 mt-3">
                                                 <button type="submit" class="btn btn-warning btn btn-block" name="register" href="mesas.php"><i class="bi bi-plus-lg text-white">&nbsp;Crear Mesa</i></button>
-                                            </div>     
+                                            </div> 
+                                            <?php } ?>
                                         </form>        
                                     </div> 
                                 </div>
@@ -120,7 +144,7 @@
                                                         }
                                                     ?>
                                                     <tr>
-                                                        <td align="center"><?php echo $id; ?></td>
+                                                        <td align="center"><?php echo $nombre; ?></td>
                                                         <td align="center" class="label <?php echo $label_class; ?>"><?php echo $estado; ?></td>
                                                         
                                                     </tr>

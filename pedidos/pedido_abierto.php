@@ -33,10 +33,13 @@
                                     detalle_estado,
                                     pedido_mesero,
                                     pedido_mesero_nombre,
+                                    mesas_nombre,
+                                    mesas_tipo_pedido,
                                     COUNT(PD.detalle_cantidad) AS totalcant,
                                     sum(detalle_cantidad * detalle_precio) as total
                         FROM        pedidos AS PE 
-                        INNER JOIN  pedido_detalle as PD ON PE.codigo_recibo = PD.codigo_recibo_detalle
+                        INNER JOIN  pedido_detalle AS PD ON PE.codigo_recibo = PD.codigo_recibo_detalle
+                        INNER JOIN  mesa AS ME ON PE.pedido_mesa = ME.mesas_id
                         WHERE       detalle_estado = 'abierta'
                         group by    codigo_recibo_detalle
                         order by    detalle_mesa;
@@ -64,7 +67,18 @@
                                             $mesero = $fila['pedido_mesero'];
                                             $mesero1 = $fila['pedido_mesero_nombre'];
                                             $idmesas = $fila['detalle_mesa'];
-                                                                                          
+                                            $nombremesas = $fila['mesas_nombre'];
+                                            
+
+                                            $tipo_pedido = $fila['mesas_tipo_pedido'];
+                                            if ($tipo_pedido == 'LOCAL') {
+                                            $label_class1 = 'fas fa-utensils';
+                                            } elseif ($tipo_pedido == 'DOMICILIO') {
+                                            $label_class1 = "fas fa-motorcycle" ;
+                                            } elseif ($tipo_pedido == 'por entregar') {
+                                            $label_class1 = 'badge bg-primary badge';
+                                            }
+
                                             $estado = $fila['detalle_estado'];
                                             if ($estado == 'cerrada') {
                                             $label_class = 'badge bg-danger';
@@ -76,13 +90,14 @@
                             ?>
                             <div class="card-body border m-2 p-0 justify-content-center align-items-center" style="text-align: center">
                                 <br>
-                                <span class="material-icons" id="tenedor">restaurant</span>
+                                <span class="label <?php echo $label_class1; ?>" style="font-size:50px"></span>
                                 <br>
-                                <p style="font-size:24px">Mesa:&nbsp;<?php echo $idmesas;?></p>
+                                <p style="font-size:24px">&nbsp;<?php echo $nombremesas;?></p>
                                 <span class="label <?php echo $label_class; ?>" style="font-size:18px"><?php echo $estado; ?></span>
                                 <p>productos servidos:&nbsp;&nbsp;<?php echo $totalcant;?></p>
                                 <h4>$&nbsp;<?php echo  number_format($total, 0, ",", ".");?></h4>
-                                <p>Atendido por:&nbsp;&nbsp;<?php echo $mesero1;?></p>
+                                <p>Atendido por:&nbsp;&nbsp;<?php echo $mesero1;?></p>                                
+                                
                             </div>
                             <?php } ?>
                         </div>

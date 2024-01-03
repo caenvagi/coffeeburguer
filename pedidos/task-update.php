@@ -21,6 +21,6 @@ $result2 = mysqli_query($connection,$query2);
         die(' la consulta a fallado');
     } 
 
-    header("location:pedido_nuevo.php?pedido_mesa=$mesas");
+    header("location:pedido_abierto.php");
 }
 ?>
