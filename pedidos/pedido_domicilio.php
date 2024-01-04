@@ -48,7 +48,7 @@
         <div id="layoutSidenav_content" class="layoutSidenav" >
             <main>
                 <div class="container-fluid px-3"> 
-                    <div class="card-header BG-WARNING mt-1"><font color="white">CREAR MESAS</font></div>
+                    <div class="card-header BG-WARNING mt-1"><font color="white">DOMICILIOS</font></div>
                     <div class="container mt-1">
                         <div class="row justify-content-center">
                             <!-- inicio formulario -->
@@ -63,6 +63,7 @@
                                                 $idmesas = $fila['mesas_id'];
                                                 $nombremesa = $fila['mesas_nombre'];                                               
                                                 $estado = $fila['mesas_estado'];
+                                                $tipo = $fila['mesas_tipo_pedido'];
                                                 if ($estado == 'cerrada') {
                                                     $label_class = 'badge bg-danger';
                                                 } elseif ($estado == 'abierta') {
@@ -72,46 +73,33 @@
                                                 }
                                                 ?>
                                                 
-                                                <div class="text-center">
+                                                <div class="">
 
                                                     <form method="POST" action="pedido_mesa.php?pedido_mesa=<?php echo $idmesas;?>" class="m-0">
                                                         <input type="hidden" id="pedido_mesero" name="pedido_mesero" value="<?php echo $id; ?>">
                                                         <input type="hidden" id="pedido_mesero_nombre" name="pedido_mesero_nombre" value="<?php echo $nombre; ?>">
                                                         <input type="hidden" id="pedido_mesa" name="pedido_mesa" value="<?php echo $idmesas; ?>">
                                                         <input type="hidden" id="pedido_estado" name="pedido_estado" value="abierta">
-
+                                                        <input type="hidden" id="pedido_tipo" name="pedido_tipo" value="<?php echo $tipo; ?>">
                                                         
                                                         
                                                             <div class="card-body border mb-2 ">
                                                             
-                                                                <div class="input-group mb-0">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text" id="basic-addon1">NOMBRE</span>
-                                                                    </div>
-                                                                    
-                                                                    <input type="text" class="form-control" name="pedido_cliente" placeholder="NOMBRE" aria-label="NOMBRE" aria-describedby="basic-addon1">
-                                                                </div>
-                                                                <div class="input-group m-0">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text" id="basic-addon1">DIRECCION</span>
-                                                                    </div>
-                                                                    
-                                                                    <input type="text" class="form-control" name="pedido_direccion" placeholder="DIRECCION" aria-label="DIRECCION" aria-describedby="basic-addon1">
-                                                                </div>
-                                                                <div class="input-group m-0">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text" id="basic-addon1">TELEFONO</span>
-                                                                    </div>
-                                                                    
-                                                                    <input type="text" class="form-control" name="pedido_telefono" placeholder="TELEFONO" aria-label="TELEFONO" aria-describedby="basic-addon1">
-                                                                </div>
+                                                                
+                                                                    <input type="text" class="form-control mb-2" name="pedido_cliente" placeholder="NOMBRE" aria-label="NOMBRE" aria-describedby="basic-addon1" require>
+                                                                
+                                                                    <input type="text" class="form-control mb-2" name="pedido_direccion" placeholder="DIRECCION" aria-label="DIRECCION" aria-describedby="basic-addon1" require>
+                                                                
+                                                                    <input type="text" class="form-control mb-2" name="pedido_telefono" placeholder="TELEFONO" aria-label="TELEFONO" aria-describedby="basic-addon1"require >
+                                                                
+
                                                                 <div class="card text-center">
-                                                                <button value="agregar" id="btn_mesa" name="btn_mesa" type="submit" class="btn btn-outline-dark btn-lg p-2 m-2">
-                                                                    <span class="material-icons" id="tenedor">restaurant</span>
-                                                                    <p>&nbsp;<?php echo $nombremesa;?></p>
-                                                                    <span class="label <?php echo $label_class; ?>"><?php echo $estado; ?></span>
-                                                                    <br>
-                                                                </button>
+                                                                    <button value="agregar" id="btn_mesa" name="btn_mesa" type="submit" class="btn btn-outline-dark btn-lg p-2 m-2">
+                                                                        <span class="material-icons" id="tenedor">restaurant</span>
+                                                                        <p>&nbsp;<?php echo $nombremesa;?></p>
+                                                                        <span class="label <?php echo $label_class; ?>"><?php echo $estado; ?></span>
+                                                                        <br>
+                                                                    </button>
                                                                 </div>
                                                             
                                                             

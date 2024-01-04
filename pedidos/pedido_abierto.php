@@ -58,7 +58,7 @@
         <?php require '../logs/nav-bar.php'; ?>
         <div id="layoutSidenav_content" class="layoutSidenav" >
                 <main>
-                    <div class="card-header BG-WARNING mt-1"><font color="white">PEDIDOS</font></div>
+                    <div class="card-header BG-WARNING mt-1"><font color="white">PEDIDOS ATENDIDOS</font></div>
                         <div class="rows" >
                             <?php while ($fila = $mesas->fetch_array()) {
                                             $codRec = $fila['codigo_recibo'];
@@ -97,7 +97,11 @@
                                 <p>productos servidos:&nbsp;&nbsp;<?php echo $totalcant;?></p>
                                 <h4>$&nbsp;<?php echo  number_format($total, 0, ",", ".");?></h4>
                                 <p>Atendido por:&nbsp;&nbsp;<?php echo $mesero1;?></p>                                
-                                
+                                <form action="pedido_mesa.php?pedido_mesa=<?php echo $idmesas;?>" method="post">
+                                    <button value="agregar" id="btn_mesa" name="btn_mesa" type="submit" class="btn btn-outline-dark btn-lg p-2 m-2">
+                                    Ir a pedido
+                                    </button>
+                                </form>
                             </div>
                             <?php } ?>
                         </div>

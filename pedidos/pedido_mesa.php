@@ -115,8 +115,16 @@
         ";
         $ultimo1 = $mysqli->query($queryUlt1);
 
+        // Para mesa abierta
+        $queryUlt2 = "  SELECT  codigo_recibo
+                        FROM    pedidos 
+                        WHERE   pedido_mesa = $registro_id and pedido_estado='abierta'
+        ";
+        $ultimo2 = $mysqli->query($queryUlt2);
+
     // Para mesa abierta
         $query_productos1 = "   SELECT      codigo_recibo_detalle as recibo,
+                                            pedido_tipo,
                                             COUNT(detalle_cantidad) AS totalcant,
                                             sum(detalle_cantidad * detalle_precio) as total
                                 FROM        pedido_detalle AS PD
@@ -126,6 +134,36 @@
                                 WHERE       pedido_mesa = $registro_id and detalle_estado = 'abierta'
                             ";
         $productos1 = $mysqli->query($query_productos1);
+
+    // Para mesa abierta
+        $query_productos2 = "   SELECT      codigo_recibo_detalle as recibo,
+                                            pedido_tipo,
+                                            mesas_nombre,
+                                            COUNT(detalle_cantidad) AS totalcant,
+                                            sum(detalle_cantidad * detalle_precio) as total
+                                FROM        pedido_detalle AS PD
+                                INNER JOIN  productos AS PR ON PD.detalle_producto = PR.producto_id
+                                INNER JOIN  categorias AS CA ON PR.producto_categoria = CA.categoria_id
+                                INNER JOIN  pedidos AS PE ON PD.codigo_recibo_detalle = PE.codigo_recibo
+                                INNER JOIN  mesa AS ME ON ME.mesas_id = PD.detalle_mesa
+                                WHERE       pedido_mesa = $registro_id and detalle_estado = 'abierta'
+                                ";
+        $productos2 = $mysqli->query($query_productos2);
+
+        // Para mesa abierta
+        $query_productos3 = "   SELECT      codigo_recibo_detalle as recibo,
+                                            pedido_tipo,
+                                            mesas_nombre,
+                                            COUNT(detalle_cantidad) AS totalcant,
+                                            sum(detalle_cantidad * detalle_precio) as total
+                                FROM        pedido_detalle AS PD
+                                INNER JOIN  productos AS PR ON PD.detalle_producto = PR.producto_id
+                                INNER JOIN  categorias AS CA ON PR.producto_categoria = CA.categoria_id
+                                INNER JOIN  pedidos AS PE ON PD.codigo_recibo_detalle = PE.codigo_recibo
+                                INNER JOIN  mesa AS ME ON ME.mesas_id = PD.detalle_mesa
+                                WHERE       pedido_mesa = $registro_id and detalle_estado = 'abierta'
+                                ";
+        $productos3 = $mysqli->query($query_productos3);
 
     // Para categorias
         $categorias = $mysqli-> query(" SELECT  * 
@@ -312,7 +350,12 @@
                                                 }
                                                 ?>
                                             <!-- fin alertas -->
-                                            PEDIDO PARA LA MESA <?php echo $mesas ?>
+
+                                            <!-- PEDIDO <?php echo $mesas ?> -->
+
+                                            <?php foreach ($productos2 as $prod1) { ?>
+                                                <?php echo $prod1['mesas_nombre'];?>
+                                            <?php } ?>
                                         </div> 
                                         <table class="table table-bordered table-sm text-center">
                                             <thead>
@@ -325,6 +368,33 @@
                                             <tbody id="tasks" class="text-center">
                                             </tbody>
                                         </table>
+                                               
+                                        <div class="total1" id="total1">
+                                            <div style="width: calc(100% - 24px)">
+                                                    <?php foreach ($ultimo2 as $rec1) { ?>
+                                                <form method="POST" action="">
+                                                    <?php } ?>
+                                                    <?php foreach ($productos3 as $prod2) { ?> 
+                                                    <button class="total-boton">
+                                                        <div class="total2">
+                                                            <div class="total3">
+                                                                <p class="total4"><?php echo $prod2['totalcant']; ?></p>
+                                                            </div>
+                                                                <p class="total5">&nbsp;&nbsp;&nbsp;&nbsp;Confirmar pedido:</p>
+                                                        </div>
+                                                        <div class="total6">
+                                                            <p class="total7">$&nbsp;<?php echo number_format($prod2['total'], 0, ",", "."); ?></p>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"><path d="M9.993 18c.263.002.516-.099.705-.281l5.009-5.01a1.002 1.002 0 0 0 0-1.418l-5.01-5.01a1.001 1.001 0 0 0-1.416 1.417l4.3 4.302-1 1.002-3.3 3.3A1.002 1.002 0 0 0 9.993 18Z"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </button>
+                                                    <?php } ?>
+                                                    <label type="text" id="nombre"></label><br>
+                                                </form>
+                                            </div>
+                                        </div> 
+                                          
+                                        <?php if($tipo_usuario == 1){?>
                                         <div class="total1" id="total1">
                                             <div style="width: calc(100% - 24px)">
                                                     <?php foreach ($ultimo1 as $rec) { ?>
@@ -336,7 +406,7 @@
                                                             <div class="total3">
                                                                 <p class="total4"><?php echo $prod['totalcant']; ?></p>
                                                             </div>
-                                                                <p class="total5">&nbsp;&nbsp;&nbsp;&nbsp;Confirmar pedido:</p>
+                                                                <p class="total5">&nbsp;&nbsp;&nbsp;&nbsp;Pagar pedido:</p>
                                                         </div>
                                                         <div class="total6">
                                                             <p class="total7">$&nbsp;<?php echo number_format($prod['total'], 0, ",", "."); ?></p>
@@ -348,7 +418,8 @@
                                                     <label type="text" id="nombre"></label><br>
                                                 </form>
                                             </div>
-                                        </div> 
+                                        </div>
+                                        <?php  } ?> 
                                     </div>
                                 </div>
                             <!-- fin listado pedido -->                                   

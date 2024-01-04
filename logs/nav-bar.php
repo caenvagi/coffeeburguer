@@ -154,10 +154,10 @@
                                                 <div><span class="material-symbols-outlined">food_bank</span></div>
                                                 &nbsp;&nbsp;&nbsp;Mesas
                                             </a>
-                                            <a class="nav-link" href="../mesas/domicilios.php">
+                                            <!-- <a class="nav-link" href="../mesas/domicilios.php">
                                                 <div><span class="material-icons">two_wheeler</span></div>
                                                 &nbsp;&nbsp;&nbsp;Domicilios
-                                            </a>
+                                            </a> -->
                                             
                                             <!-- <a class="nav-link" href="../apostillas/apost_tablas.php">
                                             <div><i class='bi bi-clipboard-check-fill'></i></div>

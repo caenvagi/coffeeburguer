@@ -108,7 +108,7 @@
                                         <td><?php echo $mesero1; ?></td>
                                         <td><?php echo $idmesas; ?></td>
                                         <td><?php echo $totalcant; ?></td>
-                                        <td><?php echo $total; ?></td>
+                                        <td>$&nbsp;<?php echo number_format($total, 0, ",", "."); ?></td>
                                         <td><span class="label <?php echo $label_class; ?>" style="font-size:18px"><?php echo $estado; ?></span></td>
                                         <td><span class="label <?php echo $label_class1; ?>" style="font-size:20px"></span>&nbsp;&nbsp;<?php echo $tipo_pedido; ?></td>
                                     </tr>
