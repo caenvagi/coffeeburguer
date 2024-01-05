@@ -70,7 +70,8 @@
                                         <th>CANT</th>
                                         <th>TOTAL</th>
                                         <th>ESTADO</th>
-                                        <th>TIPO</th>
+                                        <th></th>
+                                        <th>TIPO</th>   
                                     </tr>
                                 </thead>
                                 <tbody style="width:100% ; text-align: center;">
@@ -110,7 +111,8 @@
                                         <td><?php echo $totalcant; ?></td>
                                         <td>$&nbsp;<?php echo number_format($total, 0, ",", "."); ?></td>
                                         <td><span class="label <?php echo $label_class; ?>" style="font-size:18px"><?php echo $estado; ?></span></td>
-                                        <td><span class="label <?php echo $label_class1; ?>" style="font-size:20px"></span>&nbsp;&nbsp;<?php echo $tipo_pedido; ?></td>
+                                        <td><span class="label <?php echo $label_class1; ?>" style="font-size:20px"></span></td>
+                                        <td>&nbsp;&nbsp;<?php echo $tipo_pedido; ?></td>
                                     </tr>
                                     <?php } ?>
                                 </tbody>
@@ -123,6 +125,7 @@
                                         <th>TOTAL</th>
                                         <th></th>
                                         <th></th>
+                                        <th></th>
                                 </tfoot>                               
                             </table> 
                         </div>
@@ -133,7 +136,27 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            new DataTable('#example');
-        }) ;       
+                var table = $('#example').DataTable( {
+
+                    stateSave: true,                   
+
+                    rowReorder: {
+                    selector: 'td:nth-child(11)'
+                    },
+                    responsive: true,
+                    pageLength: 50,
+                    language: {
+                    url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                    },
+                    
+                    select: {
+                        style:    'os',
+                        selector: 'td:first-child'
+                        },
+                            
+                        
+                });
+                
+            });      
     </script>
 </html>
