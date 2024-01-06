@@ -58,7 +58,7 @@
         <?php require '../logs/nav-bar.php'; ?>
         <div id="layoutSidenav_content" class="layoutSidenav" >
                 <main>
-                    <div class="card-header BG-WARNING mt-1"><font color="white">PEDIDOS ATENDIDOS</font></div>
+                    <div class="card-header BG-WARNING mt-1"><b style="color: white;">PEDIDOS ATENDIDOS</b></div>
                         <div class="rows" >
                             <?php while ($fila = $mesas->fetch_array()) {
                                             $codRec = $fila['codigo_recibo'];

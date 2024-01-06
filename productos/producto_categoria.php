@@ -84,7 +84,7 @@
         <div id="layoutSidenav_content" class="layoutSidenav" >
             <main>
                 <div class="container-fluid px-3"> 
-                <div class="card-header BG-DANGER mt-1"><font color="white">PRODUCTOS</font></div>
+                <div class="card-header BG-DANGER mt-1"><b style="color: white;">INGRESAR CATEGORIAS</b></div>
                     <div class="container mt-1">
                         <div class="row justify-content-center">
                             <!-- inicio formulario -->
@@ -96,7 +96,7 @@
                                         <form id="ventas" name="ventas" class="sm p-4" action="producto_categoria.php" method="POST">
                                                 
                                                 <input type="hidden" class="form-control" name="id" placeholder="Id" aria-label="id" aria-describedby="basic-addon1" readonly></input>
-                                                   
+                                                
                                                 <label class="form-label">Nombre Categoria: </label>
                                                     <div class="input-group mb-1">
                                                         <div class="input-group-prepend">

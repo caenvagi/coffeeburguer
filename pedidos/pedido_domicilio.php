@@ -48,7 +48,7 @@
         <div id="layoutSidenav_content" class="layoutSidenav" >
             <main>
                 <div class="container-fluid px-3"> 
-                    <div class="card-header BG-WARNING mt-1"><font color="white">DOMICILIOS</font></div>
+                    <div class="card-header BG-WARNING mt-1"><b style="color: white;">DOMICILIOS</b></div>
                     <div class="container mt-1">
                         <div class="row justify-content-center">
                             <!-- inicio formulario -->

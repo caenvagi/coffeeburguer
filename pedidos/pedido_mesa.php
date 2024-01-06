@@ -109,9 +109,13 @@
         $ultimo = $mysqli->query($queryUlt);
 
     // Para mesa abierta
-        $queryUlt1 = "  SELECT  codigo_recibo
-                        FROM    pedidos 
-                        WHERE   pedido_mesa = $registro_id and pedido_estado='abierta'
+            $queryUlt1 = "  SELECT  codigo_recibo,
+                                    pedido_fecha,
+                                    pedido_mesero,
+                                    sum(detalle_cantidad * detalle_precio) as total
+                        FROM        pedidos AS PE 
+                        INNER JOIN  pedido_detalle as PD ON PE.codigo_recibo = PD.codigo_recibo_detalle
+                        WHERE       pedido_mesa = $registro_id and pedido_estado='abierta'
         ";
         $ultimo1 = $mysqli->query($queryUlt1);
 
@@ -183,7 +187,9 @@
         <?php require '../logs/nav-bar.php'; ?>
         <div id="layoutSidenav_content" class="layoutSidenav" >
             <main>
-            <div class="card-header BG-WARNING mt-1"><font color="white">PEDIDOS</font></div>
+            <div class="card-header BG-WARNING mt-1"><b style="color: white;">PEDIDO PARA</b>&nbsp; <?php foreach ($productos2 as $prod1) { ?>
+                                                <b style="font-size: 20px; color: white;"><?php echo $prod1['mesas_nombre'];?></style=></b>
+                                            <?php } ?></div>
                 <div class="container-fluid"> 
                     <div class="container mt-3">
                         <div class="row justify-content-center">
@@ -349,14 +355,9 @@
                                                 <?php
                                                 }
                                                 ?>
-                                            <!-- fin alertas -->
+                                            <!-- fin alertas --> 
+                                        </div>
 
-                                            <!-- PEDIDO <?php echo $mesas ?> -->
-
-                                            <?php foreach ($productos2 as $prod1) { ?>
-                                                <?php echo $prod1['mesas_nombre'];?>
-                                            <?php } ?>
-                                        </div> 
                                         <table class="table table-bordered table-sm text-center">
                                             <thead>
                                                 <td><b>PRODUCTO</b></td>
@@ -368,11 +369,10 @@
                                             <tbody id="tasks" class="text-center">
                                             </tbody>
                                         </table>
-                                               
                                         <div class="total1" id="total1">
                                             <div style="width: calc(100% - 24px)">
                                                     <?php foreach ($ultimo2 as $rec1) { ?>
-                                                <form method="POST" action="">
+                                                <form method="POST" action="pedido_abierto.php">
                                                     <?php } ?>
                                                     <?php foreach ($productos3 as $prod2) { ?> 
                                                     <button class="total-boton">
@@ -393,12 +393,21 @@
                                                 </form>
                                             </div>
                                         </div> 
-                                          
                                         <?php if($tipo_usuario == 1){?>
                                         <div class="total1" id="total1">
                                             <div style="width: calc(100% - 24px)">
                                                     <?php foreach ($ultimo1 as $rec) { ?>
                                                 <form method="POST" action="task-update.php?pedido_mesa=<?php echo $registro_id?>&codigo_recibo=<?php echo $rec['codigo_recibo']; ?>">
+                                                    
+                                                    <input type="hidden" value="<?php echo $rec['pedido_fecha']; ?>" id="caja_fecha" class="caja_fecha" name="caja_fecha" readonly></input>
+                                                    <input type="hidden" value="<?php echo $rec['pedido_mesero']; ?>" id="caja_usuario" class="caja_usuario" name="caja_usuario" readonly></input>
+                                                    <input type="hidden" value="3" id="caja_movimiento" class="caja_movimiento" name="caja_movimiento" readonly></input>    
+                                                    <input type="hidden" value="Punto de venta" id="caja_desc_movimiento" class="caja_desc_movimiento" name="caja_desc_movimiento" readonly></input>
+                                                    <input type="hidden" value="<?php echo $rec['total']; ?>" id="caja_ingresos" class="caja_ingresos" name="caja_ingresos" readonly></input>            
+                                                    <input type="hidden" value="0" id="caja_egresos" class="caja_egresos" name="caja_egresos" readonly></input>
+                                                    <input type="hidden" value="<?php echo $rec['pedido_mesero']; ?>" id="user_login" class="user_login" name="user_login" readonly></input>       
+                                                    <input type="hidden" value="NO" id="liquidado" class="liquidado" name="liquidado" readonly></input>
+
                                                     <?php } ?>
                                                     <?php foreach ($productos1 as $prod) { ?> 
                                                     <button class="total-boton">
@@ -431,9 +440,5 @@
             <?php require '../logs/nav-footer.php'; ?>
         </div>
         <script src="../js/mensajes.js"></script>
-       <script>
-        
-       </script>
-                                            
     </body>
 </html>                                    

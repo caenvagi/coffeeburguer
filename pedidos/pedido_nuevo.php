@@ -18,55 +18,26 @@
             $where = "WHERE id=$id";
         }
 
-        
-
         date_default_timezone_set('America/Bogota');
 
         echo "<link rel='stylesheet' type='text/css' href='../css/styles.css'>";
         echo "<link rel='stylesheet' type='text/css' href='../css/estilos.css'>"; 
 
-       // error_reporting(0);
-
-    // consultas
-    include '../conexion/conexion.php';   
-
-      
-    
-    
-    
-
-     
+    // error_reporting(0);
+        // consultas
+        include '../conexion/conexion.php';   
 
         // consulta estado de la mesa
             $queryEstados = "   SELECT pedido_estado , pedido_mesa
-                                FROM pedidos
-                    
-            ";
+                                    FROM pedidos ";
             $estadosBtn = $mysqli->query($queryEstados);
-            
-           
 
         // consulta listado de mesas
-
-            
-            $query_mesa = " SELECT  
-                                    *
+            $query_mesa = " SELECT  *
                             FROM mesa AS ME
-                            WHERE mesas_tipo_pedido = 'LOCAL'
-                                                                        
-                            "; 
+                            WHERE mesas_tipo_pedido = 'LOCAL' "; 
             $mesas = $mysqli->query($query_mesa); 
-
-                          
-                        
-            
-              
-
-           
-    // fin consultas
-
-    
-        
+        // fin consultas       
 ?>
 
 <!DOCTYPE html>
@@ -79,10 +50,9 @@
         <?php require '../logs/nav-bar.php'; ?>
         <div id="layoutSidenav_content" class="layoutSidenav" >
             <main>
-            <div class="card-header BG-WARNING mt-1"><font color="white">PEDIDOS</font></div>
+                <div class="card-header BG-WARNING mt-1"><b style="color: white;">PEDIDOS POR MESA</b></div>
                 <div class="container">
                     <div class="rows">
-                   
                         <?php
                             while ($fila = $mesas->fetch_array()) {                                                        
                                     $idmesas = $fila['mesas_id'];

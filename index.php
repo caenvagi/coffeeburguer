@@ -63,11 +63,8 @@ echo "<link rel='stylesheet' type='text/css' href='css/estilos.css'>";
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<title>Coffee burger</title>
-	
-	<link href="css/styles.css" rel="stylesheet" />
-	
-	
+	<title>Coffee burger</title>	
+		
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
@@ -75,19 +72,19 @@ echo "<link rel='stylesheet' type='text/css' href='css/estilos.css'>";
 
 	<!-- CSS  -->
 	<link href="css/estilos.css" type="text/css" rel="stylesheet" media="screen,projection" />
-
-
+	<link href="css/styles.css" rel="stylesheet" />
 </head>
 
 <body id="fondo" class="fondo">
+<main>
 	<div id="layoutAuthentication">
 		<div id="layoutAuthentication_content">
-			<main>
-				<div class="container ">
+			
+				<div class="container mt-3">
 					<div class=" row justify-content-center mt-0 mb-0">
-						<div class="col-lg-5 mt-5 mb-0">
+						<div class="col-lg-5 mt-3 mb-3">
 							<div class="TB card shadow-lg border-0 rounded-lg mt-0 mb-0">
-								<div class="card-header mt-1">
+								<div class="card-header mt-0">
 									<div >
 										<img  id="logo-loguin" src="assets/img/logo.png">
 									</div>
@@ -136,7 +133,7 @@ echo "<link rel='stylesheet' type='text/css' href='css/estilos.css'>";
 											<div class="input-group-prepend">
 												<span class="input-group-text" id="basic-addon1"><i class='fas fa-key'></i>&nbsp;</span>
 											</div>
-											<input type="password" id="clave" class="form-control" name="clave" placeholder="password" aria-label="contraseña" aria-describedby="basic-addon1">
+											<input type="password" id="clave" class="form-control" name="clave" placeholder="password" aria-label="password" aria-describedby="basic-addon1">
 										</div>
 
 										<!-- <div class="form-floating mb-3">
@@ -160,7 +157,7 @@ echo "<link rel='stylesheet' type='text/css' href='css/estilos.css'>";
 						</div>
 					</div>
 				</div>
-			</main>
+			
 		</div>
 		<?php
 		require 'logs/nav-footer.php';
@@ -168,7 +165,7 @@ echo "<link rel='stylesheet' type='text/css' href='css/estilos.css'>";
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="js/scripts.js"></script>
-
+	</main>
 </body>
 
 </html>

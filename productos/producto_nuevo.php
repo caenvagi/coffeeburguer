@@ -93,7 +93,7 @@
         <div id="layoutSidenav_content" class="layoutSidenav" >
             <main>
                 <div class="container-fluid px-3"> 
-                    <div class="card-header BG-DANGER mt-1"><font color="white">PRODUCTOS</font></div>
+                    <div class="card-header BG-DANGER mt-1"><b style="color: white;">INGRESAR PRODUCTOS</b></div>
                     <div class="container mt-1">
                         <div class="row justify-content-center">
                             <!-- inicio formulario -->

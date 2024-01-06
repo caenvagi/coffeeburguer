@@ -16,6 +16,8 @@ if(isset($_POST['codigo_recibo_detalle'])){
 
     $result = mysqli_query($connection,$query);
 
+    
+
     if(!$result){
         die(' la consulta a fallado');
     } 

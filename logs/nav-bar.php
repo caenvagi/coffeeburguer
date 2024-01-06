@@ -112,15 +112,22 @@
                                                 &nbsp;&nbsp;&nbsp;Pedidos
                                             </a>
 
-                                            <a class="nav-link" href="../pedidos/pedido_abierto.php">
-                                                <div><span class="material-symbols-outlined">table_restaurant</span></div>
-                                                &nbsp;&nbsp;&nbsp;Mesas Abiertas
-                                            </a>
-                                            
+                                                                                       
 
                                             <a class="nav-link" href="../pedidos/pedido_domicilio.php">
                                                 <div><span class="material-icons">two_wheeler</span></div>
                                                 &nbsp;&nbsp;&nbsp;Domicilios
+                                            </a>
+
+                                            <a class="nav-link" href="../pedidos/pedido_abierto.php">
+                                                <div><span class="material-symbols-outlined">table_restaurant</span></div>
+                                                &nbsp;&nbsp;&nbsp;Pedido Abierto
+                                            </a> 
+
+
+                                            <a class="nav-link" href="../pedidos/pedido_lista.php">
+                                                <div><i class="fas fa-chart-line" ></i></div>
+                                                &nbsp;&nbsp;&nbsp;Lista pedidos
                                             </a>
                                             
                                             
@@ -182,9 +189,14 @@
                                                 &nbsp;&nbsp;&nbsp;Ingresar
                                             </a>
                                             <a class="nav-link" href="../caja/caja_lista.php">
-                                                <div><i class="fas fa-chart-line" ></i></div>
-                                                &nbsp;&nbsp;&nbsp;Lista pedidos
+                                                <div><i class='fas fa-file-alt'></i></div>
+                                                &nbsp;&nbsp;&nbsp;Listado
                                             </a>
+                                            <a class="nav-link" href="../caja/caja_saldos.php">
+                                                <div><i class='fas fa-donate'></i></div>
+                                                &nbsp;&nbsp;&nbsp;Saldos
+                                            </a>
+                                            
                                             
                                         </nav>
                                     </div>
