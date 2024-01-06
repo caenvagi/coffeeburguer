@@ -88,7 +88,7 @@
                                             $label_class = 'badge bg-primary badge';
                                             }
                             ?>
-                            <div class="card-body border m-2 p-0 justify-content-center align-items-center" style="text-align: center">
+                            <div class="card-body border m-2 p-0 justify-content-center align-items-center" style="text-align: center ; background-color: #ededed">
                                 <br>
                                 <span class="label <?php echo $label_class1; ?>" style="font-size:50px"></span>
                                 <br>
@@ -98,7 +98,7 @@
                                 <h4>$&nbsp;<?php echo  number_format($total, 0, ",", ".");?></h4>
                                 <p>Atendido por:&nbsp;&nbsp;<?php echo $mesero1;?></p>                                
                                 <form action="pedido_mesa.php?pedido_mesa=<?php echo $idmesas;?>" method="post">
-                                    <button value="agregar" id="btn_mesa" name="btn_mesa" type="submit" class="btn btn-outline-dark btn-lg p-2 m-2">
+                                    <button value="agregar" id="btn_mesa" name="btn_mesa" type="submit" class="btn btn-outline-dark  btn-lg p-2 m-2">
                                     Ir a pedido
                                     </button>
                                 </form>

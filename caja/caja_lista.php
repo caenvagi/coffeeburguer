@@ -42,7 +42,7 @@
                                             INNER JOIN  usuarios Us         ON Ca.usuario    = Us.id   
                                             WHERE       liquidado = 'NO'
                                             ORDER BY    fecha_movimiento DESC
-                                         ") or die($conexion->error);
+                                        ") or die($conexion->error);
 
     $total_mov_ingreso = $mysqli->query   ("  SELECT      SUM(valor_ingreso) as total_ingresos
                                             FROM        caja Ca
@@ -67,7 +67,6 @@
                                             WHERE       liquidado = 'NO'
                                             ORDER BY    fecha_movimiento DESC
                                     ") or die($conexion->error);
-   
 ?>
 
 <!DOCTYPE html>
@@ -76,10 +75,8 @@
     <head>
         <?php require '../logs/head.php';?>
         <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-        <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-        
+        <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">        
     </head>
-
     <body>
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
         <?php require '../logs/nav-bar.php';?>
@@ -95,25 +92,19 @@
                                     <div class="card-header">
                                         Movimientos de caja Mensual:
                                     </div>
-                            
-                                                <style>
-                                                    #contenedorPadre {
-                                                    }
-                                                    #contenedorHijo {
-                                                        position: absolute;
-                                                        top: 50%;
-                                                        left: 50%;
-                                                        transform: translate(-50%, -50%);
-                                                    }
-                                                    
-                                                    .card2{
-                                                        margin:     -1px -13px 0 -13px;
-                                                    }
-                                                </style>
-
+                                    <style>
+                                        #contenedorHijo {
+                                            position: absolute;
+                                            top: 50%;
+                                            left: 50%;
+                                            transform: translate(-50%, -50%);
+                                        }
+                                        .card2{
+                                            margin:     -1px -13px 0 -13px;
+                                        }
+                                    </style>
                                         <div class="container"> 
                                             <div class="row">
-
                                                 <div id="contenedorPadre" class="col-lg-4 col-sm-12" >
                                                     <div  class="row p-2">
                                                         <div class="card col-3 bg-success text-white">
@@ -195,8 +186,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                               
-
                                         <div class="card m-3">
                                             <div class="card-header">
                                                 Movimientos de caja Mensual:
@@ -204,8 +193,6 @@
                                             <div class="table-responsive m-2">
                                                 <table id="example" class="display table table-sm table-bordered table-striped table-hover text text-center" style="font-size: 12px" class="table table-bordered text-center" >
                                                     <caption>Movimientos de caja Mensual</caption>
-                                                    
-                                                
                                                     <thead class="table-secondary">
                                                         <tr>
                                                             <th align="center">Cod</i></th>
@@ -218,7 +205,6 @@
                                                             <!-- <th align="center">Creado por</th> -->
                                                         </tr>
                                                     </thead>
-                                                    
                                                     <tbody>
                                                         <?php
                                                             while ($fila = $movimientos->fetch_array()) {
@@ -243,11 +229,8 @@
                                                         </tr>
                                                         <?php } ?>
                                                     </tbody>
-                                                    
                                                     <tfoot>
-                                                        
                                                     </tfoot>
-                                                   
                                                 </table>
                                             </div>
                                         </div>
@@ -257,24 +240,31 @@
                 </div>     
             </main>
                 <!-- pie de pagina --> <?php require '../logs/nav-footer.php'; ?>
-            
         </div>          
         <!-- FIN pagina -->
-        
         <script>
             $(document).ready(function() {
                 $('#example').DataTable({
                     "order": [[ 0, "desc" ]],
                     'pageLength': 25,
                     "language": {
-                         "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                        "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
                         }
-                           
+                        
                     });
-                    
-                    });
+                                        
+                });
+                
         </script> 
-        <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>                                                           
+        <script type="text/javascript">
+            function actualizar(){location.reload(true);}
+            //Función para actualizar cada 5 segundos(5000 milisegundos)
+            setInterval("actualizar()",60000);
+        </script>
+        <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script> 
+        <script>
+           
+        </script>                                                         
      </body>
      <script type="text/javascript" src="../js/mensajes.js"></script>
     
