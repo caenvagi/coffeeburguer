@@ -26,8 +26,57 @@
     echo "<link rel='stylesheet' type='text/css' href='../css/styles.css'>";
     echo "<link rel='stylesheet' type='text/css' href='../css/estilos.css'>";
     
+    // consultas
+        include '../conexion/conexion.php'; 
+            
+        $query_totalCat = " SELECT  pedido_fecha,
+                                    producto_categoria,
+                                    sum(detalle_cantidad * detalle_precio) as total
+                        FROM        pedidos AS PE 
+                        INNER JOIN  pedido_detalle as PD ON PE.codigo_recibo = PD.codigo_recibo_detalle 
+                        INNER JOIN  mesa AS ME ON PE.pedido_mesa = ME.mesas_id
+                        INNER JOIN  productos AS PR ON PD.detalle_producto = PR.producto_id 
+                        WHERE       producto_categoria = 1                     
+                        group by    producto_categoria
+                                                ";
+        $totalComRap = $mysqli->query($query_totalCat);
 
-    include '../conexion/conexion.php';
+        $query_totalCat1 = " SELECT  pedido_fecha,
+                                    producto_categoria,
+                                    sum(detalle_cantidad * detalle_precio) as total
+                        FROM        pedidos AS PE 
+                        INNER JOIN  pedido_detalle as PD ON PE.codigo_recibo = PD.codigo_recibo_detalle 
+                        INNER JOIN  mesa AS ME ON PE.pedido_mesa = ME.mesas_id
+                        INNER JOIN  productos AS PR ON PD.detalle_producto = PR.producto_id 
+                        WHERE       producto_categoria = 2                     
+                        group by    producto_categoria
+                                                ";
+        $totalcafe = $mysqli->query($query_totalCat1);
+
+        $query_totalCat2 = " SELECT  pedido_fecha,
+                                    producto_categoria,
+                                    sum(detalle_cantidad * detalle_precio) as total
+                        FROM        pedidos AS PE 
+                        INNER JOIN  pedido_detalle as PD ON PE.codigo_recibo = PD.codigo_recibo_detalle 
+                        INNER JOIN  mesa AS ME ON PE.pedido_mesa = ME.mesas_id
+                        INNER JOIN  productos AS PR ON PD.detalle_producto = PR.producto_id 
+                        WHERE       producto_categoria = 5                     
+                        group by    producto_categoria
+                                                ";
+        $totalBebidas = $mysqli->query($query_totalCat2);
+
+        $query_totalCat3 = " SELECT  pedido_fecha,
+                                    producto_categoria,
+                                    sum(detalle_cantidad * detalle_precio) as total
+                        FROM        pedidos AS PE 
+                        INNER JOIN  pedido_detalle as PD ON PE.codigo_recibo = PD.codigo_recibo_detalle 
+                        INNER JOIN  mesa AS ME ON PE.pedido_mesa = ME.mesas_id
+                        INNER JOIN  productos AS PR ON PD.detalle_producto = PR.producto_id 
+                        WHERE       producto_categoria = 6 and 7                     
+                        group by    producto_categoria
+                                                ";
+        $totalNevera = $mysqli->query($query_totalCat3);
+    // fin consultas       
 
     
 ?>
@@ -113,13 +162,13 @@
                                                                     <div class="text-center" style="font-size: 11px; color:grey">
                                                                         Presupuesto 
                                                                     </div>
-                                                                        <h6 style="color:grey">$ 4.000.000</h6>
+                                                                        <h6 style="color:grey">$ 0</h6>
                                                                     
                                                                         
                                                                     <div class="" style="font-size: 12px; color:black">
                                                                         Venta
                                                                     </div>
-                                                                        <h5> $ 3.500.000</h5>
+                                                                        <h5> $ 0</h5>
                                                                         
 
                                                                     <div class="single-chart col-auto" class="col-auto" style="width:6em">
@@ -131,13 +180,13 @@
                                                                                 a 15.9155 15.9155 0 0 1 0 -31.831"
                                                                                 />
                                                                             <path class="circle"
-                                                                                stroke-dasharray="50,100"
+                                                                                stroke-dasharray="0,100"
                                                                                     
                                                                                 d="M18 2.0845
                                                                                 a 15.9155 15.9155 0 0 1 0 31.831
                                                                                 a 15.9155 15.9155 0 0 1 0 -31.831"
                                                                                 />
-                                                                            <text x="18" y="20.35" class="percentage">50 % </text>
+                                                                            <text x="18" y="20.35" class="percentage">0 % </text>
                                                                         </svg>
                                                                             
                                                                     </div>
@@ -151,7 +200,7 @@
 
                                                                         <div class="contenedor justify-content-center" >
                                                                             <div class="card-header bg-light" >
-                                                                                <h3>30</h3>
+                                                                                <h3>0</h3>
                                                                                 
                                                                             </div>    
                                                                             <p style='font-size: 10px;color:grey'></p>
@@ -161,7 +210,7 @@
                                                                            
                                                                             <div class="contenedor justify-content-center">
                                                                                 <div class="card-header bg-white" >
-                                                                                    <h6><span>-50</span></h6>
+                                                                                    <h6><span>0</span></h6>
                                                                                 </div>
                                                                                 <p style='font-size: 10px;color:grey'>&nbsp;Unidades vs.<br><h7><?php setlocale(LC_TIME,"spanish"); echo strftime("%Y", strtotime("- 2 YEAR")); ?></h7> </p>
                                                                             </div>
@@ -185,13 +234,13 @@
                                                                     <div class="" style="font-size: 11px; color:grey">   
                                                                         Presupuesto
                                                                     </div>
-                                                                        <h6 style="color:grey">$ 5.000.000</h6>
+                                                                        <h6 style="color:grey">$ 0</h6>
                                                                         
                                                                        
                                                                     <div class="" style="font-size: 12px; color:black">
                                                                         Venta 
                                                                     </div>
-                                                                        <h5>$ 4.900.000</h5>
+                                                                        <h5>$ 0</h5>
                                                                         
 
                                                                     <div class="single-chart col-auto" class="col-auto" style="width:6em">
@@ -203,13 +252,13 @@
                                                                             a 15.9155 15.9155 0 0 1 0 -31.831"
                                                                         />
                                                                         <path class="circle"
-                                                                            stroke-dasharray="80,100"
+                                                                            stroke-dasharray="0,100"
                                                                             
                                                                             d="M18 2.0845
                                                                             a 15.9155 15.9155 0 0 1 0 31.831
                                                                             a 15.9155 15.9155 0 0 1 0 -31.831"
                                                                         />
-                                                                        <text x="18" y="20.35" class="percentage"> 80 %</text>
+                                                                        <text x="18" y="20.35" class="percentage"> 0 %</text>
                                                                         
                                                                         </svg>
                                                                         
@@ -223,7 +272,7 @@
 
                                                                         <div class="contenedor justify-content-center" >
                                                                             <div class="card-header bg-light" >
-                                                                                <h3>50</h3>
+                                                                                <h3>0</h3>
                                                                                 
                                                                             </div>    
                                                                             <p style='font-size: 10px;color:grey'></p>
@@ -234,7 +283,7 @@
                                                                             
                                                                             <div class="contenedor justify-content-center">
                                                                                 <div class="card-header bg-white" >
-                                                                                    <h6><span>20</span></h6>
+                                                                                    <h6><span>0</span></h6>
                                                                                 </div>
                                                                                 <p style='font-size: 10px;color:grey'>&nbsp;Unidades vs.<br><h7><?php setlocale(LC_TIME,"spanish"); echo strftime("%Y", strtotime("- 1 YEAR")); ?></h7></p>
                                                                             </div>
@@ -272,7 +321,9 @@
                                                         </div>
                                                             <div class="row" >
                                                                 <div class="card-body" style="color:grey ; font-size:16px">
-                                                                    $1.000.000                                                                    
+                                                                <?php foreach ($totalComRap as $total) { ?>
+                                                                    $&nbsp;<?php echo number_format($total['total'], 0, ",", "."); ?>
+                                                                    <?php } ?>
                                                                 </div>       
                                                             </div>                                                            
                                                     </div>
@@ -284,7 +335,9 @@
                                                         </div>
                                                             <div class="row" >
                                                                 <div class="card-body" style="color:grey ; font-size:16px">
-                                                                    $500.000                                                                    
+                                                                    <?php foreach ($totalcafe as $total1) { ?>
+                                                                    $&nbsp;<?php echo number_format($total1['total'], 0, ",", "."); ?>
+                                                                    <?php } ?>
                                                                 </div>       
                                                             </div>
                                                             
@@ -297,7 +350,9 @@
                                                         </div>
                                                             <div class="row" >
                                                                 <div class="card-body" style="color:grey ; font-size:16px">
-                                                                    $600.000                                                                    
+                                                                    <?php foreach ($totalBebidas as $total2) { ?>
+                                                                    $&nbsp;<?php echo number_format($total2['total'], 0, ",", "."); ?>
+                                                                    <?php } ?>                                                                    
                                                                 </div>       
                                                             </div>
                                                             
@@ -310,7 +365,9 @@
                                                         </div>
                                                             <div class="row" >
                                                                 <div class="card-body" style="color:grey ; font-size:16px">
-                                                                    $300.000                                                                    
+                                                                    <?php foreach ($totalNevera as $total3) { ?>
+                                                                    $&nbsp;<?php echo number_format($total3['total'], 0, ",", "."); ?>
+                                                                    <?php } ?>                                                                     
                                                                 </div>       
                                                             </div>
                                                             
