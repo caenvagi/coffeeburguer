@@ -679,7 +679,7 @@ progress {
   max-width: 100%;
   padding-right: calc(var(--bs-gutter-x) * .5);
   padding-left: calc(var(--bs-gutter-x) * .5);
-  margin-top: 90px;
+  
 }
 
 .col {
@@ -11295,14 +11295,14 @@ textarea.form-control-lg {
   }
 }
 html,
-body {
+/* body {
   height: 100%;
-}
+} */
 
 #layoutAuthentication {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 95vh;
 }
 #layoutAuthentication #layoutAuthentication_content {
   min-width: 0;
