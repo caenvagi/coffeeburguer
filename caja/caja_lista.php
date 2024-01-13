@@ -42,7 +42,7 @@
                                             INNER JOIN  usuarios Us         ON Ca.usuario    = Us.id   
                                             WHERE       liquidado = 'NO'
                                             ORDER BY    fecha_movimiento DESC
-                                        ") or die($conexion->error);
+                                        ") or die($mysqli->error);
 
     $total_mov_ingreso = $mysqli->query   ("  SELECT      SUM(valor_ingreso) as total_ingresos
                                             FROM        caja Ca

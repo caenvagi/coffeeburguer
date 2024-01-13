@@ -52,7 +52,7 @@
     <head>
         <?php require '../logs/head.php'; ?>
         <script src="../js/mensajes.js"></script>
-       <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     </head>
     <body>
         <?php require '../logs/nav-bar.php'; ?>
@@ -61,7 +61,7 @@
                 <div class="card-header BG-WARNING mt-1"><b style="color: white;">LISTA PEDIDOS</b></div>
                         <div class="table-responsive m-2" >
                             <table id="example" class="table display table-sm table-striped table-hover table-bordered" style="width:100% ; text-align: center;">
-                                <thead class="table-success">
+                                <thead class="table-success" style="font-size:11px">
                                     <tr>
                                         <th>FECHA Y HORA</th>
                                         <th>FACTURA</th>
@@ -74,7 +74,7 @@
                                         <th>TIPO</th>   
                                     </tr>
                                 </thead>
-                                <tbody style="width:100% ; text-align: center;">
+                                <tbody style="width:100% ; text-align: center; font-size:12px">
                                 <?php while ($fila = $mesas->fetch_array()) {
                                                 $fecha = $fila['pedido_fecha'];
                                                 $codRec = $fila['codigo_recibo'];
@@ -110,7 +110,7 @@
                                         <td><?php echo $idmesas; ?></td>
                                         <td><?php echo $totalcant; ?></td>
                                         <td>$&nbsp;<?php echo number_format($total, 0, ",", "."); ?></td>
-                                        <td><span class="label <?php echo $label_class; ?>" style="font-size:18px"><?php echo $estado; ?></span></td>
+                                        <td ><span class="label <?php echo $label_class; ?>" style="font-size:14px"><?php echo $estado; ?></span></td>
                                         <td><span class="label <?php echo $label_class1; ?>" style="font-size:20px"></span></td>
                                         <td>&nbsp;&nbsp;<?php echo $tipo_pedido; ?></td>
                                     </tr>

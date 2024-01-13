@@ -371,7 +371,8 @@
                                         </table>
                                         <div class="total1" id="total1">
                                             <div style="width: calc(100% - 24px)">
-                                                    <?php foreach ($ultimo2 as $rec1) { ?>
+                                                    <?php 
+                                                    foreach ($ultimo2 as $rec1) { ?>
                                                 <form method="POST" action="pedido_abierto.php">
                                                     <?php } ?>
                                                     <?php foreach ($productos3 as $prod2) { ?> 
