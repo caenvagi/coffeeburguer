@@ -137,19 +137,55 @@
                                                 </div>
                                                 <div id="botonCajadiv2" class="col-lg-5 col-md-3 col-sm-7 col-6">
                                                     <button id="botonCaja" type="button" class="btn btn-outline-success">Nueva venta</button>
-                                                    <button id="botonCaja" type="button" class="btn btn-outline-danger">Nuevo gasto</button>
+                                                    <button id="botonCaja" type="button" class="btn btn-outline-danger">nuevo gasto</button>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="cardbody m-3">
-                                            <div class=" row transacciones">
+                                            <div class="row transacciones">
                                                 <div class="d-grid gap-2 col-6 mx-auto">
                                                     <button type="button" class="btn btn-outline-dark">transacciones</button>
                                                 </div>
-                                                <dic class="d-grid gap-2 col-6 mx-auto">
+                                                <div class="d-grid gap-2 col-6 mx-auto">
                                                     <button type="button" class="btn btn-outline-secondary">Cierres de Caja</button>
-                                                </dic>
+                                                </div>
                                             </div>
+                                        </div>
+                                        <div class="row informes m-3">
+                                            <div class="card col-md-4">
+                                                <div class="sc-oBxuN liBMMm">
+                                                    <div class="row sc-eKtvVk idXfeD m-2">    
+                                                        <span><i class='fas fa-chart-line' style='font-size:36px;color:green'></i></span>
+                                                    </div>
+                                                    <div class="sc-crhfPb dAOUhy">
+                                                        <span class="label-bottom">Balance</span>
+                                                        <span class="value value-bottom"> $&nbsp;20.500</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card col-md-4">
+                                                <div class="sc-oBxuN liBMMm">
+                                                    <div class="row sc-eKtvVk idXfeD m-2">    
+                                                        <span><i class='fas fa-chart-line' style='font-size:36px;color:green'></i></span>
+                                                    </div>
+                                                    <div class="sc-crhfPb dAOUhy">
+                                                        <span class="label-bottom">Ventas totales</span>
+                                                        <span class="value value-bottom"> $&nbsp;20.500</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card col-md-4">
+                                                <div class="sc-oBxuN liBMMm">
+                                                    <div class="row sc-eKtvVk idXfeD m-2">    
+                                                        <span><i class='fas fa-chart-line' style='font-size:36px;color:green'></i></span>
+                                                    </div>
+                                                    <div class="sc-crhfPb dAOUhy">
+                                                        <span class="label-bottom">Gastos totales</span>
+                                                        <span class="value value-bottom"> $&nbsp;20.500</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                
                                         </div>                                        
                                     </div>
                                 </div>
