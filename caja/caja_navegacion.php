@@ -17,21 +17,21 @@
         </div>  
         <div class="container-fluid">
                 <a href="#" class="navbar-brand">CAJA</a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion">
+                <!-- <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button> -->
             </div>
 
-            <div id="MenuNavegacion" class="collapse navbar-collapse">
+            <!-- <div id="MenuNavegacion" class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-5">
                     <li class="nav-item">
                         <a class="nav-link" href="caja_ingresos.php">Ingresar&nbsp;Movimiento</a>
                     </li>
                     &nbsp;&nbsp;&nbsp;
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="cancelar_guias.php">Guias&nbsp;por&nbsp;pagar</a>
                     </li>
-                    &nbsp;&nbsp;&nbsp;-->
+                    &nbsp;&nbsp;&nbsp;
                     <li class="nav-item">
                         <a class="nav-link" href="caja_lista.php">Consultar&nbsp;Movimientos</a>
                     </li>
@@ -40,7 +40,7 @@
                         <a class="nav-link" href="caja_saldos.php">Saldos</a>
                     </li>
                     &nbsp;&nbsp;&nbsp;
-                    <!-- 
+                    
                     <li class="nav-item dropdown">
                                                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                                         Contabilidad
@@ -57,8 +57,8 @@
                                                 <li class="nav-item ms-3">
                                                     <a class="nav-link text-nowrap" href="#">Iniciar sesión</a>
                                                 </li>
-                                            </ul> -->
-            </div>
+                                            </ul>
+            </div> -->
         </nav>
     </div>
     <!-- FIN BARRA NAVEGACIÓN -->

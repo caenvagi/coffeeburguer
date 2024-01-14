@@ -184,6 +184,10 @@
                                     </a>
                                     <div class="collapse" id="collapse-caja" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                         <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="../caja/caja_movimientos.php">
+                                                <div><i class="fas fa-keyboard" ></i></div>
+                                                &nbsp;&nbsp;&nbsp;Movimientos
+                                            </a>
                                             <a class="nav-link" href="../caja/caja_ingresos.php">
                                                 <div><i class="fas fa-keyboard" ></i></div>
                                                 &nbsp;&nbsp;&nbsp;Ingresar

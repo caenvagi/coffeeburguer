@@ -157,7 +157,20 @@
         margin:5px;
         margin-top: 115px !important;
     }
-}
+    #botonCaja{
+        text-align: center !important;
+        margin-bottom: 5px;        
+    }
+    #botonCajadiv1{
+        text-align: center !important;
+        margin-bottom: 3px;
+        border-right: rgb(153, 151, 151) 2px hidden !important;        
+    }
+    #botonCajadiv2{
+        text-align: center;        
+    }
+}    
+
 #product_item{
     width:125px;
     height:120px;
@@ -415,5 +428,28 @@
     text-transform: none;
 }
 
+#cardMovimientos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
 
+#botonCaja{
+    max-width: 115px !important;
+    min-width: 115px !important;
+    }
+    
+#botonCajadiv1{
+    text-align: end;
+    border-right: rgb(153, 151, 151) 2px solid;
+}
+#botonCajadiv2{
+    text-align: center;
+}
 
+.card-header{
+    border-bottom: solid !important;
+    border-bottom-color: rgb(146, 144, 144) !important;
+    
+}
