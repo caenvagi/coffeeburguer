@@ -129,7 +129,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="card">
-                                        <div class="card-header">                                                
+                                        <div class="card-header" id="card-headerMov">                                                
                                             <div class="row" id="cardMovimientos">                                                
                                                 Movimientos:
                                                 <div id="botonCajadiv1" class="col-lg-5 col-md-5 col-sm-3 col-12">
@@ -151,42 +151,86 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row informes m-3">
-                                            <div class="card col-md-4">
-                                                <div class="sc-oBxuN liBMMm">
-                                                    <div class="row sc-eKtvVk idXfeD m-2">    
-                                                        <span><i class='fas fa-chart-line' style='font-size:36px;color:green'></i></span>
+                                        
+                                        <div class="row informes justify-content-between m-3">
+                                            <div class="card shadow col-md-4" id="cardBalance">
+                                                <div class="cardBalance">
+                                                    <div class="row cardBalanceIconGreen m-2">    
+                                                        <span><i class='far fa-chart-bar' style='font-size:30px;color:green'></i></span>
                                                     </div>
-                                                    <div class="sc-crhfPb dAOUhy">
+                                                    <div class="cardBalanceText">
                                                         <span class="label-bottom">Balance</span>
                                                         <span class="value value-bottom"> $&nbsp;20.500</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card col-md-4">
-                                                <div class="sc-oBxuN liBMMm">
-                                                    <div class="row sc-eKtvVk idXfeD m-2">    
-                                                        <span><i class='fas fa-chart-line' style='font-size:36px;color:green'></i></span>
+                                            <div class="card shadow col-md-4" id="cardBalance">
+                                                <div class="cardBalance">
+                                                    <div class="row cardBalanceIconGreen m-2">    
+                                                        <span><i class='fas fa-hand-holding-usd' style='font-size:30px;color:green'></i></span>
                                                     </div>
-                                                    <div class="sc-crhfPb dAOUhy">
+                                                    <div class="cardBalanceText">
                                                         <span class="label-bottom">Ventas totales</span>
                                                         <span class="value value-bottom"> $&nbsp;20.500</span>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card col-md-4">
-                                                <div class="sc-oBxuN liBMMm">
-                                                    <div class="row sc-eKtvVk idXfeD m-2">    
-                                                        <span><i class='fas fa-chart-line' style='font-size:36px;color:green'></i></span>
+                                            </div>  
+                                            <div class="card shadow col-md-4" id="cardBalance">
+                                                <div class="cardBalance">
+                                                    <div class="row cardBalanceIconRed m-2">    
+                                                        <span><i class='fas fa-coins' style='font-size:30px;color:red'></i></span>
                                                     </div>
-                                                    <div class="sc-crhfPb dAOUhy">
+                                                    <div class="cardBalanceText">
                                                         <span class="label-bottom">Gastos totales</span>
                                                         <span class="value value-bottom"> $&nbsp;20.500</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                                
-                                        </div>                                        
+                                        </div>
+                                        
+                                        <div  class="row informes justify-content-between m-0">
+                                            <div class="d-grid gap-2 col-3 mx-auto">
+                                                <button id="botonTabla" type="button" class="btn btn-outline-success">Ingresos</button>
+                                            </div>
+                                            <div class="d-grid gap-2 col-3 mx-auto">
+                                                <button id="botonTabla" type="button" class="btn btn-outline-danger">Gastos</button>
+                                            </div> 
+                                            <div class="d-grid gap-2 col-3 mx-auto">
+                                                <button id="botonTabla" type="button" class="btn btn-outline-primary">Por cobrar</button>
+                                            </div>
+                                            <div class="d-grid gap-2 col-3 mx-auto">
+                                                <button id="botonTabla" type="button" class="btn btn-outline-dark">Por pagar</button>
+                                            </div>
+                                            
+                                                <table class="mt-3" >
+                                                    <thead id="tableHeadMovimientos">
+                                                        <th></th>
+                                                        <th>Concepto</th>
+                                                        <th>Valor</th>
+                                                        <th>Medio de pago</th>
+                                                        <th>Fecha y hora</th>
+                                                        <th>Estado</th>
+                                                    </thead>
+                                                    <tbody id="tableBodyMovimientos">
+                                                        <td id="tableIconGreen"><i class='fas fa-hand-holding-usd' style='font-size:14px;color:green'></i></td>
+                                                        <td>Venta en el punto</td>
+                                                        <td>$35.000</td>
+                                                        <td>Efectivo</td>
+                                                        <td>14/01/2023 11:20 pm</td>
+                                                        <td style="font-size:14px"><span class="badge bg-success">Pagada</span></td>
+                                                    </tbody>
+                                                    <tbody id="tableBodyMovimientos">
+                                                        <td id="tableIconGreen"><i class='fas fa-hand-holding-usd' style='font-size:14px;color:green'></i></td>
+                                                        <td>Venta en el punto</td>
+                                                        <td>$35.000</td>
+                                                        <td>Efectivo</td>
+                                                        <td>14/01/2023 11:20 pm</td>
+                                                        <td style="font-size:14px"><span class="badge bg-success">Pagada</span></td>
+                                                    </tbody>
+                                                </table>
+                                            
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
