@@ -88,7 +88,7 @@
                                                     $label_class1 = "fas fa-motorcycle" ;
                                                     } elseif ($tipo_pedido == 'por entregar') {
                                                     $label_class1 = 'badge bg-primary badge';
-                                                    }
+                                                    } 
                                                     
                                                 $idmesas = $fila['detalle_mesa'];
                                                 $totalcant = $fila['totalcant'];

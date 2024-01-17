@@ -204,7 +204,7 @@
                                                 <div class="row">
                                                     <div class="wrap mt-2 mb-2">
                                                         <div class="store-wrapper">
-                                                            <div class="category_list">
+                                                            <div class="category_list">  
                                                                 <ul class="ul">
                                                                     <a class="category_item" id="all" href="#"  category="all">Todos</a>
                                                                     <?php
@@ -408,6 +408,7 @@
                                                     <input type="hidden" value="0" id="caja_egresos" class="caja_egresos" name="caja_egresos" readonly></input>
                                                     <input type="hidden" value="<?php echo $rec['pedido_mesero']; ?>" id="user_login" class="user_login" name="user_login" readonly></input>       
                                                     <input type="hidden" value="NO" id="liquidado" class="liquidado" name="liquidado" readonly></input>
+                                                    <input type="hidden" value="ingreso" id="caja_tipo" class="caja_tipo" name="caja_tipo" readonly></input>
 
                                                     <?php } ?>
                                                     <?php foreach ($productos1 as $prod) { ?> 

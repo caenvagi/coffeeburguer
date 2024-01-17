@@ -142,7 +142,7 @@
                                                     outline-style: solid;
                                                     outline-width: 1px;
                                                     background: lightgreen;
-                                                 }
+                                                }
                                             </style>
                                             
                                             <form id="movimientos" name="movimientos" class="row g-0 p-2" action="consulta/ingreso.php" method="POST">
@@ -155,13 +155,13 @@
 
                                                 <div class="form-check form-check-inline me-2">
                                                     <i class='fas fa-plus-circle'></i>
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="INGRESO" required>
-                                                    <label class="form-check-label" for="inlineRadio1">Ingreso</label>
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="ingreso" required></input>
+                                                    <label class="form-check-label" for="inlineRadio1">ingreso</label>
                                                 </div>
                                                 <div class="form-check form-check-inline m-2">
                                                     <i class='fas fa-minus-circle'></i>
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="EGRESO" required>
-                                                    <label class="form-check-label" for="inlineRadio2">Gasto</label>
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="gasto" required></input>
+                                                    <label class="form-check-label" for="inlineRadio2">gasto</label>
                                                 </div>
 
                                                 <div class="form-floating m-2">
@@ -191,11 +191,8 @@
                                                         console.log(valor);
                                                         $('#span1').text('Va a registrar un'+' '+ valor);
                                                     });
-                                                </script>
-                                                
-                                                
-                                               
-                                                
+                                                </script> 
+
                                                 <div class="form-floating m-2">
                                                     <input type="text" name="desc_movimiento" class="form-control" id="floatingInput" placeholder="Input" required>
                                                     <label for="floatingInput">Descripcion</label>
@@ -209,6 +206,8 @@
                                                 <input value="<?php echo $id ?>"  type="hidden" class="form-control" name="user_login" placeholder="usuario" aria-label="user_login" aria-describedby="basic-addon1" required autofocus>
                                                 
                                                 <input class="form-check-input" type="hidden" name="liquidado" value="NO">
+
+                                                <input class="form-check-input" type="hidden" name="caja_tipo" value="gasto">
 
                                                 <div class="d-grid gap-2 m-2">
                                                     <button type="submit"  name="register" href="consulta/ingreso.php" class="btn btn-secondary btn btn-block"  ><i class="bi bi-plus-lg text-white">&nbsp;GUARDAR</i></button>

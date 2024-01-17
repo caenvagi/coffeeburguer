@@ -70,7 +70,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es"> 
 
     <head>
         <?php require '../logs/head.php';?>

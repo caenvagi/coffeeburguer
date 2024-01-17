@@ -18,6 +18,8 @@ $(document).ready(function () {
 
 
 
+
+
 // document.getElementById("proditem").style.display = "none";
 
 // document.getElementById("total1").style.display = "none";

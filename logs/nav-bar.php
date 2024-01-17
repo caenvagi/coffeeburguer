@@ -188,18 +188,18 @@
                                                 <div><i class="fas fa-keyboard" ></i></div>
                                                 &nbsp;&nbsp;&nbsp;Movimientos
                                             </a>
-                                            <a class="nav-link" href="../caja/caja_ingresos.php">
+                                            <!-- <a class="nav-link" href="../caja/caja_ingresos.php">
                                                 <div><i class="fas fa-keyboard" ></i></div>
                                                 &nbsp;&nbsp;&nbsp;Ingresar
-                                            </a>
-                                            <a class="nav-link" href="../caja/caja_lista.php">
+                                            </a> -->
+                                            <!-- <a class="nav-link" href="../caja/caja_lista.php">
                                                 <div><i class='fas fa-file-alt'></i></div>
                                                 &nbsp;&nbsp;&nbsp;Listado
-                                            </a>
-                                            <a class="nav-link" href="../caja/caja_saldos.php">
+                                            </a> -->
+                                            <!-- <a class="nav-link" href="../caja/caja_saldos.php">
                                                 <div><i class='fas fa-donate'></i></div>
                                                 &nbsp;&nbsp;&nbsp;Saldos
-                                            </a>
+                                            </a> -->
                                             
                                             
                                         </nav>

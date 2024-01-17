@@ -12,6 +12,7 @@ $ingreso = $_POST['caja_ingresos'];
 $egresos = $_POST['caja_egresos'];
 $user_login = $_POST['user_login'];
 $liquidado = $_POST['liquidado'];
+$tipo = $_POST['caja_tipo'];
 
 
 // echo $mesas;
@@ -27,8 +28,8 @@ $result1 = mysqli_query($connection,$query1);
 $query2 = "UPDATE pedido_detalle SET detalle_estado = 'cerrada' where codigo_recibo_detalle = $recibo";
 $result2 = mysqli_query($connection,$query2);
 
-$query3 = "  INSERT INTO caja    (fecha_movimiento , usuario , movimiento , desc_movimiento , valor_ingreso , valor_egreso , user_login , liquidado)
-                VALUES          ('$fecha','$mesero','$movimiento','$desc_movimiento','$ingreso','$egresos','$user_login','$liquidado')";
+$query3 = "  INSERT INTO caja    (fecha_movimiento , usuario , movimiento , desc_movimiento , valor_ingreso , valor_egreso , user_login , liquidado , caja_tipo)
+                VALUES          ('$fecha','$mesero','$movimiento','$desc_movimiento','$ingreso','$egresos','$user_login','$liquidado','$tipo')";
 $result3 = mysqli_query($connection,$query3);
 
 

@@ -48,6 +48,8 @@
     #tableBodyMovimientos{
         font-size: 12px !important;
         text-align: center !important;
+        align-items: center !important;
+        justify-content: center !important;
         }    
 }    
 
@@ -512,13 +514,55 @@
         -webkit-box-align: center;
         align-items: center;
         -webkit-box-pack: center;
+        justify-content: center; 
+        border-radius: 100%;
+        background: rgb(215, 244, 232); 
+        margin: auto;  
+    }
+    #tableIconRed {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
         justify-content: center;
         border-radius: 100%;
-        background: rgb(215, 244, 232);
-        margin: 3px;
-        text-align: center;
+        background: rgb(255, 226, 224);
+        margin: auto;   
     }
     #botonTabla{
-        max-width: 170px ;
-        min-width: 170px ;
+        max-width: 200px ;
+        min-width: 200px ;
     }
+
+    .botonTabla{
+        border: 1px solid #2e518b; /*anchura, estilo y color borde*/
+        padding: 10px; /*espacio alrededor texto*/
+        background-color: #2e518b; /*color botón*/
+        color: #f8f5f5; /*color texto*/
+        text-decoration: none; /*decoración texto*/
+        text-transform: uppercase; /*capitalización texto*/
+        font-family: 'Helvetica', sans-serif; /*tipografía texto*/
+        border-radius: 10px; /*bordes redondos*/
+        font-size: 10px;
+        text-align: center;
+        -webkit-box-align: center;  
+        align-items: center;
+        box-sizing: border-box;    
+        height: 32px;
+        margin: 0px 8px 4px 0px;   
+        cursor: pointer;
+        display: flex;
+        padding: 8px 12px;
+        white-space: nowrap;
+        border: 0.5px solid rgb(135, 153, 171);}
+    /*boton categorias*/
+
+    .butom_list .ct_item_active{
+        background: rgb(40, 41, 40);
+        border: 1px solid rgb(40, 41, 40); /*anchura, estilo y color borde*/
+        color:white;        
+    }
+
+  
