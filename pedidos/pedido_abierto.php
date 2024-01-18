@@ -23,8 +23,8 @@
         echo "<link rel='stylesheet' type='text/css' href='../css/styles.css'>";
         echo "<link rel='stylesheet' type='text/css' href='../css/estilos.css'>"; 
 
-       // error_reporting(0);
-
+      // error_reporting(0);
+       error_reporting(E_ALL ^ E_NOTICE);
     // consultas
         include '../conexion/conexion.php'; 
         
@@ -44,8 +44,11 @@
                         group by    codigo_recibo_detalle
                         order by    detalle_mesa;
                                                 ";
-        $mesas = $mysqli->query($query_mesa);
-        // fin consultas       
+        
+        
+       
+        // fin consultas
+              
 ?>
 
 <!DOCTYPE html>
@@ -59,36 +62,65 @@
         <div id="layoutSidenav_content" class="layoutSidenav" >
                 <main>
                     <div class="card-header BG-WARNING mt-1"><b style="color: white;">PEDIDOS ATENDIDOS</b></div>
-                        <div class="rows" >
-                            <?php while ($fila = $mesas->fetch_array()) {
-                                            $codRec = $fila['codigo_recibo'];
-                                            $totalcant = $fila['totalcant'];
-                                            $total = $fila['total'];
-                                            $mesero = $fila['pedido_mesero'];
-                                            $mesero1 = $fila['pedido_mesero_nombre'];
-                                            $idmesas = $fila['detalle_mesa'];
-                                            $nombremesas = $fila['mesas_nombre'];
-                                            
+                        
+                    <!-- <div class="sc-43191fe4-0 dTEzXC">
+                        <p class="sc-gEvEer gRVyje sc-43191fe4-1 ddmZxl" data-testid="default-typography">
+                        Aún no tienes mesas o domicilios abiertos. Empieza agregando uno con las acciones de 
+                        <strong>“Nuevo pedido”</strong> y <strong>“Nuevo domicilio”</strong></p>
+                    </div> -->                    
 
-                                            $tipo_pedido = $fila['mesas_tipo_pedido'];
-                                            if ($tipo_pedido == 'LOCAL') {
-                                            $label_class1 = 'fas fa-utensils';
-                                            } elseif ($tipo_pedido == 'DOMICILIO') {
-                                            $label_class1 = "fas fa-motorcycle" ;
-                                            } elseif ($tipo_pedido == 'por entregar') {
-                                            $label_class1 = 'badge bg-primary badge';
-                                            }
+                    <div class="rows" >
+                            <?php 
+                            if($mesas = mysqli_query($mysqli, $query_mesa)){
+                                if(mysqli_num_rows($mesas) > 0) {
+                                    while ($fila = $mesas->fetch_array()) {
+                                        $codRec = $fila['codigo_recibo'];
+                                        $totalcant = $fila['totalcant'];
+                                        $total = $fila['total'];
+                                        $mesero = $fila['pedido_mesero'];
+                                        $mesero1 = $fila['pedido_mesero_nombre'];
+                                        $idmesas = $fila['detalle_mesa'];
+                                        $nombremesas = $fila['mesas_nombre'];
+                                        $estado = $fila['detalle_estado'];                                            
 
-                                            $estado = $fila['detalle_estado'];
-                                            if ($estado == 'cerrada') {
-                                            $label_class = 'badge bg-danger';
-                                            } elseif ($estado == 'abierta') {
-                                            $label_class = "badge bg-success" ;
-                                            } elseif ($estado == 'por entregar') {
-                                            $label_class = 'badge bg-primary badge';
-                                            }
+                                        $tipo_pedido = $fila['mesas_tipo_pedido'];
+                                        if ($tipo_pedido == 'LOCAL') {
+                                        $label_class1 = 'fas fa-utensils';
+                                        } elseif ($tipo_pedido == 'DOMICILIO') {
+                                        $label_class1 = "fas fa-motorcycle" ;
+                                        } elseif ($tipo_pedido == 'por entregar') {
+                                        $label_class1 = 'badge bg-primary badge';
+                                        }
+
+                                        $estado = $fila['detalle_estado'];
+                                        if ($estado == 'cerrada') {
+                                        $label_class = 'badge bg-danger';
+                                        } elseif ($estado == 'abierta') {
+                                        $label_class = "badge bg-success" ;
+                                        } elseif ($estado == 'por entregar') {
+                                        $label_class = 'badge bg-primary badge';
+                                        }
+                                    }
+
+                                    
+                                    mysqli_free_result($mesas);
+                                } else{
+                                    '<script type="text/javascript">$("#cardPedido").hide()</script>';
+                                    
+                                    
+                                    echo "
+                                    <div class='sc-43191fe4-0 dTEzXC'>
+                                    <p class='sc-gEvEer gRVyje sc-43191fe4-1 ddmZxl' data-testid='default-typography'>
+                                    Aún no tienes mesas o domicilios abiertos. Empieza agregando uno con las acciones de 
+                                    <strong>“Nuevo pedido”</strong> y <strong>“Nuevo domicilio”</strong></p>
+                                </div>";
+                                } 
+                            
+                            
                             ?>
-                            <div class="card-body border m-2 p-0 justify-content-center align-items-center" style="text-align: center ; background-color: #ededed">
+                            <script type="text/javascript">$("#cardPedido").hide()</script>
+
+                            <div id="cardPedido" class="card-body border m-2 p-0 justify-content-center align-items-center" style="text-align: center ; background-color: #ededed">
                                 <br>
                                 <span class="label <?php echo $label_class1; ?>" style="font-size:50px"></span>
                                 <br>
@@ -107,8 +139,11 @@
                         </div>
                     </main>            
             <?php require '../logs/nav-footer.php'; ?>
+
+            
         </div>
     </body>
+    
     <script>
     </script>
 </html>

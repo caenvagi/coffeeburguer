@@ -565,4 +565,38 @@
         color:white;        
     }
 
-  
+    .dTEzXC {
+        display: grid;
+        place-items: center;
+        margin-top: 120px;
+    }
+
+    .ddmZxl {
+        width: 368px;
+        text-align: center;
+        color: rgb(57, 76, 96);
+        margin: 24px 0px 0px;
+        padding: 0px;
+    }
+
+    .gRVyje {
+        font-family: "Nunito Sans";
+        font-size: 1rem;
+        line-height: 1.5rem;
+        font-weight: 400;
+        font-style: normal;
+        margin: 1em;
+        padding: 0px;
+        color: rgb(26, 39, 50);
+        text-transform: none;
+    }
+
+    p {
+        display: block;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+    }
+    /* pagina pedido_abierto mensaje no hay pedidos */
+    
