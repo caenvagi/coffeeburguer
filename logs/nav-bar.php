@@ -221,6 +221,14 @@
                                             </a>
                                         </nav>
                                     </div>
+                                    <div class="collapse" id="collapse-ENVIA" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="../usuarios/usuario_perfil.php?id=5824412">
+                                                <div><i class="fa fa-user-circle" style='font-size:24px'></i></div>
+                                                &nbsp;&nbsp;&nbsp;Perfil
+                                            </a>
+                                        </nav>
+                                    </div>
                                 <?php  } ?>    
                                 <!-- MENU CONFIGURACION FIN-->
 

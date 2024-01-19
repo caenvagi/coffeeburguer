@@ -205,7 +205,7 @@
                                                                 <div class="modal-body">
                                                                     <style>
                                                                     .span3{
-                                                                        padding: px !important;
+                                                                        padding: 0px !important;
                                                                         margin: 2px !important;
                                                                         border-radius:5px !important;
                                                                         outline-style: solid !important;

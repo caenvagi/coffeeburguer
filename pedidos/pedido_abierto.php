@@ -23,8 +23,8 @@
         echo "<link rel='stylesheet' type='text/css' href='../css/styles.css'>";
         echo "<link rel='stylesheet' type='text/css' href='../css/estilos.css'>"; 
 
-      // error_reporting(0);
-       error_reporting(E_ALL ^ E_NOTICE);
+    // error_reporting(0);
+    error_reporting(E_ALL ^ E_NOTICE);
     // consultas
         include '../conexion/conexion.php'; 
         
@@ -44,11 +44,7 @@
                         group by    codigo_recibo_detalle
                         order by    detalle_mesa;
                                                 ";
-        
-        
-       
         // fin consultas
-              
 ?>
 
 <!DOCTYPE html>
@@ -113,15 +109,17 @@
                                     <p class='sc-gEvEer gRVyje sc-43191fe4-1 ddmZxl' data-testid='default-typography'>
                                     Aún no tienes mesas o domicilios abiertos. Empieza agregando uno con las acciones de 
                                     <strong>“Nuevo pedido”</strong> y <strong>“Nuevo domicilio”</strong></p>
-                                </div>";
+                                    </div>
+                                
+                                ";
                                 } 
                             
                             
                             ?>
                             <script type="text/javascript">$("#cardPedido").hide()</script>
-
+                            
                             <div id="cardPedido" class="card-body border m-2 p-0 justify-content-center align-items-center" style="text-align: center ; background-color: #ededed">
-                                <br>
+                                
                                 <span class="label <?php echo $label_class1; ?>" style="font-size:50px"></span>
                                 <br>
                                 <p style="font-size:24px">&nbsp;<?php echo $nombremesas;?></p>

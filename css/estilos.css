@@ -581,7 +581,7 @@
 
     .gRVyje {
         font-family: "Nunito Sans";
-        font-size: 1rem;
+        font-size: 1.2rem;
         line-height: 1.5rem;
         font-weight: 400;
         font-style: normal;
@@ -599,4 +599,54 @@
         margin-inline-end: 0px;
     }
     /* pagina pedido_abierto mensaje no hay pedidos */
+
+    /* pagina perfil de usuario  */
+
+    #containerPerfil{
+        flex-wrap: wrap;
+        padding: 5px;
+        margin: 5px;
+        margin-top:15px !important;
+        border:rgb(151, 150, 150) 1px solid;
+        display: inline-block;
+        border-radius: 15px;
+        }
+    #imagen{
+        margin-left: 10px;
+    }
+    .fotoPerfil{        
+        height: 10rem;
+        width: 10rem;
+        border-radius: 100%;
+        border:rgb(134, 134, 134) 3px solid;
+        margin: 2rem 2rem 2rem 2rem;
+    }
+    #cardDatos{
+        border-top: #cdcfce 2px solid !important;
+        margin-top:10px;
+    }
+    #datosNombre{
+        margin:0px;
+        margin-top: 10px !important;
+    }
+    #datosCargo{
+        margin-top: 0px;
+        margin-bottom: 0px !important;
+        color: rgb(158, 158, 158);
+        font-size: 14px;
+    }
+    .labelCards{
+        margin-top: 5px;
+        font-size: 16px;
+        color:rgb(161, 160, 160)
+    }
+    .datosCards{
+        margin-top: 5px;
+    }
+    #cajaBotones{
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+    }
+
+    
     
