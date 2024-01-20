@@ -33,6 +33,21 @@
                                         INNER JOIN tipo_usuarios Tu ON US.tipo_usuario = Tu.id_tipo_usuario
                                         WHERE id=$id
                                         ") or die($mysqli->error);
+
+include '../conexion/conexion.php';
+$fotouser1 = $mysqli->query("  SELECT        US.nombre,
+                                            US.email,
+                                            US.usuario,
+                                            US.tipo_usuario,
+                                            Tu.tipo_usuario,
+                                            US.direccion,
+                                            US.telefono,
+                                            US.foto1,
+                                            Us.foto2                                       
+                                    FROM usuarios US
+                                    INNER JOIN tipo_usuarios Tu ON US.tipo_usuario = Tu.id_tipo_usuario
+                                    WHERE id=$id
+                                    ") or die($mysqli->error);                                   
     
     
         
@@ -89,8 +104,13 @@
                             <div class="nav">
                                 <!-- titulo del menu <div class="sb-sidenav-menu-heading">Menu</div> -->
                                 <a class="nav-link" href="#">
-                                    <img class="avatar" src="<?php echo $foto ?>"/> &nbsp;<?php echo $nombre ?>
-                                    </br>
+                                <?php
+                                    while ($fila = $fotouser1->fetch_array()) {
+                                    $foto1 = $fila['foto1'];
+                                ?>
+                                    <img class="avatar" src="<?php echo $foto1 ?>"/> &nbsp;<?php echo $nombre ?>
+                                    <?php } ?>   
+                                </br>
                                     &nbsp;<?php echo $usuario ?>
                                     <div class="sb-nav-link-icon"><!--<i class="fas fa-tachometer-alt"></i>--></div>
                                     </a>

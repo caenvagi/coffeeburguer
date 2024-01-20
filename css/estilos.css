@@ -50,7 +50,35 @@
         text-align: center !important;
         align-items: center !important;
         justify-content: center !important;
-        }    
+        }
+
+    #imagen{
+        display: flex;
+        justify-content: center; 
+        flex-direction: row;
+        }
+    .fotoPerfil{        
+        margin:10px 0px 10px 0px!important;
+        }
+    #datosNombre{
+        display: flex;
+        justify-content: center; 
+        flex-direction: row;
+        justify-content: center;
+    }  
+    #datosCargo{
+        display: flex;
+        justify-content: center; 
+        flex-direction: row;
+        justify-content: center;
+    } 
+    #datosUser{
+        margin-left: 10px !important;
+    }  
+    #cajaBotones{
+        
+
+    }      
 }    
 
 /* para página dashboard */
@@ -644,8 +672,9 @@
         margin-top: 5px;
     }
     #cajaBotones{
-        margin-top: 20px !important;
-        margin-bottom: 20px !important;
+        margin: 5px !important;
+        padding-top: 15px;
+        border-top:#cdcfce 2px solid !important;
     }
 
     

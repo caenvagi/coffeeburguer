@@ -34,7 +34,7 @@ if ($_POST) {
 			$_SESSION['foto2'] = $row['foto2'];
 			$_SESSION['activo'] = $row['activo'];
 
-			header("location: index/dashboard.php");
+			header("location: principal/dashboard.php");
 ?>
 		<?php
 		} else {
