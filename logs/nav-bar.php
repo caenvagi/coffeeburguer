@@ -84,7 +84,7 @@ $fotouser1 = $mysqli->query("  SELECT        US.nombre,
         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $nombre ?>&nbsp;&nbsp;&nbsp;<img class="avatar2" src="<?php echo $foto1 ?>" /><!-- &nbsp;&nbsp;<i class="fas fa-user fa-fw"></i>--></a>
         <?php } ?>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="../usuarios/usuarios.php"><i class="fa fa-user-circle"></i>&nbspPerfil</a></li>
+                <li><a class="dropdown-item" href="../usuarios/usuario_perfil.php?id=<?php echo $id ?>"><i class="fa fa-user-circle"></i>&nbsp;Perfil</a></li>
                 <!--<li><a class="dropdown-item" href="#!">Otros</a></li>-->
                 <li>
                     <hr class="dropdown-divider" />
@@ -240,15 +240,7 @@ $fotouser1 = $mysqli->query("  SELECT        US.nombre,
                                                 &nbsp;&nbsp;&nbsp;Empleados
                                             </a>
                                         </nav>
-                                    </div>
-                                    <div class="collapse" id="collapse-ENVIA" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="../usuarios/usuario_perfil.php?id=5824412">
-                                                <div><i class="fa fa-user-circle" style='font-size:24px'></i></div>
-                                                &nbsp;&nbsp;&nbsp;Perfil
-                                            </a>
-                                        </nav>
-                                    </div>
+                                    </div>                                    
                                 <?php  } ?>    
                                 <!-- MENU CONFIGURACION FIN-->
 

@@ -7,10 +7,9 @@
         header("Location: index.php");
     }
     $id = $_SESSION['id'];
-   
-    $tipo_usuario = $_SESSION['tipo_usuario'];
-    ;
 
+    $tipo_usuario = $_SESSION['tipo_usuario'];
+    
     if ($tipo_usuario == 1) {
         $where = "";
     } else if ($tipo_usuario == 2) {
@@ -113,7 +112,7 @@
             <main>
                 <div class="container-fluid px-3">
                     <!-- BARRA NAVEGACIÓN -->
-                        <div class="card-header BG-PRIMARY mt-1"><b style="color: white;">Perfil Usuario</b></div>
+                        <div class="card-header BG-PRIMARY mt-1"><b style="color: white;">Usuario</b></div>
                             <!-- CARD PERFIL NUEVO -->
                                 <div class="container col-12 col-sm-12" id="containerPerfil">
                                     <div class="row col-12 col-sm-12">
