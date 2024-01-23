@@ -43,8 +43,8 @@
             $fotos = trim($_POST['foto2']);
             $activo = trim($_POST['activo']);
             
-            $consulta = "   INSERT INTO usuarios(id, nombre, cargo, direccion, telefono, email, usuario, clave, tipo_usuario, foto1, foto2, activo) 
-                            VALUES ('$id','$nombre','$cargo','$direccion','$telefono','$email','$usuario','$clave','$tipo','$foto','$fotos','$activo')";
+            $consulta = "   INSERT INTO usuarios(id, nombre,  direccion, telefono, email, usuario, clave, tipo_usuario, tipo_cargo, foto1, foto2, activo) 
+                            VALUES ('$id','$nombre','$direccion','$telefono','$email','$usuario','$clave','$tipo','$cargo','$foto','$fotos','$activo')";
             $resultado = mysqli_query($mysqli,$consulta);
             if($resultado){
                 header('location:usuarios_nuevos.php?mensaje=guardado')
@@ -67,6 +67,8 @@
         }
     }
 
+    
+
     // Para el combox
     $query = "  SELECT id_tipo_usuario, tipo_usuario 
                 FROM tipo_usuarios
@@ -76,9 +78,30 @@
 
     // Para lista de usuarios
     $query = "  SELECT * 
-                FROM usuarios
+                FROM usuarios US
+                INNER JOIN  tipo_cargo TC ON US.tipo_cargo = TC.id_cargo
+                ORDER BY activo DESC
                 ";
     $resultado2 = $mysqli->query($query);
+
+    // Para lista de usuarios
+    $query2 = "     SELECT * 
+                    FROM usuarios as US
+                    INNER JOIN tipo_cargo as TC ON TC.id_cargo = US.tipo_cargo
+                    
+                ";
+    $empleados = $mysqli->query($query2);
+
+    $query1 = "     SELECT * 
+                    FROM tipo_cargo
+                ";
+    $cargo = $mysqli->query($query1);
+
+    
+
+    
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -126,7 +149,7 @@
                                     if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'falta') {
                                     ?>
                                         <div class="alerta alert alert-warning alert-dismissible fade show text-center" role="alert">
-                                            <h5><strong>Error !</strong> @mail o Nombre o Usuario ya existen!</h5>
+                                            <h5><strong>Error !</strong> no se pudo editar!</h5>
                                             Intenta de nuevo
                                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div>
@@ -179,7 +202,7 @@
                                     ?>
                                 <!-- fin alertas -->
                                 
-                                <!-- modasl ingreso empleados -->
+                                <!-- modal ingreso empleados -->
                                     <!--  Modal trigger button  -->
                                     <div class="col col-sm-3 col-md-4">
                                         <button type="button" class="btn btn-outline-primary btn-md mb-2" data-bs-toggle="modal" data-bs-target="#modalId">
@@ -222,7 +245,7 @@
                                                                             <div class="input-group-prepend">
                                                                                 <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"></i>&nbsp;</span>
                                                                             </div>
-                                                                        <input value="" type="tel" class="form-control" name="telefono" placeholder="Telefono" aria-label="tel" aria-describedby="basic-addon1" minlength="12" maxlength="12" required autofocus>
+                                                                        <input value="" type="tel" class="form-control" name="telefono" placeholder="Telefono" aria-label="tel" aria-describedby="basic-addon1" minlength="10" maxlength="10" required autofocus>
                                                                         </div>
                                                                         <div class="input-group mb-2">
                                                                             <div class="input-group-prepend">
@@ -248,11 +271,19 @@
                                                                                 <div class="input-group-prepend">
                                                                                     <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-user-tie'></i>&nbsp;</label>
                                                                                 </div>
-                                                                                    <select class="form-select custom-select" id="cargo" name="cargo" required autofocus>
-                                                                                        <option hidden selected>Cargo</option>
-                                                                                        <option value="mensajero">Mesero</option>
-                                                                                        <option value="Administrador">Administrador</option>
-                                                                                        <option value="Programador">Tecnologia</option>
+                                                                                <select class="form-select custom-select" id="cargo" name="cargo" required autofocus>
+                                                                                <option hidden selected>Cargo</option>
+                                                                                    <?php
+                                                                                    // Para el combox guias mensajeros activos
+                                                                                    $query5 = " SELECT  * 
+                                                                                                FROM    tipo_cargo
+                                                                                                ";
+                                                                                    $cargoTipo2 = $mysqli->query($query5);
+                                                                                    // Fin Para el combox guias mensajeros activos
+                                                                                    ?>
+                                                                                    <?php while ($row = $cargoTipo2->fetch_assoc()) { ?>
+                                                                                            <option value="<?php echo $row['id_cargo']; ?>"><?php echo $row['cargo_nombre']; ?></option>
+                                                                                    <?php } ?>
                                                                                     </select>
                                                                             </div>
                                                                         </div>
@@ -307,7 +338,9 @@
                                                     <th align="center">AVATAR</th>
                                                     <th align="center">CARGO</th>
                                                     <th align="center">USER</th>
-                                                    <th align="center" colspan="2">ACTIVO</th>
+                                                    <th align="center">ACTIVO</th>
+                                                    <th align="center">EDITAR</th>
+                                                
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -315,7 +348,7 @@
                                                     while ($fila = $resultado2->fetch_array()) {
                                                         $id = $fila['id'];
                                                         $nombre = $fila['nombre'];
-                                                        $cargo = $fila['cargo'];
+                                                        $cargoNombre = $fila['cargo_nombre'];
                                                         $direccion = $fila['direccion'];
                                                         $telefono = $fila['telefono'];
                                                         $foto = $fila['foto1'];
@@ -345,27 +378,129 @@
                                                                     "<img class='avatar5' src='$foto'";
                                                                 }
                                                                 ?></td>
-                                                        <td align="center"><?php echo $cargo; ?></td>
+                                                        <td align="center"><?php echo $cargoNombre; ?></td>
                                                         <td align="center"><?php echo $user; ?></td>                                                                
-                                                        <td align="center"><?php echo $activo2; ?></td>
+                                                        <td align="center" style="visibility:collapse; display:none;"><?php echo $activo2; ?></td>
                                                         <td>
                                                             <?php if ($activo == "SI") 
                                                                 {echo "<h3 style=color:green><i class='bi bi-person-check-fill'></i></h3>";
                                                                 }else 
                                                                 {echo "<h3 style=color:grey><i class='bi bi-person-x-fill'></i></h3>";}
                                                                 ?>
-                                                        </td>
-                                                        <?php } ?>
+                                                        </td>                                                            
+                                                        <td align="center"><a data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $id; ?>"
+                                                                                    title="Editar" class="btn btn-outline-success btn-xs">
+                                                                                    <i class="bi bi-pencil-square"></i></a></td>
+                                                        
+                                                    <?php } ?>   
                                                     </tr>
                                             </tbody>
                                             <tfoot>                                                
                                             </tfoot>
                                         </table>
                                     </div>
-                                <!-- fin tabla empleados -->    
+                                <!-- fin tabla empleados -->                                
+                                
+                                <!-- modal editar empleados -->
+                                    <!-- Modal -->
+                                        <?php
+                                            while ($fila = $empleados->fetch_array()) {
+                                                $id = $fila['id'];
+                                                $nombre = $fila['nombre'];
+                                                $cargo = $fila['tipo_cargo'];
+                                                $direccion = $fila['direccion'];
+                                                $telefono = $fila['telefono'];
+                                                $foto = $fila['foto1'];
+                                                $fotos = $fila['foto2'];
+                                                $user = $fila['usuario'];                                                        
+                                                $activo2 = $fila['activo'];
+                                                $nombreCargo = $fila['cargo_nombre'];
+                                                $email = $fila['email'];
+                                                $activo = $fila['activo'];
+                                                if ($activo === 'SI'){
+                                                    $checked = 'checked="checked"';
+                                                }elseif($activo === 'NO'){
+                                                    $checked = 'checked=""';
+                                                }  ?>
+                                    <form id="usuario" name="usuario" class="row g-0 p-2" action="usuarios_editarproceso.php" method="POST">
+                                        <div class="modal fade" id="exampleModal<?php echo $id; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-alt"></i>&nbsp;Modificar Empleado <br></h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>    
+                                                    <div class="modal-body">
+                                                        <div class="mb-1">
+                                                            <h7 class="mb-1"><?php echo $nombre; ?><br>
+                                                            <input type="text" name="id" id="id" value="<?php echo $id; ?>" readonly></input>
+                                                                <label class="form-label mt-1"> </label>
+                                                                    <div class="input-group mb-1 mt-2">
+                                                                        <div class="input-group-prepend">
+                                                                            <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-user-tie'></i>&nbsp;</label>
+                                                                        </div>
+                                                                        <select class="form-select custom-select" id="cargo" name="cargo" required autofocus>
+                                                                        <option value="<?php echo $cargo ?>"><?php echo $nombreCargo ?></option>
+                                                                        <?php
+                                                                        // Para el combox guias mensajeros activos
+                                                                        $query1 = " SELECT  * 
+                                                                                    FROM    tipo_cargo
+                                                                                    ";
+                                                                        $cargoTipo = $mysqli->query($query1);
+                                                                        // Fin Para el combox guias mensajeros activos
+                                                                        ?>
+                                                                        <?php while ($row = $cargoTipo->fetch_assoc()) { ?>
+                                                                                <option value="<?php echo $row['id_cargo']; ?>"><?php echo $row['cargo_nombre']; ?></option>
+                                                                        <?php } ?>
+                                                                        </select>
+                                                                    </div>
+                                                        </div>        
+                                                        <div class="input-group mb-2">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-map-marker-alt"></i>&nbsp;</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" name="direccion" id="direccion" value="<?php echo $direccion ?>" placeholder="Direccion" aria-label="direccion" aria-describedby="basic-addon1" required autofocus>
+                                                        </div>
+                                                        <div class="input-group mb-2">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"></i>&nbsp;</span>
+                                                            </div>
+                                                            <input type="tel" class="form-control" name="telefono" id="telefono" placeholder="Telefono" value="<?php echo $telefono ?>" aria-label="tel" aria-describedby="basic-addon1" minlength="10" maxlength="10" required autofocus>
+                                                        </div>
+                                                        <div class="input-group mb-2">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"></i>&nbsp;</span>
+                                                            </div>
+                                                            <input  type="text" class="form-control" name="email"  id="email"placeholder="Email" value="<?php echo $email ?>" aria-label="email" aria-describedby="basic-addon1" required autofocus>
+                                                        </div>
+                                                        <div class="">
+                                                            <center><label class="form-label">Empeleado Activo </label></center>                            
+                                                            <div class="justify-content-center input-group mb-0 text-center">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" id="inlineCheckbox1" name="activo" value="SI" <?php if($activo == 'SI') print "checked" ?> >
+                                                                    <label class="form-check-label" for="inlineCheckbox1">SI</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" id="inlineCheckbox2" name="activo" value="NO" <?php if($activo == 'NO') print "checked" ?> >
+                                                                    <label class="form-check-label" for="inlineCheckbox2">NO</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                        <button type="submit" value="editar" class="btn btn-primary btn btn-block">Guardar cambios</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>    
+                                    <?php } ;  ?>                                    
+                                <!-- modal editar empleados -->                        
+                            
                             </div>
                         </div>
-                </div>
+                </div>   
             </main>
             <!-- footer -->
                 <?php require '../logs/nav-footer.php'; ?>

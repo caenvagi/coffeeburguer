@@ -1,17 +1,15 @@
 <?php 
-session_start();
+    session_start();
 
-$id = $_POST['id'];
-require '../conexion/conexion.php';
-$foto = $_FILES['nfoto'];
-echo $foto['tmp_name'];
-$directorio_destino = "images";
-$directorio_destino2 = "../usuarios/";
-$directorio_destino3 = "../usuarios/";
+    $id = $_POST['id'];
+    require '../conexion/conexion.php';
+    $foto = $_FILES['nfoto'];
+    echo $foto['tmp_name'];
+    $directorio_destino = "images";
+    $directorio_destino2 = "../usuarios/";
+    $directorio_destino3 = "../usuarios/";
 
-$tmp_name = $foto['tmp_name'];
-    
-    
+    $tmp_name = $foto['tmp_name']; 
         $img_file = $foto['name'];
         $img_type = $foto['type'];
         echo 1;
@@ -26,22 +24,11 @@ $tmp_name = $foto['tmp_name'];
             $destino = $directorio_destino2 . 'images/' .  $img_file;
             mysqli_query($mysqli, "UPDATE usuarios SET foto2 = '$destino' WHERE id = '$id';");
             $destino = $directorio_destino . '/' .  $img_file;
-           (move_uploaded_file($tmp_name, $destino))
-        
-                ?>
-
+            (move_uploaded_file($tmp_name, $destino))
+?>
 <script type="text/javascript">
-     window.location = "usuarios.php";
- </script>
-                <?php  
-
-            }
-    
-
-
-
-    
-
- ?>
-
- 
+    window.location = "usuario_perfil.php";
+</script>
+<?php  
+}
+?>

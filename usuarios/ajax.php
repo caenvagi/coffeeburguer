@@ -12,9 +12,7 @@
         {
             $password   = md5($_POST['passActual']);
             $newPass    = md5($_POST['passNuevo']);
-            $id = $_SESSION['id'];
-        
-            
+            $id = $_SESSION['id'];           
 
             $code       =   '';
             $msg        =   '';
@@ -44,14 +42,10 @@
             $arrData = array('cod' => $code, 'msg' => $msg);
             echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 
-
         }else{
             echo "error";
         }
         exit;
     }
-
-
-    
 ?>
 
