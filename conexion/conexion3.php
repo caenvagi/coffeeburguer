@@ -1,4 +1,5 @@
 <?php 
+
 $contrasena = "";
 $usuario = "root";
 $nombre_bd = "burguermirador";

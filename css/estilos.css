@@ -179,7 +179,13 @@
     .avatar3 {
         width: 2em;
         border-radius:5px;
-            }
+    }
+    /* table td:nth-child(1) {
+        background: rgb(73, 11, 243);
+        border-radius: 100%;
+        margin-top: 5%;
+        padding: 2px;
+    } */
     .logo2 {
         width: 3em;
         height: 3em;

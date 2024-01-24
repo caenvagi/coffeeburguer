@@ -65,9 +65,7 @@
                 <h3 class="bad">ingrese los datos</h3>
                 <?php 
         }
-    }
-
-    
+    }  
 
     // Para el combox
     $query = "  SELECT id_tipo_usuario, tipo_usuario 
@@ -96,12 +94,6 @@
                     FROM tipo_cargo
                 ";
     $cargo = $mysqli->query($query1);
-
-    
-
-    
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -116,7 +108,7 @@
             <main>
                 <div class="container-fluid px-3">
                     <!-- BARRA NAVEGACIÓN -->
-                        <div class="card-header BG-primary mt-1"><b style="color: white;">Empleados</b></div>
+                        <div class="card-header BG-primary mt-1"><b style="color: white;"><i class="fa fa-user-circle" style='font-size:24px'></i>&nbsp;&nbsp;Empleados</b></div>
                     <!-- FIN BARRA NAVEGACIÓN -->
                         <div class="container mt-1 p-4 rounded-3" style="background-color: ;">
                             <div class="row justify-content">
@@ -201,14 +193,16 @@
                                     }
                                     ?>
                                 <!-- fin alertas -->
-                                
-                                <!-- modal ingreso empleados -->
-                                    <!--  Modal trigger button  -->
+
+                                <!--  Modal trigger button  -->
                                     <div class="col col-sm-3 col-md-4">
                                         <button type="button" class="btn btn-outline-primary btn-md mb-2" data-bs-toggle="modal" data-bs-target="#modalId">
                                             <strong>+ Empleado</strong>
                                         </button>
                                     </div>
+                                <!--  Modal trigger button  -->    
+                                
+                                <!-- modal ingreso empleados -->
                                     <!-- Modal Body-->
                                     <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -225,7 +219,7 @@
                                                                     <form id="usuario" name="usuario" class="row g-0 p-2" action="usuarios_nuevos.php" method="POST">
                                                                         <div class="input-group mb-2">
                                                                             <div class="input-group-prepend">
-                                                                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-alt"></i>&nbsp;</span>
+                                                                                <span class="input-group-text" id="basic-addon1"><i class='far fa-address-card'></i>&nbsp;</span>
                                                                             </div>
                                                                             <input type="text" class="form-control" id="id" name="id" placeholder="cedula" aria-label="cedula" aria-describedby="basic-addon1" required autofocus>
                                                                         </div>
@@ -427,7 +421,7 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-alt"></i>&nbsp;Modificar Empleado <br></h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-user-circle" style='font-size:24px'></i>&nbsp;Modificar Empleado <br></h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>    
                                                     <div class="modal-body">
