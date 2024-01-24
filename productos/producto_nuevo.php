@@ -274,6 +274,107 @@
                                     </div>
                                 </div>
                             <!-- fin tabla guias hoy -->
+
+                                <!-- modal editar producto -->
+                                    <!-- Modal -->
+                                    <?php
+                                                        while ($fila = $productosEditar->fetch_array()) {
+                                                            $id = $fila['producto_id'];
+                                                            $img = $fila['producto_img'];
+                                                            $nombre = $fila['producto_nombre'];
+                                                            $precio = $fila['producto_precio'];
+                                                            $categoria = $fila['categoria_nombre'];
+                                                            $catimg = $fila['categoria_img'];
+                                                            $estacion = $fila['estacion_nombre'];
+                                                            $cantidades = $fila['producto_cantidad'];
+                                                            
+                                                        ?>
+                                    <form id="productos" name="productos" class="row g-0 p-2" action="productos_editarproceso.php" method="POST">
+                                        <div class="modal fade" id="exampleModal<?php echo $id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel"><span class="material-icons">fastfood</span>&nbsp;Modificar Producto <br></h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>    
+                                                    <div class="modal-body">
+
+                                                    <input type="hidden" class="form-control" name="producto_id" id="producto_id" value="<?php echo $id; ?>" placeholder="producto_id" aria-label="producto_id" aria-describedby="basic-addon1" readonly required autofocus>
+                                                        
+                                                        <div class="input-group mb-2">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="basic-addon1"><span class="material-icons">fastfood</span>&nbsp;</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" name="producto_nombre" id="producto_nombre" value="<?php echo $nombre; ?>" placeholder="producto_nombre" aria-label="producto_nombre" aria-describedby="basic-addon1" required autofocus>
+                                                        </div>
+
+                                                        <div class="input-group mb-2">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-cash"></i>&nbsp;</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" name="precio" id="precio" placeholder="Precio" value="<?php echo $precio; ?>" aria-label="precio" aria-describedby="basic-addon1" required autofocus>
+                                                        </div>
+
+                                                        <div class="input-group mb-2">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="basic-addon1"><i class='fas fa-clipboard-list'></i>&nbsp;</span>
+                                                            </div>
+                                                            <input type="number" class="form-control" name="cantidad" id="cantidad" placeholder="cantidad" value="<?php echo $cantidades; ?>" aria-label="cantidad" aria-describedby="basic-addon1"  required autofocus>
+                                                        </div>
+
+                                                        <div class="mb-1">
+                                                            <label class="form-label">Categoria </label>
+                                                                <div class="input-group mb-1">
+                                                                    <div class="input-group-prepend">
+                                                                        <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-chalkboard-teacher'></i>&nbsp;</label>
+                                                                    </div>
+                                                                    <select class="form-select custom-select" id="producto_categoria" name="producto_categoria" required autofocus>
+                                                                        <option value="<?php echo $categoria; ?>"selected><?php echo $categoria; ?></option>
+                                                                            <?php
+                                                                             //Para el combox
+                                                                            $query2 = "  SELECT * 
+                                                                            FROM categorias 
+                                                                            ";
+                                                                        $categoriasEditar = $mysqli->query($query2);
+                                                                        ?>
+                                                                        <?php while ($row = $categoriasEditar->fetch_assoc()) { ?>
+                                                                        <option value="<?php echo $row['categoria_id']; ?>"><?php echo $row['categoria_id']; ?>-<?php echo $row['categoria_nombre']; ?></option>
+                                                                            <?php } ?>
+                                                                    </select>
+                                                                </div>
+                                                        </div>
+                                                        <div class="mb-1">
+                                                            <label class="form-label">Estacion de trabajo </label>
+                                                                <div class="input-group mb-1">
+                                                                    <div class="input-group-prepend">
+                                                                        <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-coffee'></i>&nbsp;</label>
+                                                                    </div>
+                                                                    <select class="form-select custom-select" id="producto_estacion" name="producto_estacion" required autofocus>
+                                                                        <option value="<?php echo $estacion; ?>" selected><?php echo $estacion; ?></option>
+                                                                        <?php 
+                                                                        // Para el combox
+                                                                            $query4 = "  SELECT * 
+                                                                                        FROM producto_estacion 
+                                                                                        ";
+                                                                            $estacionEditar = $mysqli->query($query4);
+                                                                            ?>    
+                                                                        <?php while ($row = $estacionEditar->fetch_assoc()) { ?>
+                                                                        <option value="<?php echo $row['estacion_id']; ?>"><?php echo $row['estacion_id']; ?>-<?php echo $row['estacion_nombre']; ?></option>
+                                                                        <?php } ?>
+                                                                    </select>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                        <button type="submit" value="editar" class="btn btn-danger btn btn-block">Guardar cambios</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>    
+                                    <?php } ;  ?> 
+                                <!-- modal editar producto -->  
                         </div>    
                     </div>
                 </div>
