@@ -11,6 +11,10 @@
     
     <title>Coffee burguer 1.1</title>
 
+     <!-- google icons-->
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 	
 	 
@@ -25,8 +29,6 @@
     
     <script src="../js/scripts.js"></script>
 
-<!-- google icons-->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+   
     
 </head>

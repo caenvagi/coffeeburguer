@@ -90,9 +90,140 @@
                 <div class="container-fluid px-3"> 
                 <div class="card-header BG-DANGER mt-1"><b style="color: white;">INGRESAR MESAS</b></div>
                     <div class="container mt-1">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content">
+
+                            <!-- inicio de alertas -->
+                                <!-- inicio de falta -->
+                                <?php
+                                if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'nada') {
+                                ?>
+                                    <div class="alerta alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>Error !</strong> Ingresa todos los datos
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                                <!-- Mensaje guardado -->
+                                <?php
+                                if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'guardado') {
+                                ?>
+                                    <div class="alerta alert alert-success alert-dismissible fade show" role="alert">
+                                    <i class="far fa-thumbs-up" style="font-size:24px"></i>&nbsp;&nbsp;<strong>Ok !</strong> &nbsp;Mesa Ingresada...
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                                <!-- Mensaje falta -->
+                                <?php
+                                if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'falta') {
+                                ?>
+                                    <div class="alerta alert alert-warning alert-dismissible fade show" role="alert">
+                                        <strong>Error !</strong> Producto ya existe !
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                                <!-- Mensaje error -->
+                                <?php
+                                if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'error') {
+                                ?>
+                                    <div class="alerta alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>Error !</strong> Vuelve a intentar!
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                                <!-- Mensaje actualizar -->
+                                <?php
+                                if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'editado') {
+                                ?>
+                                    <div class="alerta alert alert-primary alert alert-dismissible fade show" role="alert">
+                                        <strong>Actualizacion :</strong> Todos los datos fueron actualizados.
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                                <!-- Mensaje eliminar -->
+                                <?php
+                                if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'eliminado') {
+                                ?>
+                                    <div class="alerta alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>Eliminar :</strong> El registro fue eliminado.
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            <!-- fin alertas -->
+
+                            <!--  Modal trigger button  -->
+                                <div class="col col-sm-3 col-md-4">
+                                    <button type="button" class="btn btn-outline-danger btn-md mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <strong>+ Mesa</strong>
+                                    </button>
+                                </div>
+                            <!--  Modal trigger button  -->
+
+                            <!-- inicio tabla -->    
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Listado de mesas:
+                                        </div>
+                                        <div class="p-2">
+                                            <table class="table table-sm table-bordered text-center table-hover" style="font-size: 14px">
+                                                <thead>                                                    
+                                                    <tr class="table-active">                                                        
+                                                        <th align="center">mesas_id</th>
+                                                        <th align="center">mesas_nombre</th>
+                                                        <th align="center">mesas_estado</th>
+                                                        <th align="center">mesas_tipo_pedido</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?php
+                                                    while ($fila = $mesas->fetch_array()) {
+                                                        $id = $fila['mesas_id'];
+                                                        $nombre = $fila['mesas_nombre'];
+                                                        $estado_pedido = $fila['mesas_tipo_pedido'];
+                                                        $estado = $fila['mesas_estado'];
+                                                        if ($estado == 'cerrada') {
+                                                            $label_class = 'badge bg-danger';
+                                                        } elseif ($estado == 'abierta') {
+                                                            $label_class = "badge bg-success" ;
+                                                        } elseif ($estado == 'por entregar') {
+                                                            $label_class = 'badge bg-primary badge';
+                                                        }
+                                                    ?>
+                                                    <tr>
+                                                        <td align="center"><?php echo $id; ?></td>
+                                                        <td align="center"><?php echo $nombre; ?></td>
+                                                        <td align="center" class="label <?php echo $label_class; ?>"><?php echo $estado; ?></td>
+                                                        <td align="center"><?php echo $estado_pedido; ?></td>
+                                                    </tr>
+                                                        <?php } ?>
+                                                </tbody>
+                                                <tfoot>                                                    
+                                                </tfoot>
+                                            
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- fin tabla -->
+
+                            
+                            
+                            
+                            
+                            
                             <!-- inicio formulario -->
-                                <div class="col-md-5">
+                                <!-- <div class="col-md-5">
                                     <div class="card">
                                         <div class="card-header">
                                             Ingresar Mesa nueva:
@@ -115,121 +246,15 @@
                                             <?php } ?>
                                         </form>        
                                     </div> 
-                                </div>
+                                </div> -->
                             <!-- fin formulario -->
-                            <!-- inicio tabla -->    
-                                <div class="col-md-7">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            Listado de mesas:
-                                        </div>
-                                        <div class="p-2">
-                                            <table class="table table-sm table-bordered text-center table-hover" style="font-size: 14px">
-                                                <thead>                                                    
-                                                    <tr class="table-active">                                                        
-                                                        <th align="center">MESA</th>
-                                                        <th align="center">ESTADO</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                    while ($fila = $mesas->fetch_array()) {
-                                                        $id = $fila['mesas_id'];
-                                                        $nombre = $fila['mesas_nombre'];
-                                                        $estado = $fila['mesas_estado'];
-                                                        if ($estado == 'cerrada') {
-                                                            $label_class = 'badge bg-danger';
-                                                        } elseif ($estado == 'abierta') {
-                                                            $label_class = "badge bg-success" ;
-                                                        } elseif ($estado == 'por entregar') {
-                                                            $label_class = 'badge bg-primary badge';
-                                                        }
-                                                    ?>
-                                                    <tr>
-                                                        <td align="center"><?php echo $nombre; ?></td>
-                                                        <td align="center" class="label <?php echo $label_class; ?>"><?php echo $estado; ?></td>
-                                                    </tr>
-                                                        <?php } ?>
-                                                </tbody>
-                                                <tfoot>                                                    
-                                                </tfoot>
-                                                <!-- inicio de alertas -->
-                                                    <!-- inicio de falta -->
-                                                    <?php
-                                                    if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'nada') {
-                                                    ?>
-                                                        <div class="alerta alert alert-danger alert-dismissible fade show" role="alert">
-                                                            <strong>Error !</strong> Ingresa todos los datos
-                                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                                        </div>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                    <!-- Mensaje guardado -->
-                                                    <?php
-                                                    if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'guardado') {
-                                                    ?>
-                                                        <div class="alerta alert alert-success alert-dismissible fade show" role="alert">
-                                                        <i class="far fa-thumbs-up" style="font-size:24px"></i>&nbsp;&nbsp;<strong>Ok !</strong> &nbsp;Mesa Ingresada...
-                                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                                        </div>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                    <!-- Mensaje falta -->
-                                                    <?php
-                                                    if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'falta') {
-                                                    ?>
-                                                        <div class="alerta alert alert-warning alert-dismissible fade show" role="alert">
-                                                            <strong>Error !</strong> Producto ya existe !
-                                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                                        </div>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                    <!-- Mensaje error -->
-                                                    <?php
-                                                    if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'error') {
-                                                    ?>
-                                                        <div class="alerta alert alert-danger alert-dismissible fade show" role="alert">
-                                                            <strong>Error !</strong> Vuelve a intentar!
-                                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                                        </div>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                    <!-- Mensaje actualizar -->
-                                                    <?php
-                                                    if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'editado') {
-                                                    ?>
-                                                        <div class="alerta alert alert-primary alert alert-dismissible fade show" role="alert">
-                                                            <strong>Actualizacion :</strong> Todos los datos fueron actualizados.
-                                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                                        </div>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                    <!-- Mensaje eliminar -->
-                                                    <?php
-                                                    if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'eliminado') {
-                                                    ?>
-                                                        <div class="alerta alert alert-danger alert-dismissible fade show" role="alert">
-                                                            <strong>Eliminar :</strong> El registro fue eliminado.
-                                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                                        </div>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                <!-- fin alertas -->
-                            
-                            <!--  Modal trigger button  -->
-                                <div class="col col-sm-3 col-md-4">
-                                    <button type="button" class="btn btn-outline-danger btn-md mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        <strong>+ Mesa</strong>
-                                    </button>
-                                </div>
-                            <!--  Modal trigger button  -->
 
+                            
+                                                
+                            
+                            
+
+                            
                             <!-- Modal -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -336,55 +361,7 @@
                                 </div>
                             <!-- Modal --> 
 
-                            <script>
-                                $("select[name=mesas_tipo_pedido]").click(function(){
-                                    $("select[name=mesas_tipo_pedido]").each(function(){
-                                        var valor5 = this.value;
-                                            // $('#span2').text('Va a registrar un'+' '+ valor);
-                                            if (valor5 == "LOCAL") {
-                                                document.getElementById("mesas_cons_mesas").value = <?php
-                                                                //lista de mesas  
-                                                                $query_mesa5 =   "      SELECT * 
-                                                                                        FROM mesa
-                                                                                        WHERE mesas_tipo_pedido = 'LOCAL'                  
-                                                                                        ORDER BY mesas_id 
-                                                                                        DESC LIMIT 1 ";
-                                                                $mesas5 = $mysqli->query($query_mesa5);
-                                                                
-                                                                while ($fila = $mesas5->fetch_array()) {
-                                                                    $id_mesa = $fila['mesas_id'];    
-                                                                    $nombre_mesa = $fila['mesas_nombre'];
-                                                                    $tipo_pedido = $fila['mesas_tipo_pedido'];
-                                                                    $consMesas1 = $fila['mesas_cons_mesas'];
-                                                                ?>
-                                                                <?php echo $consMesas1 +1 ?>
-                                                                <?php } ?>;
-                                                document.getElementById("mesas_cons_domicilios").value = 0;
-
-                                            }else if (valor5 == "DOMICILIO") {
-                                                document.getElementById("mesas_cons_mesas").value = 0;
-                                                document.getElementById("mesas_cons_domicilios").value =  <?php
-                                                                //lista de mesas  
-                                                                $query_mesa5 =   "      SELECT * 
-                                                                                        FROM mesa
-                                                                                        WHERE mesas_tipo_pedido = 'DOMICILIO'                  
-                                                                                        ORDER BY mesas_id 
-                                                                                        DESC LIMIT 1                                                                           ";
-                                                                $mesas5 = $mysqli->query($query_mesa5);
-                                                                
-                                                                while ($fila = $mesas5->fetch_array()) {
-                                                                    $id_mesa = $fila['mesas_id'];    
-                                                                    $nombre_mesa = $fila['mesas_nombre'];
-                                                                    $tipo_pedido = $fila['mesas_tipo_pedido'];
-                                                                    $consDomicilio1 = $fila['mesas_cons_domicilios'];
-                                                                ?>
-                                                                <?php echo $consDomicilio1 +1 ?>
-                                                                <?php } ?>;
-                                            }
-                                            console.log(valor5)
-                                        });
-                                    });
-                            </script>
+                            
 
                             <!-- inicio formulario -->
                                 <!-- <div class="col-md-5">
@@ -490,53 +467,7 @@
                                 
                             <!-- fin formulario -->
 
-                            <!-- inicio tabla -->    
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            Listado de mesas:
-                                        </div>
-                                        <div class="p-2">
-                                            <table class="table table-sm table-bordered text-center table-hover" style="font-size: 14px">
-                                                <thead>                                                    
-                                                    <tr class="table-active">                                                        
-                                                        <th align="center">mesas_id</th>
-                                                        <th align="center">mesas_nombre</th>
-                                                        <th align="center">mesas_estado</th>
-                                                        <th align="center">mesas_tipo_pedido</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                    while ($fila = $mesas->fetch_array()) {
-                                                        $id = $fila['mesas_id'];
-                                                        $nombre = $fila['mesas_nombre'];
-                                                        $estado_pedido = $fila['mesas_tipo_pedido'];
-                                                        $estado = $fila['mesas_estado'];
-                                                        if ($estado == 'cerrada') {
-                                                            $label_class = 'badge bg-danger';
-                                                        } elseif ($estado == 'abierta') {
-                                                            $label_class = "badge bg-success" ;
-                                                        } elseif ($estado == 'por entregar') {
-                                                            $label_class = 'badge bg-primary badge';
-                                                        }
-                                                    ?>
-                                                    <tr>
-                                                        <td align="center"><?php echo $id; ?></td>
-                                                        <td align="center"><?php echo $nombre; ?></td>
-                                                        <td align="center" class="label <?php echo $label_class; ?>"><?php echo $estado; ?></td>
-                                                        <td align="center"><?php echo $estado_pedido; ?></td>
-                                                    </tr>
-                                                        <?php } ?>
-                                                </tbody>
-                                                <tfoot>                                                    
-                                                </tfoot>
-                                            
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            <!-- fin tabla -->
+                            
                         </div>    
                     </div>
                 </div>
@@ -544,5 +475,54 @@
             <?php require '../logs/nav-footer.php'; ?>
         </div>
         <script src="../js/mensajes.js"></script>
+        <script>
+            $("select[name=mesas_tipo_pedido]").click(function(){
+                $("select[name=mesas_tipo_pedido]").each(function(){
+                    var valor5 = this.value;
+                        // $('#span2').text('Va a registrar un'+' '+ valor);
+                        if (valor5 == "LOCAL") {
+                            document.getElementById("mesas_cons_mesas").value = <?php
+                                            //lista de mesas  
+                                            $query_mesa5 =   "      SELECT * 
+                                                                    FROM mesa
+                                                                    WHERE mesas_tipo_pedido = 'LOCAL'                  
+                                                                    ORDER BY mesas_id 
+                                                                    DESC LIMIT 1 ";
+                                            $mesas5 = $mysqli->query($query_mesa5);
+                                            
+                                            while ($fila = $mesas5->fetch_array()) {
+                                                $id_mesa = $fila['mesas_id'];    
+                                                $nombre_mesa = $fila['mesas_nombre'];
+                                                $tipo_pedido = $fila['mesas_tipo_pedido'];
+                                                $consMesas1 = $fila['mesas_cons_mesas'];
+                                            ?>
+                                            <?php echo $consMesas1 +1 ?>
+                                            <?php } ?>;
+                            document.getElementById("mesas_cons_domicilios").value = 0;
+    
+                        }else if (valor5 == "DOMICILIO") {
+                            document.getElementById("mesas_cons_mesas").value = 0;
+                            document.getElementById("mesas_cons_domicilios").value =  <?php
+                                            //lista de mesas  
+                                            $query_mesa5 =   "      SELECT * 
+                                                                    FROM mesa
+                                                                    WHERE mesas_tipo_pedido = 'DOMICILIO'                  
+                                                                    ORDER BY mesas_id 
+                                                                    DESC LIMIT 1                                                                           ";
+                                            $mesas5 = $mysqli->query($query_mesa5);
+                                            
+                                            while ($fila = $mesas5->fetch_array()) {
+                                                $id_mesa = $fila['mesas_id'];    
+                                                $nombre_mesa = $fila['mesas_nombre'];
+                                                $tipo_pedido = $fila['mesas_tipo_pedido'];
+                                                $consDomicilio1 = $fila['mesas_cons_domicilios'];
+                                            ?>
+                                            <?php echo $consDomicilio1 +1 ?>
+                                            <?php } ?>;
+                        }
+                        console.log(valor5)
+                    });
+                });
+        </script>
     </body>
 </html>
