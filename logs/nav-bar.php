@@ -65,7 +65,7 @@ $fotouser1 = $mysqli->query("  SELECT        US.nombre,
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
 <!-- Navbar Brand -->
-    <a class="logo2" href="../index/dashboard.php"><img class="logo2" src="../assets/img/logo.png"></a><a class="navbar-brand ps-3" href="../index/dashboard.php">Coffee Burguer</a>
+    <a class="logo2" href="../principal/dashboard.php"><img class="logo2" src="../assets/img/logo.png"></a><a class="navbar-brand ps-3" href="../principal/dashboard.php">Coffee Burguer</a>
 <!-- Sidebar Toggle -->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         

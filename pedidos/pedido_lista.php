@@ -35,6 +35,7 @@
                                     pedido_mesero,
                                     pedido_mesero_nombre,
                                     mesas_tipo_pedido,
+                                    mesas_nombre,
                                     COUNT(PD.detalle_cantidad) AS totalcant,
                                     sum(detalle_cantidad * detalle_precio) as total
                         FROM        pedidos AS PE 
@@ -60,7 +61,7 @@
                 <main>
                 <div class="card-header BG-WARNING mt-1"><b style="color: white;">LISTA PEDIDOS</b></div>
                         <div class="table-responsive m-2" >
-                            <table id="example" class="table display table-sm table-striped table-hover table-bordered" style="width:100% ; text-align: center;">
+                            <table id="example" class="table table table-borderless table-hover mt-3 table text-center table align-middle" style="font-size: 12px">
                                 <thead class="table-success" style="font-size:11px">
                                     <tr>
                                         <th>FECHA Y HORA</th>
@@ -91,6 +92,7 @@
                                                     } 
                                                     
                                                 $idmesas = $fila['detalle_mesa'];
+                                                $mesaNombre = $fila['mesas_nombre'];        
                                                 $totalcant = $fila['totalcant'];
                                                 $total = $fila['total']; 
                                                     
@@ -107,11 +109,11 @@
                                         <td><?php echo $fecha; ?></td>
                                         <td><?php echo $codRec; ?></td>
                                         <td><?php echo $mesero1; ?></td>
-                                        <td><?php echo $idmesas; ?></td>
+                                        <td><?php echo $mesaNombre; ?></td>
                                         <td><?php echo $totalcant; ?></td>
                                         <td>$&nbsp;<?php echo number_format($total, 0, ",", "."); ?></td>
-                                        <td ><span class="label <?php echo $label_class; ?>" style="font-size:14px"><?php echo $estado; ?></span></td>
-                                        <td><span class="label <?php echo $label_class1; ?>" style="font-size:20px"></span></td>
+                                        <td ><span class="label <?php echo $label_class; ?>" style="font-size:12px"><?php echo $estado; ?></span></td>
+                                        <td><span class="label <?php echo $label_class1; ?>" style="font-size:16px"></span></td>
                                         <td>&nbsp;&nbsp;<?php echo $tipo_pedido; ?></td>
                                     </tr>
                                     <?php } ?>

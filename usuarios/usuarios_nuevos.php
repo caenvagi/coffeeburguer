@@ -318,7 +318,7 @@
                                         </div>
                                     </div>
                                     <!-- Modal Body-->
-                                <!-- modasl ingreso empleados -->
+                                <!-- modal ingreso empleados -->
                                 
                                 <!-- tabla empleados -->
                                     <div class="col col-12 col-sm-12 col-md-12">
@@ -328,7 +328,7 @@
                                         <table id="tablita" class="table table table-borderless table-hover mt-3 table text-center table align-middle" style="font-size: 12px">
                                             <thead>
                                                 <tr>
-                                                    <th align="center">NOMBRE</th>
+                                                    <th align="center">NOMBRE</th> 
                                                     <th align="center">AVATAR</th>
                                                     <th align="center">CARGO</th>
                                                     <th align="center">USER</th>

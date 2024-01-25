@@ -358,7 +358,7 @@
                                             <!-- fin alertas --> 
                                         </div>
 
-                                        <table class="table table-bordered table-sm text-center">
+                                        <table class="table table table-borderless table-hover mt-3 table text-center table align-middle" style="font-size: 12px">
                                             <thead>
                                                 <td><b>PRODUCTO</b></td>
                                                 <td><b>CANT</b></td>
@@ -369,6 +369,7 @@
                                             <tbody id="tasks" class="text-center">
                                             </tbody>
                                         </table>
+                                        
                                         <div class="total1" id="total1">
                                             <div style="width: calc(100% - 24px)">
                                                     <?php 

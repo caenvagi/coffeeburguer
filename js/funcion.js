@@ -99,7 +99,7 @@ $(function(){
                         <td>${task.producto_nombre}</td>
                         <td>${task.totalcant}</td>
                         <td> $ ${task.totalprecio}</td>
-                        <td><button type="button" href:"task-delete.php" class="btn btn-danger" onclick="location.href='task-delete.php?producto_id=${task.producto_id}&codigo_recibo_detalle=${task.codigo_recibo_detalle}&pedido_mesa=${task.pedido_mesa}'"><span class="material-symbols-outlined">
+                        <td><button style="font-size: 8px" type="button" href:"task-delete.php" class="btn btn-outline-danger btn-xs" onclick="location.href='task-delete.php?producto_id=${task.producto_id}&codigo_recibo_detalle=${task.codigo_recibo_detalle}&pedido_mesa=${task.pedido_mesa}'"><span class="material-symbols-outlined">
                         delete
                         </span></button></td>
                         

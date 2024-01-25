@@ -318,7 +318,7 @@
                                             Listado de mesas:
                                         </div>
                                         <div class="p-2">
-                                            <table class="table table-sm table-bordered text-center table-hover" style="font-size: 14px">
+                                            <table class="table table table-borderless table-hover mt-3 table text-center table align-middle" style="font-size: 12px">
                                                 <thead>                                                    
                                                     <tr class="table-active">                                                        
                                                         <th align="center">mesas_id</th>
