@@ -685,6 +685,11 @@
     #tablaEmpleados{
         border-color: #ff9f00;
     }
+    #boton-mesas{
+        width: 140px !important;
+        height:35px !important;
+        font-size: 14px !important;
+    }
 
     
     
