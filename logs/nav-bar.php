@@ -290,9 +290,9 @@ $fotouser1 = $mysqli->query("  SELECT        US.nombre,
                                 <!-- OTRO MENU FIN  -->
                             </div>
                         </div>
-                        <div class="sb-sidenav-footer">
-                            <div class="small">Logged in as:</div>
-                            <?php echo $usuario ?>
+                        <div class="sb-sidenav-footer text-center">
+                            <img class="logosiste" src="../assets/img/LOGO-09.png"/>
+                            <div class="small"></div>                            
                         </div>
                     </nav>
             </div>   

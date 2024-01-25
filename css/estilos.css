@@ -168,6 +168,10 @@
         margin-bottom: 0px;
         border-radius: 10px;
     }
+    .logosiste {
+        width: 6em;
+        border-radius: 0px;
+    }
     .avatar {
         width: 3.5em;
         border-radius: 10px;
