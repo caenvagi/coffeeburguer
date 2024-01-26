@@ -238,7 +238,7 @@
                                                                             <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-chalkboard-teacher'></i>&nbsp;</label>
                                                                         </div>
                                                                         <select name="mesas_tipo_pedido" id="mesas_tipo_pedido" required autofocus>
-                                                                            <option hidden selected>Seleccione forma de pedido</option>
+                                                                            <option hidden>Seleccione forma de pedido</option>
                                                                             <option value="LOCAL">LOCAL</option>
                                                                             <option value="DOMICILIO">DOMICILIO</option>                                                    
                                                                         </select>
@@ -268,7 +268,7 @@
                                                                                 $tipo_pedido = $fila['mesas_tipo_pedido'];
                                                                                 $consecutivo = $fila['mesas_cons_mesas'];
                                                                             ?>
-                                                                            <option value="MESA-<?php echo $consecutivo +1 ?>">MESA-<?php echo $consecutivo +1 ?></option>
+                                                                            <option name="nombremesa2" value="MESA-<?php echo $consecutivo +1 ?>">MESA-<?php echo $consecutivo +1 ?></option>
                                                                             <?php } ?>
                                                                             
                                                                             <?php
@@ -294,9 +294,9 @@
                                                             
                                                             <input type="hidden" class="form-control" name="mesas_estado" id="mesas_estado"  value="cerrada" placeholder="mesas_estado" aria-label="mesas_estado" aria-describedby="basic-addon1"></input>
                                                             
-                                                            <input type="hidden" class="form-control" id="mesas_cons_mesas" name="mesas_cons_mesas" placeholder="mesas_cons_mesas" required autofocus>
+                                                            <input type="text" class="form-control" id="mesas_cons_mesas" name="mesas_cons_mesas" placeholder="mesas_cons_mesas" required autofocus>
                                                             
-                                                            <input type="hidden" class="form-control" id="mesas_cons_domicilios" name="mesas_cons_domicilios" placeholder="mesas_cons_domicilios" required autofocus>
+                                                            <input type="text" class="form-control" id="mesas_cons_domicilios" name="mesas_cons_domicilios" placeholder="mesas_cons_domicilios" required autofocus>
                                                             
                                                             <?php } ?>
 
@@ -408,6 +408,52 @@
                         console.log(valor5)
                     });
                 });
+        </script>
+        <script>
+            $("select[name=mesas_nombre]").click(function(){
+                $("select[name=mesas_tipo_pedido]").each(function(){
+                    var valor6 = this.value;
+                        // $('#span2').text('Va a registrar un'+' '+ valor);
+                        if (valor6 == "LOCAL") {
+                            document.getElementById("mesas_cons_mesas").value = <?php
+                                            //lista de mesas  
+                                            $query_mesa6 =   "      SELECT * 
+                                                                    FROM mesa
+                                                                    WHERE mesas_tipo_pedido = 'LOCAL'                  
+                                                                    ORDER BY mesas_id 
+                                                                    DESC LIMIT 1 ";
+                                            $mesas6 = $mysqli->query($query_mesa6);
+                                            
+                                            while ($fila = $mesas6->fetch_array()) {                                                
+                                                $consMesas3 = $fila['mesas_cons_mesas'];
+                                            ?>
+                                            <?php echo $consMesas3 +1 ?>
+                                            <?php } ?>;
+                            document.getElementById("mesas_cons_domicilios").value = 0;
+    
+                        }else if (valor6 == "DOMICILIO") {
+                            document.getElementById("mesas_cons_mesas").value = 0;
+                            document.getElementById("mesas_cons_domicilios").value =  <?php
+                                            //lista de mesas  
+                                            $query_mesa7 =   "      SELECT * 
+                                                                    FROM mesa
+                                                                    WHERE mesas_tipo_pedido = 'DOMICILIO'                  
+                                                                    ORDER BY mesas_id 
+                                                                    DESC LIMIT 1                                                                           ";
+                                            $mesas7 = $mysqli->query($query_mesa7);
+                                            
+                                            while ($fila = $mesas7->fetch_array()) {
+                                                $consDomicilio2 = $fila['mesas_cons_domicilios'];
+                                            ?>
+                                            <?php echo $consDomicilio2 +1 ?>
+                                            <?php } ?>;
+                        }
+                        console.log(valor6)
+                    });
+                });
+        </script>
+        <script>
+            
         </script> 
     </body>
 </html>
