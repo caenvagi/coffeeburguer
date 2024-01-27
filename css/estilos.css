@@ -86,7 +86,13 @@
     #tabla-productos{
         font-size: 10px !important;
     }   
-}    
+}
+
+@media(max-width: 822px){
+    #tabla_empleados{
+        font-size: 17px !important;
+    } 
+}
 
 /* para página dashboard */
     .contenedor {

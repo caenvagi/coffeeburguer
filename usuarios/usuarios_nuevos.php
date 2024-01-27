@@ -508,7 +508,7 @@
             }else{
             rows[z].style.backgroundColor = "lightgray";
             }
-         }
+        }
         </script>
     </body>
 </html>

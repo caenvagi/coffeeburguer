@@ -23,11 +23,41 @@
 
     if (isset($_GET['id'])) {
     $usuario = $_GET['id'];
-    $sql_usuario = $mysqli->query("   SELECT * FROM usuarios
-                                        WHERE id=$id") or die($mysqli->error);
+    $sql_usuario = $mysqli->query(" SELECT  US.id,
+                                            US.nombre,
+                                            US.email,
+                                            US.usuario,
+                                            US.tipo_cargo,
+                                            US.tipo_usuario,
+                                            Tu.tipo_usuario,
+                                            US.direccion,
+                                            US.telefono,
+                                            US.foto1,
+                                            US.foto2,
+                                            US.activo,
+                                            TC.cargo_nombre
+                                    FROM usuarios as US
+                                    INNER JOIN  tipo_usuarios as Tu ON US.tipo_usuario = Tu.id_tipo_usuario
+                                    INNER JOIN  tipo_cargo TC ON US.tipo_cargo = TC.id_cargo
+                                    WHERE id=$usuario") or die($mysqli->error);
     } else {
-    $sql_usuario = $mysqli->query("   SELECT * FROM usuarios
-                                        WHERE id=$id") or die($mysqli->error);
+    $sql_usuario = $mysqli->query("   SELECT  US.id,
+                                            US.nombre,
+                                            US.email,
+                                            US.usuario,
+                                            US.tipo_cargo,
+                                            US.tipo_usuario,
+                                            Tu.tipo_usuario,
+                                            US.direccion,
+                                            US.telefono,
+                                            US.foto1,
+                                            US.foto2,
+                                            US.activo,
+                                            TC.cargo_nombre
+                                    FROM usuarios as US
+                                    INNER JOIN  tipo_usuarios as Tu ON US.tipo_usuario = Tu.id_tipo_usuario
+                                    INNER JOIN  tipo_cargo TC ON US.tipo_cargo = TC.id_cargo
+                                        WHERE id$usuario") or die($mysqli->error);
     }
 
     date_default_timezone_set('America/Bogota');
@@ -117,16 +147,13 @@
         <?php require '../logs/nav-bar.php'; ?>
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid px-3">
-                
-                        <div class="card-header BG-PRIMARY mt-1"><b style="color: white;">Usuario</b></div>
-                        <!-- CARD PERFIL NUEVO -->
-                            <div class="container col-12 col-sm-12" id="containerPerfil">
-                                <div class="row col-12 col-sm-12">
-
-                                    <div class="card border-light col-12 col-sm-5 col-md-4" id="imagen">
+            <div class="card-header BG-PRIMARY mt-1 "><b style="color: white;">Usuario</b></div>
+                <div class="container-fluid ml-2 ">                  
+                            <div class="container col-12 col-sm-12 " id="containerPerfil">
+                                <div class="row col-12 col-sm-12 ">
+                                    <div class="card border-light col-12 col-sm-5 col-md-4 " id="imagen">
                                         <?php
-                                            while ($fila = $tipofoto1->fetch_array()) {
+                                            while ($fila = $sql_usuario->fetch_array()) {
                                                         $foto = $fila['foto1'];
                                                         $fotos = $fila['foto2'];
                                                         $activo = $fila['activo'];
