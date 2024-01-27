@@ -113,12 +113,11 @@
         <?php require '../logs/nav-bar.php'; ?>
         <div id="layoutSidenav_content" class="layoutSidenav" >
             <main>
+            <div class="card-header BG-DANGER mt-1"><b style="color: white;"><span class="material-icons">fastfood</span>&nbsp;&nbsp;INGRESAR PRODUCTOS</b></div>
                 <div class="container-fluid px-3"> 
-                    <div class="card-header BG-DANGER mt-1"><b style="color: white;"><span class="material-icons">fastfood</span>&nbsp;&nbsp;INGRESAR PRODUCTOS</b></div>
-                    <div class="container mt-1 p-4 rounded-3">
-                        <div class="row justify-content">
-
-                                <!-- inicio de alertas -->
+                
+                    <div class="container mt-1 p-2 rounded-3">
+                            <!-- inicio de alertas -->
                                     <!-- inicio de falta -->
                                     <?php
                                     if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'nada') {
@@ -183,7 +182,8 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div>
                                     <?php } ?>
-                                <!-- fin alertas -->
+                            <!-- fin alertas -->
+                        <div class="row justify-content">
 
                                 <!--  Modal trigger button  -->
                                     <div class="col col-sm-3 col-md-4">
@@ -204,7 +204,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="container-fluid">
-                                                        <!-- formulario ingresar PRODUCTO -->
+                                                    <!-- formulario ingresar PRODUCTO -->
                                                         <div class="col-md-12">
                                                             <div class="card border-4 rounded-3" style="background-color: ;">
                                                                 <form id="ventas" name="ventas" class="sm p-4" action="producto_nuevo.php" method="POST">
@@ -290,7 +290,7 @@
                                             </div>
     
                                             <div class="p-0">
-                                                <table class="table table table-borderless table-hover mt-0 table text-center table align-middle" style="font-size: 12px">
+                                                <table id="tabla-productos" class="table table-sm table-borderless table-hover mt-0 table text-center table align-middle" style="font-size: 12px">
                                                     <thead>                                                    
                                                         <tr class="table-active">                                                        
                                                             <th COLSPAN=2 align="center">PRODUCTO</th>

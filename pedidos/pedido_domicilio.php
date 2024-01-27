@@ -47,14 +47,16 @@
         <?php require '../logs/nav-bar.php'; ?>
         <div id="layoutSidenav_content" class="layoutSidenav" >
             <main>
+            <div class="card-header BG-WARNING mt-1"><b style="color: white;">DOMICILIOS</b></div>
                 <div class="container-fluid px-3"> 
-                    <div class="card-header BG-WARNING mt-1"><b style="color: white;">DOMICILIOS</b></div>
+
                     <div class="container mt-1">
                         <div class="row justify-content-center">
+                            
                             <!-- inicio formulario -->
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="card-header">
+                                    <div class="card p-0 col col-12 col-sm-12 col-md-12">
+                                        <div class="card-header ">
                                             Ingresar Datos del domicilio:
                                         </div>
                                         <div class="rows justify-content-center m-2">
@@ -120,9 +122,7 @@
                                     </div> 
                                 </div>
                             <!-- fin formulario -->
-                            <!-- inicio tabla -->    
-                                
-                            <!-- fin tabla -->
+
                         </div>    
                     </div>
                 </div>

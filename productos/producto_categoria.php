@@ -86,12 +86,12 @@
         <?php require '../logs/nav-bar.php'; ?>
         <div id="layoutSidenav_content" class="layoutSidenav" >
             <main>
+            <div class="card-header BG-DANGER mt-1"><b style="color: white;"><span class="material-icons">category</span>&nbsp;&nbsp;INGRESAR CATEGORIAS</b></div>
                 <div class="container-fluid px-3"> 
-                <div class="card-header BG-DANGER mt-1"><b style="color: white;"><span class="material-icons">category</span>&nbsp;&nbsp;INGRESAR CATEGORIAS</b></div>
-                    <div class="container mt-1 p-4 rounded-3">
-                        <div class="row justify-content">
+                
+                    <div class="container mt-1 p-2 rounded-3">
 
-                            <!-- inicio de alertas -->
+                        <!-- inicio de alertas -->
                                 <!-- inicio de falta -->
                                 <?php
                                 if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'nada') {
@@ -158,7 +158,11 @@
                                 <?php
                                 }
                                 ?>
-                            <!-- fin alertas -->
+                        <!-- fin alertas -->
+
+                        <div class="row justify-content">
+
+                            
                             
                             <!--  Modal trigger button  -->
                                 <div class="col col-sm-3 col-md-4">
