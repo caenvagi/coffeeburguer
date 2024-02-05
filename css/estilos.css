@@ -711,5 +711,40 @@
         font-size: 12px;
     } 
 
-    
-    
+    /* pagina dashboard categorias */
+    ul.ventasCat {
+        list-style: none;
+    }
+
+    .ventasCat{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px,160px));
+        grid-gap: 24px;
+        margin-top: 12px;
+    }
+    .ventasCat li{
+        padding: 8px;
+        background: rgb(248, 246, 246);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        grid-gap:12px;
+        cursor: pointer;
+        border: #666 1px solid;
+    }       
+    .logoCat {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        font-size: 36px;
+        display: flex;
+        justify-content: center;        
+    }
+    .ventasCat li .info h7{
+        font-size: 18px;
+        font-weight: 600;
+        color: black
+    } 
+    .ventasCat li .info p{
+        font-size: 14px;
+    } 

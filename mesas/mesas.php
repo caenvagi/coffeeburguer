@@ -75,7 +75,23 @@
         $query_mesa2 = "    SELECT  *
                             FROM    mesa
                             ORDER BY mesas_id DESC LIMIT 1 ";
-        $mesas2 = $mysqli->query($query_mesa2);                    
+        $mesas2 = $mysqli->query($query_mesa2); 
+        
+    error_reporting(1);
+    error_reporting(E_ALL ^ E_NOTICE);
+    // consultas
+        include '../conexion/conexion.php'; 
+        
+        $query_mesa9 = "    SELECT  	mesas_id                                
+                            FROM        mesa 
+                            where       mesas_tipo_pedido = 'LOCAL'
+                            ";
+
+        $query_mesa11 = "       SELECT  	mesas_id                                
+                                FROM        mesa 
+                                where       mesas_tipo_pedido = 'DOMICILIO'
+        ";
+        // fin consultas
 ?>
 
 <!DOCTYPE html>
@@ -159,57 +175,80 @@
                                     }
                                     ?>
                             <!-- fin alertas -->                    
+                            
                             <div class="row justify-content">
 
                                 <!-- botones iniciales -->
-                                    <div class="card">
-                                        <div class="row botonesMesa">
-                                            <!--  Modal trigger button  -->
-                                                <div class="d-grid gap-2 col-4 mt-4 ">
-                                                    <button id="boton-mesas" type="button" class="btn btn-outline-danger btn-md mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                        <strong>+ Mesa</strong>
-                                                    </button>
-                                                </div>
-                                            <!--  Modal trigger button  -->
+                                    <?php 
+                                    if($mesas11 = mysqli_query($mysqli, $query_mesa11)){
+                                        if(mysqli_num_rows($mesas11) > 0) {
+                                            while ($fila = $mesas11->fetch_array()) {
+                                                $idmesa11 = $fila['mesas_id'];                       
+                                            }echo'
+                                                                    
+                                            ';
+                                                mysqli_free_result($mesas11);
+                                            } else{                        
+                                            echo'<!--  button domicilio inicial  -->
+                                            <div  id="botonDomicilio" class="d-grid gap-2 col-4" >
+                                                        <form id="mesas" name="mesas" class="sm p-4" action="mesas.php" method="POST">        
+                                                            
+                                                                <input value="DOMICILIO-1" type="hidden"name="mesas_nombre" ></input>
+                                                                <input value="cerrada" type="hidden"name="mesas_estado" ></input>
+                                                                <input value="DOMICILIO" type="hidden"name="mesas_tipo_pedido" ></input>
+                                                                <input value="0" type="hidden"name="mesas_cons_mesas" ></input>
+                                                                <input value="1" type="hidden"name="mesas_cons_domicilios" ></input>
 
-                                            <!--  button mesa inicial  -->
-                                                <div class="d-grid gap-2 col-4" >
-                                                    <form id="mesas" name="mesas" class="sm p-4" action="mesas.php" method="POST">        
-                                                        <input value="MESA-1" type="hidden"name="mesas_nombre" ></input>
-                                                        <input value="cerrada" type="hidden"name="mesas_estado" ></input>
-                                                        <input value="LOCAL" type="hidden"name="mesas_tipo_pedido" ></input>
-                                                        <input value="1" type="hidden"name="mesas_cons_mesas" ></input>
-                                                        <input value="0" type="hidden"name="mesas_cons_domicilios" ></input>
+                                                            
+                                                                <button id="boton-mesas" type="submit" name="register" class="btn btn-outline-primary btn-sm">
+                                                                    <strong>+ Domicilio inicial</strong>
+                                                                </button>
+                                                            
+                                                        </form> 
+                                                    </div>      
+                                                <!--  button domicilio inicial  -->
+                                            ';  
+                                            } 
+                                    ?> <?php } ?>         
+                                    
+                                    <?php 
+                                        if($mesas8 = mysqli_query($mysqli, $query_mesa9)){
+                                            if(mysqli_num_rows($mesas8) > 0) {
+                                                while ($fila = $mesas8->fetch_array()) {
+                                                    $idmesa7 = $fila['mesas_id'];                       
+                                                }echo'
+                                                <!--  Modal trigger button  -->
+                                                            <div id="botonMesa2" class="d-grid gap-2 col-4 mt-4 ">
+                                                                <button id="boton-mesas" type="button" class="btn btn-outline-danger btn-md mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                    <strong>+ Mesa</strong>
+                                                                </button>
+                                                            </div>
+                                                        <!--  Modal trigger button  -->                     
+                                            ';
+                                                mysqli_free_result($mesas8);
+                                            } else{                        
+                                            echo'<!--  button mesa inicial  -->
+                                                            <div id="botonMesa1" class="d-grid gap-2 col-4" >
+                                                                <form id="mesas" name="mesas" class="sm p-4" action="mesas.php" method="POST">        
+                                                                    <input value="MESA-1" type="hidden"name="mesas_nombre" ></input>
+                                                                    <input value="cerrada" type="hidden"name="mesas_estado" ></input>
+                                                                    <input value="LOCAL" type="hidden"name="mesas_tipo_pedido" ></input>
+                                                                    <input value="1" type="hidden"name="mesas_cons_mesas" ></input>
+                                                                    <input value="0" type="hidden"name="mesas_cons_domicilios" ></input>
 
-                                                        
-                                                            <button id="boton-mesas" type="submit" name="register" class="btn btn-outline-success btn-sm">
-                                                                <strong>+ Mesa inicial</strong>
-                                                            </button>
-                                                        
-                                                    </form> 
-                                                </div>       
-                                            <!--  button mesa inicial  -->
-
-                                            <!--  button domicilio inicial  -->
-                                                <div class="d-grid gap-2 col-4" >
-                                                    <form id="mesas" name="mesas" class="sm p-4" action="mesas.php" method="POST">        
-                                                        
-                                                            <input value="DOMICILIO-1" type="hidden"name="mesas_nombre" ></input>
-                                                            <input value="cerrada" type="hidden"name="mesas_estado" ></input>
-                                                            <input value="DOMICILIO" type="hidden"name="mesas_tipo_pedido" ></input>
-                                                            <input value="0" type="hidden"name="mesas_cons_mesas" ></input>
-                                                            <input value="1" type="hidden"name="mesas_cons_domicilios" ></input>
-
-                                                        
-                                                            <button id="boton-mesas" type="submit" name="register" class="btn btn-outline-primary btn-sm">
-                                                                <strong>+ Domicilio inicial</strong>
-                                                            </button>
-                                                        
-                                                    </form> 
-                                                </div>      
-                                            <!--  button domicilio inicial  -->
-                                        </div> 
-                                    </div>                                          
+                                                                    
+                                                                        <button id="boton-mesas" type="submit" name="register" class="btn btn-outline-success btn-sm">
+                                                                            <strong>+ Mesa inicial</strong>
+                                                                        </button>
+                                                                    
+                                                                </form> 
+                                                            </div>       
+                                                        <!--  button mesa inicial  -->
+                                            ';  
+                                            } 
+                                        
+                                        
+                                    ?> <?php } ?>
                                 <!-- botones iniciales -->
 
                                 <!-- Modal -->

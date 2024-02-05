@@ -65,7 +65,7 @@
                         <strong>“Nuevo pedido”</strong> y <strong>“Nuevo domicilio”</strong></p>
                     </div> -->                    
 
-                    <div class="rows" >
+                        <div class="rows" >
                             <?php 
                             if($mesas = mysqli_query($mysqli, $query_mesa)){
                                 if(mysqli_num_rows($mesas) > 0) {
