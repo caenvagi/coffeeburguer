@@ -79,7 +79,15 @@
                                         WHERE 	caja_tipo = 'gasto')
                                         
                                         as diferencia
-                                            ") or die($conexion->error);                                    
+                                            ") or die($conexion->error); 
+                                            
+    $conceptos = $mysqli->query   (" SELECT     SUM(valor_ingreso) as total_egresos
+                                            FROM        caja Ca
+                                            INNER JOIN  caja_conceptos Cc   ON Ca.movimiento = Cc.id_concepto
+                                            INNER JOIN  usuarios Us         ON Ca.usuario    = Us.id   
+                                            WHERE       caja_tipo = 'gasto'
+                                            ORDER BY    fecha_movimiento DESC
+                                        ") or die($conexion->error);
     
 ?>
 
@@ -262,7 +270,7 @@
                                                         </div>
                                                 <!-- MODAL INGRESO   -->
                                                     
-                                                <!-- Modal -->   
+                                                <!-- Modal egreso-->   
                                                     <button id="botonCaja" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">nuevo gasto</button>
                                                     </div>
                                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -299,14 +307,14 @@
                                     
                                                                                     <select name="usuario" id="usuario" class="form-select mb-3" aria-label="Default select example" required>
                                                                                         <option value="">Selecione Usuario</option>
-                                                                                        <?php while ($row =  $usuarios->fetch_assoc()) { ?>
+                                                                                        <?php while ($row =  $usuarios2->fetch_assoc()) { ?>
                                                                                         <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre']; ?></option>
                                                                                         <?php } ?>
                                                                                     </select>
                                     
                                                                                     <select name="movimiento" id="movimiento" class="form-select mb-3 mt-1" aria-label="Default select example" required>
                                                                                         <option selected>Selecione Movimiento</option>
-                                                                                        <?php while ($row =  $conceptos->fetch_assoc()) { ?>
+                                                                                        <?php while ($row =  $conceptos2->fetch_assoc()) { ?>
                                                                                         <option value="<?php echo $row['id_concepto']; ?>"><?php echo $row['nombre_concepto']; ?></option>
                                                                                         <?php } ?>
                                                                                         <!-- <option value="" id="span1"></option>

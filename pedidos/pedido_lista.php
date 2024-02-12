@@ -64,15 +64,15 @@
                             <table id="example" class="table table table-borderless table-hover mt-3 table text-center table align-middle" style="font-size: 12px">
                                 <thead class="table-success" style="font-size:11px">
                                     <tr>
+                                        <th>TIPO</th>
                                         <th>FECHA Y HORA</th>
                                         <th>FACTURA</th>
                                         <th>ATENDIDO</th>
                                         <th>MESA</th>
                                         <th>CANT</th>
                                         <th>TOTAL</th>
-                                        <th>ESTADO</th>
-                                        <th></th>
-                                        <th>TIPO</th>   
+                                        <th>ESTADO</th>                                        
+                                           
                                     </tr>
                                 </thead>
                                 <tbody style="width:100% ; text-align: center; font-size:12px">
@@ -83,7 +83,7 @@
                                                 $mesero1 = $fila['pedido_mesero_nombre'];
 
                                                 $tipo_pedido = $fila['mesas_tipo_pedido'];
-                                                    if ($tipo_pedido == 'LOCAL') {
+                                                    if ($tipo_pedido == 'MESA') {
                                                     $label_class1 = 'fas fa-utensils';
                                                     } elseif ($tipo_pedido == 'DOMICILIO') {
                                                     $label_class1 = "fas fa-motorcycle" ;
@@ -106,6 +106,7 @@
                                                 }
                                 ?>
                                     <tr>
+                                    <td><span class="label <?php echo $label_class1; ?>" style="font-size:16px"></span></td>
                                         <td><?php echo $fecha; ?></td>
                                         <td><?php echo $codRec; ?></td>
                                         <td><?php echo $mesero1; ?></td>
@@ -113,8 +114,8 @@
                                         <td><?php echo $totalcant; ?></td>
                                         <td>$&nbsp;<?php echo number_format($total, 0, ",", "."); ?></td>
                                         <td ><span class="label <?php echo $label_class; ?>" style="font-size:12px"><?php echo $estado; ?></span></td>
-                                        <td><span class="label <?php echo $label_class1; ?>" style="font-size:16px"></span></td>
-                                        <td>&nbsp;&nbsp;<?php echo $tipo_pedido; ?></td>
+                                        
+                                        
                                     </tr>
                                     <?php } ?>
                                 </tbody>
@@ -127,7 +128,7 @@
                                         <th>TOTAL</th>
                                         <th></th>
                                         <th></th>
-                                        <th></th>
+                                        
                                 </tfoot>                               
                             </table> 
                         </div>

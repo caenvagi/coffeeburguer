@@ -21,17 +21,9 @@ session_start();
 
 require('../fpdf/fpdf.php');
 
-
 require("../conexion/conexion4.php");
 
-
-
-
-
-
 $mysqli = retornarConexion();
-
-
 
 $fpdf = new FPDF('P', 'mm', array(58,200));
 $fpdf->AddPage('portrait', array(58,200));
@@ -68,17 +60,30 @@ function cabecera($fpdf, $mysqli)
                 $registro_id = $_GET['pedido_mesa'];
                 $codigo_recibo = $_GET['codigo_recibo'];
 
-    $fpdf->Ln(1);
+    //$fpdf->Ln(1);
     $fpdf->SetFont('Arial','',8);
     $fpdf->Cell(20, 5 , 'Recibo No: ',0,0,'L');
     $fpdf->Cell(20,5,$codigo_recibo,0,1,'L');
-    $fpdf->Ln(1);
+    //$fpdf->Ln(1);
     $fpdf->SetFont('Arial','',8);
-    $fpdf->Cell(20, 5 , $row['pedido_tipo']." "."No: " ,0,0,'L');
+    $fpdf->Cell(20, 5 , 'Domicilio No: ',0,0,'L');
     $fpdf->Cell(20,5,$registro_id,0,1,'L');
+    //$fpdf->Ln(1);
+    $fpdf->SetFont('Arial','',8);
+    $fpdf->Cell(15, 5 , 'Cliente: ',0,0,'L');
+    $fpdf->Cell(25,5,$row['pedido_cliente'],0,1,'L');
+    //$fpdf->Ln(1);
+    $fpdf->SetFont('Arial','',8);
+    $fpdf->Cell(15, 5 , 'Direccion: ',0,0,'L');
+    $fpdf->Cell(25,5,$row['pedido_direccion'],0,1,'L');
+    //$fpdf->Ln(1);
+    $fpdf->SetFont('Arial','',8);
+    $fpdf->Cell(15, 5 , 'Telefono: ',0,0,'L');
+    $fpdf->Cell(25,5,$row['pedido_telefono'],0,1,'L');
 
     $fpdf->Cell(58,1,'______________________________',0,1,'L');
     $fpdf->Ln(3);
+    $fpdf->SetFont('Arial','B',8);
     $fpdf->Cell(7,4,'CAN',0,0,'L');
     $fpdf->Cell(15,4,'PROD',0,0,'L');
     $fpdf->Cell(28,4,'VALOR',0,1,'R');

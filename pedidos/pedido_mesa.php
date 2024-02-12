@@ -54,7 +54,7 @@
         $conexion = new mysqli($host,$usuario,$password,$bd) or die('could not connect to database');
 
     #variable con el registro que se va a insertar
-        $registro_id = $_GET['pedido_mesa']; 
+        $registro_id = $_GET['pedido_mesa'];         
         $fecha = date("y-m-d H:i:s");
         $mesero = trim($_POST['pedido_mesero']);
         $mesero1 = trim($_POST['pedido_mesero_nombre']);
@@ -155,7 +155,8 @@
         $productos2 = $mysqli->query($query_productos2);
 
         // Para mesa abierta
-        $query_productos3 = "   SELECT      codigo_recibo_detalle as recibo,
+        $query_productos3 = "   SELECT      codigo_recibo,
+                                            codigo_recibo_detalle as recibo,
                                             pedido_tipo,
                                             mesas_nombre,
                                             COUNT(detalle_cantidad) AS totalcant,
@@ -370,7 +371,7 @@
                                             </tbody>
                                         </table>
                                         
-                                        <div class="total1" id="total1">
+                                        <!-- <div class="total1" id="total1">
                                             <div style="width: calc(100% - 24px)">
                                                     <?php 
                                                     foreach ($ultimo2 as $rec1) { ?>
@@ -394,7 +395,39 @@
                                                     <label type="text" id="nombre"></label><br>
                                                 </form>
                                             </div>
-                                        </div> 
+                                        </div>  -->
+
+                                        <div class="total1" id="total1">
+                                            <div style="width: calc(100% - 24px)">
+                                                    <?php 
+                                                    foreach ($ultimo2 as $rec1) { ?>
+                                                <form method="POST" action="pedido_abierto.php">
+                                                    <?php } ?>
+                                                    <?php foreach ($productos3 as $prod2) { ?> 
+                                                    <button class="total-boton" onclick="openInb();">
+                                                        <div class="total2">
+                                                            <div class="total3">
+                                                                <p class="total4"><?php echo $prod2['totalcant']; ?></p>
+                                                            </div>
+                                                                <p class="total5">&nbsp;&nbsp;&nbsp;&nbsp;Imprimir Pedido</p>
+                                                        </div>
+                                                        <div class="total6">
+                                                            <p class="total7">$&nbsp;<?php echo number_format($prod2['total'], 0, ",", "."); ?></p>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"><path d="M9.993 18c.263.002.516-.099.705-.281l5.009-5.01a1.002 1.002 0 0 0 0-1.418l-5.01-5.01a1.001 1.001 0 0 0-1.416 1.417l4.3 4.302-1 1.002-3.3 3.3A1.002 1.002 0 0 0 9.993 18Z"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </button>
+                                                    <script type="text/javascript">
+                                                        function openInb(){
+                                                            window.open("factura2.php?pedido_mesa=<?php echo $registro_id; ?>&codigo_recibo=<?php echo $prod2['codigo_recibo']; ?>")
+                                                        }
+                                                    </script>
+                                                    <?php } ?>
+                                                    <label type="text" id="nombre"></label><br>
+                                                </form>
+                                            </div>
+                                        </div>                
+
                                         <?php if($tipo_usuario == 1){?>
                                         <div class="total1" id="total1">
                                             <div style="width: calc(100% - 24px)">
@@ -412,8 +445,9 @@
                                                     <input type="hidden" value="ingreso" id="caja_tipo" class="caja_tipo" name="caja_tipo" readonly></input>
 
                                                     <?php } ?>
+
                                                     <?php foreach ($productos1 as $prod) { ?> 
-                                                    <button class="total-boton">
+                                                    <button class="total-boton" onclick="openInf()">
                                                         <div class="total2">
                                                             <div class="total3">
                                                                 <p class="total4"><?php echo $prod['totalcant']; ?></p>
@@ -426,6 +460,11 @@
                                                             </svg>
                                                         </div>
                                                     </button>
+                                                    <script type="text/javascript">                
+                                                        function openInf(){
+                                                            window.open("factura.php?pedido_mesa=<?php echo $registro_id; ?>&codigo_recibo=<?php echo $rec['codigo_recibo']; ?>")
+                                                        }
+                                                    </script>
                                                     <?php } ?>
                                                     <label type="text" id="nombre"></label><br>
                                                 </form>
@@ -443,5 +482,6 @@
             <?php require '../logs/nav-footer.php'; ?>
         </div>
         <script src="../js/mensajes.js"></script>
+       
     </body>
 </html>                                    

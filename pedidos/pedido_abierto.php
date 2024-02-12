@@ -44,6 +44,7 @@
                         group by    codigo_recibo_detalle
                         order by    detalle_mesa;
                                                 ";
+        $mesas = mysqli_query($mysqli, $query_mesa)
         // fin consultas
 ?>
 
@@ -67,9 +68,7 @@
 
                         <div class="rows" >
                             <?php 
-                            if($mesas = mysqli_query($mysqli, $query_mesa)){
-                                if(mysqli_num_rows($mesas) > 0) {
-                                    while ($fila = $mesas->fetch_array()) {
+                                while ($fila = $mesas->fetch_array()) {
                                         $codRec = $fila['codigo_recibo'];
                                         $totalcant = $fila['totalcant'];
                                         $total = $fila['total'];
@@ -95,29 +94,7 @@
                                         $label_class = "badge bg-success" ;
                                         } elseif ($estado == 'por entregar') {
                                         $label_class = 'badge bg-primary badge';
-                                        }
-                                    }
-
-                                    
-                                    mysqli_free_result($mesas);
-                                } else{
-                                    '<script type="text/javascript">$("#cardPedido").hide()</script>';
-                                    
-                                    
-                                    echo "
-                                    <div class='sc-43191fe4-0 dTEzXC'>
-                                    <p class='sc-gEvEer gRVyje sc-43191fe4-1 ddmZxl' data-testid='default-typography'>
-                                    Aún no tienes mesas o domicilios abiertos. Empieza agregando uno con las acciones de 
-                                    <strong>“Nuevo pedido”</strong> y <strong>“Nuevo domicilio”</strong></p>
-                                    </div>
-                                
-                                ";
-                                } 
-                            
-                            
-                            ?>
-                            <script type="text/javascript">$("#cardPedido").hide()</script>
-                            
+                                    }  ?>
                             <div id="cardPedido" class="card-body border m-2 p-0 justify-content-center align-items-center" style="text-align: center ; background-color: #ededed">
                                 
                                 <span class="label <?php echo $label_class1; ?>" style="font-size:50px"></span>
@@ -135,7 +112,8 @@
                             </div>
                             <?php } ?>
                         </div>
-                    </main>            
+                    </main>
+                                
             <?php require '../logs/nav-footer.php'; ?>
 
             

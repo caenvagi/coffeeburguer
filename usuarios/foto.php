@@ -27,7 +27,7 @@
             (move_uploaded_file($tmp_name, $destino))
 ?>
 <script type="text/javascript">
-    window.location = "usuario_perfil.php";
+    window.location = "usuarios_nuevos.php";
 </script>
 <?php  
 }

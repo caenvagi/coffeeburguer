@@ -35,7 +35,7 @@
         // consulta listado de mesas
             $query_mesa = " SELECT  *
                             FROM mesa AS ME
-                            WHERE mesas_tipo_pedido = 'LOCAL' "; 
+                            WHERE mesas_tipo_pedido = 'MESA' "; 
             $mesas = $mysqli->query($query_mesa); 
         // fin consultas       
 ?>
@@ -73,9 +73,9 @@
                             <input type="hidden" id="pedido_mesero_nombre" name="pedido_mesero_nombre" value="<?php echo $nombre; ?>">
                             <input type="hidden" id="pedido_mesa" name="pedido_mesa" value="<?php echo $idmesas; ?>">
                             <input type="hidden" id="pedido_estado" name="pedido_estado" value="abierta">
-                            <input type="hidden" id="pedido_cliente" name="pedido_cliente" value="LOCAL">
-                            <input type="hidden" id="pedido_direccion" name="pedido_direccion" value="LOCAL">
-                            <input type="hidden" id="pedido_telefono" name="pedido_telefono" value="LOCAL">
+                            <input type="hidden" id="pedido_cliente" name="pedido_cliente" value="MESA">
+                            <input type="hidden" id="pedido_direccion" name="pedido_direccion" value="MESA">
+                            <input type="hidden" id="pedido_telefono" name="pedido_telefono" value="MESA">
                             <input type="hidden" id="pedido_tipo" name="pedido_tipo" value="<?php echo $tipo; ?>">
 
                             <button value="agregar" id="btn_mesa" name="btn_mesa" type="submit" class="btn btn-outline-dark btn-lg p-2 m-2">

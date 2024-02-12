@@ -84,7 +84,7 @@
         
         $query_mesa9 = "    SELECT  	mesas_id                                
                             FROM        mesa 
-                            where       mesas_tipo_pedido = 'LOCAL'
+                            where       mesas_tipo_pedido = 'MESA'
                             ";
 
         $query_mesa11 = "       SELECT  	mesas_id                                
@@ -232,7 +232,7 @@
                                                                 <form id="mesas" name="mesas" class="sm p-4" action="mesas.php" method="POST">        
                                                                     <input value="MESA-1" type="hidden"name="mesas_nombre" ></input>
                                                                     <input value="cerrada" type="hidden"name="mesas_estado" ></input>
-                                                                    <input value="LOCAL" type="hidden"name="mesas_tipo_pedido" ></input>
+                                                                    <input value="MESA" type="hidden"name="mesas_tipo_pedido" ></input>
                                                                     <input value="1" type="hidden"name="mesas_cons_mesas" ></input>
                                                                     <input value="0" type="hidden"name="mesas_cons_domicilios" ></input>
 
@@ -278,7 +278,7 @@
                                                                             </div>
                                                                             <select name="mesas_tipo_pedido" id="mesas_tipo_pedido" required autofocus>
                                                                                 <option hidden>Seleccione forma de pedido</option>
-                                                                                <option value="LOCAL">LOCAL</option>
+                                                                                <option value="MESA">MESA</option>
                                                                                 <option value="DOMICILIO">DOMICILIO</option>                                                    
                                                                             </select>
                                                                         </div>
@@ -296,7 +296,7 @@
                                                                                 //lista de mesas  
                                                                                 $query_mesa5 =   "      SELECT * 
                                                                                                         FROM mesa
-                                                                                                        WHERE mesas_tipo_pedido = 'LOCAL'                  
+                                                                                                        WHERE mesas_tipo_pedido = 'MESA'                  
                                                                                                         ORDER BY mesas_id 
                                                                                                         DESC LIMIT 1                                                                           ";
                                                                                 $mesas5 = $mysqli->query($query_mesa5);
@@ -410,12 +410,12 @@
                 $("select[name=mesas_tipo_pedido]").each(function(){
                     var valor5 = this.value;
                         // $('#span2').text('Va a registrar un'+' '+ valor);
-                        if (valor5 == "LOCAL") {
+                        if (valor5 == "MESA") {
                             document.getElementById("mesas_cons_mesas").value = <?php
                                             //lista de mesas  
                                             $query_mesa5 =   "      SELECT * 
                                                                     FROM mesa
-                                                                    WHERE mesas_tipo_pedido = 'LOCAL'                  
+                                                                    WHERE mesas_tipo_pedido = 'MESA'                  
                                                                     ORDER BY mesas_id 
                                                                     DESC LIMIT 1 ";
                                             $mesas5 = $mysqli->query($query_mesa5);
@@ -453,12 +453,12 @@
                 $("select[name=mesas_tipo_pedido]").each(function(){
                     var valor6 = this.value;
                         // $('#span2').text('Va a registrar un'+' '+ valor);
-                        if (valor6 == "LOCAL") {
+                        if (valor6 == "MESA") {
                             document.getElementById("mesas_cons_mesas").value = <?php
                                             //lista de mesas  
                                             $query_mesa6 =   "      SELECT * 
                                                                     FROM mesa
-                                                                    WHERE mesas_tipo_pedido = 'LOCAL'                  
+                                                                    WHERE mesas_tipo_pedido = 'MESA'                  
                                                                     ORDER BY mesas_id 
                                                                     DESC LIMIT 1 ";
                                             $mesas6 = $mysqli->query($query_mesa6);
